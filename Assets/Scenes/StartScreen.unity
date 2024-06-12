@@ -572,7 +572,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Saigai Solves
+  m_Text: Saigai Solver
 --- !u!222 &628406213
 CanvasRenderer:
   m_ObjectHideFlags: 0
