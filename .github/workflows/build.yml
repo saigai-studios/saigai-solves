@@ -18,6 +18,7 @@ jobs:
       - name: Cache Docker images.
         uses: ScribeMD/docker-cache@0.5.0
         with:
+          read-only: true
           key: docker-${{ runner.os }}
 
       - name: Build Unity
