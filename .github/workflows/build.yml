@@ -15,6 +15,11 @@ jobs:
       - name: Print a message
         run: echo "Hello World!"
 
+      - name: Cache Docker images.
+        uses: ScribeMD/docker-cache@0.5.0
+        with:
+          key: docker-${{ runner.os }}
+
       - name: Build Unity
         uses: game-ci/unity-builder@v4
         env:
@@ -27,5 +32,5 @@ jobs:
       - name: Store saigai
         uses: actions/upload-artifact@v4
         with:
-          name: Build
-          path: build
+          name: sagai-solver-windows-x64
+          path: build/StandaloneWindows64
