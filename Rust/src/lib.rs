@@ -48,7 +48,7 @@ pub fn bindings_csharp() -> Result<(), Error> {
 
     Generator::new(config, ffi_inventory())
         .add_overload_writer(Unity::new())
-        .write_file("bindings/csharp/Interop.cs")?;
+        .write_file("../Assets/Scripts/Interop.cs")?;
 
     Ok(())
 }
