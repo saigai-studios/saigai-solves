@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 namespace Interoptopus.Utils
 {
@@ -13,8 +14,8 @@ namespace Interoptopus.Utils
     class HotReload
     {
         private const string DllName = @"saigai";
-        private const string SourceDll = @"../../Rust/target/debug";
-        private const string SourceInteropRoot = @"../../Rust/bindings/csharp";
+        private const string SourceDll = @"Rust/target/debug";
+        private const string SourceInteropRoot = @"Rust/bindings/csharp";
         private static readonly string[] InteropFiles = {
             @"Interop.cs",
         };
@@ -25,12 +26,23 @@ namespace Interoptopus.Utils
         {
             var random = new System.Random();
             var pluginFolder = Path.Combine(@"Assets/", "Plugins");
-            
-            // Copy plugin
+
             var targetDllPrefix = $"{DllName}.{Math.Abs(random.Next())}";
-            var targetDllFullPath = Path.Combine(pluginFolder, $"{targetDllPrefix}.dylib");
-            Directory.CreateDirectory(pluginFolder);
-            File.Copy(Path.Combine(SourceDll, $"{DllName}.dll"), targetDllFullPath);
+
+            // Copy plugin
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
+                var targetDllFullPath = Path.Combine(pluginFolder, $"lib{targetDllPrefix}.dylib");
+                Directory.CreateDirectory(pluginFolder);
+                File.Copy(Path.Combine(SourceDll, $"lib{DllName}.dylib"), targetDllFullPath);
+            } else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+                var targetDllFullPath = Path.Combine(pluginFolder, $"{targetDllPrefix}.dll");
+                Directory.CreateDirectory(pluginFolder);
+                File.Copy(Path.Combine(SourceDll, $"{DllName}.dll"), targetDllFullPath);
+            } else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+                var targetDllFullPath = Path.Combine(pluginFolder, $"lib{targetDllPrefix}.so");
+                Directory.CreateDirectory(pluginFolder);
+                File.Copy(Path.Combine(SourceDll, $"lib{DllName}.so"), targetDllFullPath);
+            }
 
             // Copy interop files
             foreach (var file in InteropFiles)
@@ -40,8 +52,9 @@ namespace Interoptopus.Utils
 
                 var text = File.ReadAllText(sourceFile);
                 var newText = text.Replace(DllName, targetDllPrefix);
-                
-                File.Delete(destFile);
+                if (File.Exists(destFile)) {
+                    File.Delete(destFile);
+                }
                 File.WriteAllText(destFile, newText);
             }
             
@@ -53,7 +66,6 @@ namespace Interoptopus.Utils
         {
             // TODO: Check hash and copy automatically 
             // Debug.Log("Project loaded in Unity Editor 2");
-            UpdateInteropFiles();
         }
         
         [MenuItem("Interoptopus/Hot Reload")]

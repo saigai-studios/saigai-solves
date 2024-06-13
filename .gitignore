@@ -76,3 +76,11 @@ crashlytics-build.properties
 
 # Ignore artifacts from Rust
 /Rust/target
+
+# Ignore dynamic libraries for Unity
+*.dylib
+*.dylib.meta
+*.dll
+*.dll.meta
+*.so
+*.so.meta
