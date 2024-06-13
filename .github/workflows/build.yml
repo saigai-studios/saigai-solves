@@ -3,7 +3,7 @@ on:
   push:
 
 jobs:
-  build:
+  build-windows:
     runs-on: windows-latest
     defaults:
       run:
@@ -22,6 +22,14 @@ jobs:
         run: cargo run --verbose
         working-directory: ./Rust
 
+      - name: Cache previous Unity builds
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-Windows
+          restore-keys: |
+            Library-
+  
       - name: Build Unity
         uses: game-ci/unity-builder@v4
         env:
@@ -37,3 +45,89 @@ jobs:
         with:
           name: sagai-solver-windows-x64
           path: build/StandaloneWindows64
+
+  build-macos:
+    runs-on: macos-12
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Fetch repository
+        uses: actions/checkout@v4
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Print a message
+        run: echo "Hello World!"
+
+      - name: Build Rust dynamic library
+        run: cargo run --verbose
+        working-directory: ./Rust
+
+      - name: Cache previous Unity builds
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-MacOS
+          restore-keys: |
+            Library-
+
+      - name: Build Unity
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneOSX
+          allowDirtyBuild: true
+        
+      - name: Store saigai
+        uses: actions/upload-artifact@v4
+        with:
+          name: sagai-solver-macos-x64
+          path: build/StandaloneOSX
+
+  build-linux:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Fetch repository
+        uses: actions/checkout@v4
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Print a message
+        run: echo "Hello World!"
+
+      - name: Build Rust dynamic library
+        run: cargo run --verbose
+        working-directory: ./Rust
+
+      - name: Cache previous Unity builds
+        uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-Linux
+          restore-keys: |
+            Library-
+
+      - name: Build Unity
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneLinux64
+          allowDirtyBuild: true
+        
+      - name: Store saigai
+        uses: actions/upload-artifact@v4
+        with:
+          name: sagai-solver-ubuntu-x64
+          path: build/StandaloneLinux64
