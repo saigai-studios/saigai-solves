@@ -1,4 +1,4 @@
-use backend::bindings_csharp;
+use saigai::bindings_csharp;
 
 fn main() {
     let _ = bindings_csharp().unwrap();
