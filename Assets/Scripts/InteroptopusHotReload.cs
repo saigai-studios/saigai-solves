@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using System;
 using System.IO;
 using UnityEditor;
@@ -61,7 +60,8 @@ namespace Interoptopus.Utils
             
             Debug.Log("Hot reloading successful.");
         }
-        
+
+#if UNITY_EDITOR
         [InitializeOnLoadMethod]
         static void OnProjectLoadedInEditor()
         {
@@ -74,6 +74,6 @@ namespace Interoptopus.Utils
         {
             UpdateInteropFiles();
         }
+#endif
     }
 }
-#endif
