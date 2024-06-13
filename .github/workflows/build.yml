@@ -12,14 +12,15 @@ jobs:
       - name: Fetch repository
         uses: actions/checkout@v4
 
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
       - name: Print a message
         run: echo "Hello World!"
 
-      - name: Cache Docker images.
-        uses: ScribeMD/docker-cache@0.5.0
-        with:
-          read-only: true
-          key: docker-${{ runner.os }}
+      - name: Build Rust dynamic library
+        run: cargo run --verbose
+        working-directory: ./Rust
 
       - name: Build Unity
         uses: game-ci/unity-builder@v4
