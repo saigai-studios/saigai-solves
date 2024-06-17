@@ -11,4 +11,3 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 interoptopus = "0.14.23"
 interoptopus_backend_csharp = "0.14.24"
-log = "0.4.21"
