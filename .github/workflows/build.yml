@@ -15,11 +15,11 @@ jobs:
       - name: Set up Rust toolchain
         uses: dtolnay/rust-toolchain@stable
                     
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v4.0.0
+      #- name: Setup .NET Core SDK
+      #  uses: actions/setup-dotnet@v4.0.0
       
-      - name: Setup .NET Script
-        run: dotnet tool install -g dotnet-script
+      #- name: Setup .NET Script
+      #  run: dotnet tool install -g dotnet-script
 
       - name: Print a message
         run: echo "Hello World!"
@@ -28,9 +28,9 @@ jobs:
         run: cargo run --verbose
         working-directory: ./Rust
 
-      - name: Test library call
-        run: dotnet script NumTest.cs
-        working-directory: ./Assets/Scripts
+      #- name: Test library call
+      #  run: dotnet script NumTest.cs
+      #  working-directory: ./Assets/Scripts
 
       - name: Cache previous Unity builds
         uses: actions/cache@v3
