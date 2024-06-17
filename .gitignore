@@ -84,3 +84,6 @@ crashlytics-build.properties
 *.dll.meta
 *.so
 *.so.meta
+
+# Ignore generated bindings files
+/Assets/Scripts/Interop.cs
