@@ -1,5 +1,4 @@
 use interoptopus::{ffi_function, ffi_type, function, Inventory, InventoryBuilder};
-use log::info;
 
 #[ffi_type]
 #[repr(C)]
@@ -18,7 +17,8 @@ pub extern "C" fn my_function(input: Vec2) {
 #[no_mangle]
 pub extern "C" fn add_two_nums(x: i32, y: i32) -> i32 {
     let result = x + y;
-    info!("Result is: {}", result);
+    println!("X + Y = {}", result);
+    // info!("Result is: {}", result);
     result
 }
 
@@ -51,4 +51,14 @@ pub fn bindings_csharp() -> Result<(), Error> {
         .write_file("bindings/csharp/Interop.cs")?;
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ut_add_two_nums() {
+        assert_eq!(5, add_two_nums(3, 2));
+    }
 }

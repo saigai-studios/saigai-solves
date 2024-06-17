@@ -18,6 +18,10 @@ jobs:
       - name: Print a message
         run: echo "Hello World!"
 
+      - name: Test Rust library
+        run: cargo test --verbose
+        working-directory: ./Rust
+
       - name: Build Rust dynamic library
         run: cargo run --verbose
         working-directory: ./Rust
@@ -65,6 +69,10 @@ jobs:
       - name: Print a message
         run: echo "Hello World!"
 
+      - name: Test Rust library
+        run: cargo test --verbose
+        working-directory: ./Rust
+
       - name: Build Rust dynamic library
         run: cargo run --verbose
         working-directory: ./Rust
@@ -111,6 +119,10 @@ jobs:
 
       - name: Print a message
         run: echo "Hello World!"
+
+      - name: Test Rust library
+        run: cargo test --verbose
+        working-directory: ./Rust
 
       - name: Build Rust dynamic library
         run: cargo run --verbose
