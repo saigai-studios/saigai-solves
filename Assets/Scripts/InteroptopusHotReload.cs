@@ -15,7 +15,7 @@ namespace Interoptopus.Utils
     {
         private const string DllName = @"saigai";
         private const string SourceDll = @"Rust/target/debug";
-        private const string SourceInteropRoot = @"Rust/bindings/csharp";
+        private const string SourceInteropRoot = @"Assets/Scripts/";
         private static readonly string[] InteropFiles = {
             @"Interop.cs",
         };
@@ -64,7 +64,7 @@ namespace Interoptopus.Utils
                         File.Delete(file);
                         // delete the .meta as well
                         File.Delete(file + ".meta");
-                    } catch (Exception e) {
+                    } catch (Exception) {
                         Debug.Log("Failed to delete file: " + file);
                     }
 
@@ -89,7 +89,7 @@ namespace Interoptopus.Utils
                         File.Delete(file);
                         // delete the .meta as well
                         File.Delete(file + ".meta");
-                    } catch (Exception e) {
+                    } catch (Exception) {
                         Debug.Log("Failed to delete file: " + file);
                     }
                 }
@@ -114,7 +114,7 @@ namespace Interoptopus.Utils
                         File.Delete(file);
                         // delete the .meta as well
                         File.Delete(file + ".meta");
-                    } catch (Exception e) {
+                    } catch (Exception) {
                         Debug.Log("Failed to delete file: " + file);
                     }
                 }

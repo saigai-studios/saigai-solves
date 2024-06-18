@@ -1,15 +1,35 @@
-use interoptopus::{ffi_function, ffi_type, function, Inventory, InventoryBuilder};
+use interoptopus::{ffi_function, ffi_type};
+use interoptopus::{function, Inventory, InventoryBuilder};
+
+/// Include the ffi functions to be generated into the C# bindings file.
+pub fn ffi_inventory() -> Inventory {
+    InventoryBuilder::new()
+        .register(function!(add_two_nums))
+        .register(function!(update_anim))
+        .register(function!(init_marker))
+        .register(function!(update_pos))
+        .inventory()
+}
+
+// Anim constants
+const SPEED: i32 = 100;
+
+// Player variables
+static mut MARKER_POS: [Vec2; 3] = [Vec2::new(); 3];
+static mut PLR: Player = Player::new();
 
 #[ffi_type]
 #[repr(C)]
-#[derive(Copy,Clone)]
+#[derive(Copy, Clone)]
 pub struct Vec2 {
     pub x: f32,
     pub y: f32,
 }
 
-const fn new() -> Vec2{
-    Vec2 { x: 0.0, y: 0.0 }
+impl Vec2 {
+    const fn new() -> Self {
+        Self { x: 0.0, y: 0.0 }
+    }
 }
 
 #[ffi_type]
@@ -22,131 +42,84 @@ pub struct Player {
     pub anim_count: i32,
 }
 
-// Anim constants
-const speed: i32 = 100;
-
-// Player variables
-static mut marker_pos: [Vec2; 3] = [new(); 3];
-static mut plr: Player = 
-Player{
-    curr: new(),
-    old: new(),
-    dest: new(),
-    curr_mark: 0,
-    anim_count: speed,
-};
+impl Player {
+    const fn new() -> Self {
+        Self {
+            curr: Vec2::new(),
+            old: Vec2::new(),
+            dest: Vec2::new(),
+            curr_mark: 0,
+            anim_count: SPEED,
+        }
+    }
+}
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn init_marker(ind: i32, pos: Vec2){
-    marker_pos[ind as usize] = pos;
+pub unsafe extern "C" fn init_marker(ind: i32, pos: Vec2) {
+    MARKER_POS[ind as usize] = pos;
 }
 
 #[ffi_function]
 #[no_mangle]
 pub unsafe extern "C" fn update_pos(opt: bool) {
     // Decrement and wrap
-    if opt{ // Left
-        plr.curr_mark -= 1;
+    if opt == true {
+        // Left
+        PLR.curr_mark -= 1;
 
-        if plr.curr_mark < 0{
-            plr.curr_mark = 2;
+        if PLR.curr_mark < 0 {
+            PLR.curr_mark = 2;
         }
-    }
-    else{ // Right
-        plr.curr_mark += 1;
+    } else {
+        // Right
+        PLR.curr_mark += 1;
 
-        if plr.curr_mark > 2{
-            plr.curr_mark = 0;
+        if PLR.curr_mark > 2 {
+            PLR.curr_mark = 0;
         }
     }
 
     // Reset animation counter
-    plr.anim_count = 0;
+    PLR.anim_count = 0;
 
     // Set starting position
-    plr.old = plr.curr;
+    PLR.old = PLR.curr;
 
     // Set ending position
-    plr.dest = marker_pos[plr.curr_mark as usize];
+    PLR.dest = MARKER_POS[PLR.curr_mark as usize];
 }
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn update_anim() -> Vec2{
-    if plr.anim_count <= speed{
-        plr.curr = move_lerp_rust(plr.anim_count, plr.old, plr.dest);
-        plr.anim_count += 1;
-    }
-    else {
-        plr.curr = marker_pos[plr.curr_mark as usize];
+pub unsafe extern "C" fn update_anim() -> Vec2 {
+    if PLR.anim_count <= SPEED {
+        PLR.curr = move_lerp_rust(PLR.anim_count, PLR.old, PLR.dest);
+        PLR.anim_count += 1;
+    } else {
+        PLR.curr = MARKER_POS[PLR.curr_mark as usize];
     }
 
-    return plr.curr;
-}
-
-#[ffi_function]
-#[no_mangle]
-pub extern "C" fn my_function(input: Vec2) {
-    println!("{}", input.x);
+    return PLR.curr;
 }
 
 #[ffi_function]
 #[no_mangle]
 pub extern "C" fn add_two_nums(x: i32, y: i32) -> i32 {
     let result = x + y;
-    println!("X + Y = {}", result);
-    // info!("Result is: {}", result);
+    // println!("X + Y = {}", result);
     result
 }
 
-pub fn move_lerp_rust(curr_time: i32, src: Vec2, dest: Vec2) -> Vec2 {
-    Vec2{
-        x: f_lerp(src.x, dest.x, (curr_time as f32) / (speed as f32)),
-        y: f_lerp(src.y, dest.y, (curr_time as f32) / (speed as f32))
+fn move_lerp_rust(curr_time: i32, src: Vec2, dest: Vec2) -> Vec2 {
+    Vec2 {
+        x: f_lerp(src.x, dest.x, (curr_time as f32) / (SPEED as f32)),
+        y: f_lerp(src.y, dest.y, (curr_time as f32) / (SPEED as f32)),
     }
 }
 
-pub fn f_lerp(src: f32, dest: f32, scale: f32) -> f32 {
+fn f_lerp(src: f32, dest: f32, scale: f32) -> f32 {
     return src + ((dest - src) * scale);
-}
-
-pub fn ffi_inventory() -> Inventory {
-    {
-        InventoryBuilder::new()
-            .register(function!(my_function))
-            .register(function!(add_two_nums))
-            .register(function!(update_anim))
-            .register(function!(init_marker))
-            .register(function!(update_pos))
-            .inventory()
-    }
-}
-
-use interoptopus::util::NamespaceMappings;
-use interoptopus::{Error, Interop};
-use interoptopus_backend_csharp::Unsafe;
-
-pub fn bindings_csharp() -> Result<(), Error> {
-    use interoptopus_backend_csharp::overloads::Unity;
-    use interoptopus_backend_csharp::{Config, Generator};
-
-    let config = Config {
-        use_unsafe: Unsafe::UnsafeKeyword,
-        dll_name: "saigai".to_string(),
-        namespace_mappings: NamespaceMappings::new("Saigai.Studios"),
-        ..Config::default()
-    };
-
-    Generator::new(config.clone(), ffi_inventory())
-        .add_overload_writer(Unity::new())
-        .write_file("bindings/csharp/Interop.cs")?;
-
-    Generator::new(config, ffi_inventory())
-        .add_overload_writer(Unity::new())
-        .write_file("../Assets/Scripts/Interop.cs")?;
-
-    Ok(())
 }
 
 #[cfg(test)]
