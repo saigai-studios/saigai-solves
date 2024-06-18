@@ -29,6 +29,15 @@ namespace Saigai.Studios
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "add_two_nums")]
         public static extern int add_two_nums(int x, int y);
 
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "update_anim")]
+        public static extern Vec2 update_anim();
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "init_marker")]
+        public static extern void init_marker(int ind, Vec2 pos);
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "update_pos")]
+        public static extern void update_pos(bool opt);
+
     }
 
     [Serializable]

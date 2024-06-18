@@ -60,11 +60,14 @@ namespace Interoptopus.Utils
                         Debug.Log("No changes to Rust library");
                         return;
                     }
-                    File.Delete(file);
-                    // delete the .meta as well
-                    File.Delete(file + ".meta");
+                    try {
+                        File.Delete(file);
+                        // delete the .meta as well
+                        File.Delete(file + ".meta");
+                    } catch (Exception) {
+                        Debug.Log("Failed to delete file: " + file);
+                    }
                 }
-
                 Directory.CreateDirectory(pluginFolder);
                 File.Copy(sourceDllFullPath, targetDllFullPath);
 
