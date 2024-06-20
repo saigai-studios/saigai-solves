@@ -139,6 +139,42 @@ pub unsafe extern "C" fn update_anim() -> Vec2 {
 
     return PLR.curr;
 }
+/*
+// minigame stuff
+#[ffi_type]
+#[repr(C)]
+enum GameState {
+    WIN,
+    LOSS,
+    PAUSE,
+    PLAYING
+}
+pub struct Game {
+    pub gs: GameState,
+}
+
+impl Game {
+    fn new() -> Self {
+        Self {
+            gs = GameState::PLAYING;
+        }
+    }
+}
+struct BusGame {
+    pub gs: GameState,
+    pub grid: [[bool; 8]; 8],
+}
+
+impl Game for BusGame {
+    
+}
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn piece_fits() -> bool {
+    // check if a piece fits in the 
+    true
+}
+*/
 
 #[ffi_function]
 #[no_mangle]
