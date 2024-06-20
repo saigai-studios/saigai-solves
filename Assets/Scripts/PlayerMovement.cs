@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vec2[] marker_xz = new Vec2[3];
+        Vec2[] marker_xz = new Vec2[4];
         
         // Get positions
         for (int i = 0; i < 3; ++i){
@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
             marker_xz[i].y = GameObject.Find(name).transform.position.z;
             Interop.init_marker(i, marker_xz[i]);
         }
+        marker_xz[3].x = GameObject.Find("Intersection Marker").transform.position.x;
+        marker_xz[3].y = GameObject.Find("Intersection Marker").transform.position.z;
+        Interop.init_marker(3, marker_xz[3]);
     }
 
     // Update is called once per frame
@@ -27,11 +30,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown("left"))
         {
-            Interop.update_pos(true);
+            Interop.update_pos_key(true);
         }
         else if (Input.GetKeyDown("right"))
         {
-            Interop.update_pos(false);
+            Interop.update_pos_key(false);
         }
 
         // Update animation
