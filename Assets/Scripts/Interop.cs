@@ -16,7 +16,7 @@ namespace Saigai.Studios
 {
     public static partial class Interop
     {
-        public const string NativeLib = "saigai.9c4b8feb";
+        public const string NativeLib = "saigai.a80069d8";
 
         static Interop()
         {
@@ -32,8 +32,11 @@ namespace Saigai.Studios
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "init_marker")]
         public static extern void init_marker(int ind, Vec2 pos);
 
-        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "update_pos")]
-        public static extern void update_pos(bool opt);
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "update_pos_key")]
+        public static extern void update_pos_key(bool opt);
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "update_pos_click")]
+        public static extern bool update_pos_click(int marker);
 
     }
 
