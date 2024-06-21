@@ -143,6 +143,83 @@ pub unsafe extern "C" fn update_anim() -> Vec2 {
 
     return PLR.curr;
 }
+/*
+// minigame stuff
+#[ffi_type]
+#[repr(C)]
+enum GameState {
+    WIN,
+    LOSS,
+    PAUSE,
+    PLAYING
+}
+
+#[derive(Clone)]
+enum Cell {
+    FREE,
+    USED,
+    VOID
+}
+
+pub struct Game {
+    pub gs: GameState,
+}
+
+impl Game {
+    fn new() -> Self {
+        Self {
+            gs: GameState::PLAYING,
+        }
+    }
+}
+struct BusGame {
+    pub game: Game,
+    pub grid: Vec<Vec<Cell>>,
+}
+
+impl BusGame {
+    fn new(ver: u32) -> Self {
+        Self {
+            game: Game::new(),
+            grid: BusGame::make_grid(ver),
+        }
+    }
+    
+    fn make_grid(num: u32) -> Vec<Vec<Cell>> {
+        let mut grid: Vec<Vec<Cell>> = match num {
+            // standard board (only really useful for square/rectangular boards)
+            0 => {
+                vec![vec![Cell::FREE; 10]; 10]
+            },
+            // I like this one better cause I think it'll be more readable
+            // plus we are making the boards anyway
+            1 => {
+                vec![
+                    vec![Cell::FREE, Cell::FREE, Cell::FREE, Cell::VOID, Cell::VOID, Cell::FREE, Cell::FREE, Cell::FREE],
+                    vec![Cell::FREE, Cell::FREE, Cell::FREE, Cell::VOID, Cell::VOID, Cell::FREE, Cell::FREE, Cell::FREE],
+                    vec![Cell::FREE, Cell::FREE, Cell::FREE, Cell::VOID, Cell::VOID, Cell::FREE, Cell::FREE, Cell::FREE],
+                    vec![Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID],
+                    vec![Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID, Cell::VOID],
+                    vec![Cell::FREE, Cell::FREE, Cell::FREE, Cell::VOID, Cell::VOID, Cell::FREE, Cell::FREE, Cell::FREE],
+                    vec![Cell::FREE, Cell::FREE, Cell::FREE, Cell::VOID, Cell::VOID, Cell::FREE, Cell::FREE, Cell::FREE],
+                    vec![Cell::FREE, Cell::FREE, Cell::FREE, Cell::VOID, Cell::VOID, Cell::FREE, Cell::FREE, Cell::FREE],
+                ]
+            },
+            _ => {
+                vec![vec![Cell::FREE; 8]; 8]
+            },
+        };
+        grid
+    }
+}
+#[ffi_function]
+#[no_mangle]
+// scrap later
+pub unsafe extern "C" fn piece_fits() -> bool {
+    // check if a piece fits in the 
+    true
+}
+*/
 
 #[ffi_function]
 #[no_mangle]
