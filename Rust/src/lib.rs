@@ -1,11 +1,13 @@
 use interoptopus::{ffi_function, ffi_type};
-use interoptopus::{function, Inventory, InventoryBuilder};
+use interoptopus::{function, extra_type, Inventory, InventoryBuilder};
 
 pub mod experiments;
 
 /// Include the ffi functions to be generated into the C# bindings file.
 pub fn ffi_inventory() -> Inventory {
     InventoryBuilder::new()
+        .register(extra_type!(Coord))
+        .register(extra_type!(Vec2))
         .register(function!(add_two_nums))
         .register(function!(update_anim))
         .register(function!(init_marker))
@@ -34,6 +36,20 @@ pub struct Vec2 {
 impl Vec2 {
     const fn new() -> Self {
         Self { x: 0.0, y: 0.0 }
+    }
+}
+
+#[ffi_type]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct Coord {
+    pub row: i32,
+    pub col: i32,
+}
+
+impl Coord {
+    const fn new() -> Self {
+        Self { row: 0, col: 0 }
     }
 }
 
