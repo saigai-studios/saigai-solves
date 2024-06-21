@@ -1,6 +1,8 @@
 use interoptopus::{ffi_function, ffi_type};
 use interoptopus::{function, Inventory, InventoryBuilder};
 
+pub mod experiments;
+
 /// Include the ffi functions to be generated into the C# bindings file.
 pub fn ffi_inventory() -> Inventory {
     InventoryBuilder::new()
@@ -9,6 +11,8 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(init_marker))
         .register(function!(update_pos_key))
         .register(function!(update_pos_click))
+        .register(function!(experiments::e4::add_piece))
+        .register(function!(experiments::e4::add_coordinate))
         .inventory()
 }
 
@@ -50,7 +54,7 @@ impl Player {
             old: Vec2::new(),
             dest: Vec2::new(),
             curr_mark: 0,
-            anim_count: SPEED*2,
+            anim_count: SPEED * 2,
         }
     }
 }
@@ -97,7 +101,7 @@ pub unsafe extern "C" fn update_pos_click(marker: i32) -> bool {
     // If marker matches the current, no update is needed
     if marker == PLR.curr_mark {
         // Check if player has reached marker
-        if PLR.anim_count <= SPEED*2 {
+        if PLR.anim_count <= SPEED * 2 {
             return false; // Do not update level yet
         } else {
             return true; // Update the level
@@ -111,14 +115,14 @@ pub unsafe extern "C" fn update_pos_click(marker: i32) -> bool {
     if PLR.anim_count > SPEED {
         // Reset animation counter
         PLR.anim_count = 0;
-        
+
         // Set starting position
         PLR.old = PLR.curr;
     }
 
     // Set ending position - this is always changed
     PLR.dest = MARKER_POS[PLR.curr_mark as usize];
-    
+
     return false;
 }
 
@@ -127,7 +131,7 @@ pub unsafe extern "C" fn update_pos_click(marker: i32) -> bool {
 pub unsafe extern "C" fn update_anim() -> Vec2 {
     if PLR.anim_count <= SPEED {
         //PLR.curr = move_lerp_rust(PLR.anim_count, PLR.old, PLR.dest);
-        PLR.curr = move_lerp_rust(PLR.anim_count,  PLR.old, MARKER_POS[3]);
+        PLR.curr = move_lerp_rust(PLR.anim_count, PLR.old, MARKER_POS[3]);
         PLR.anim_count += 1;
     } else if PLR.anim_count <= SPEED * 2 {
         //PLR.curr = move_lerp_rust(PLR.anim_count, PLR.old, PLR.dest);
