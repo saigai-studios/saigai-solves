@@ -19,11 +19,17 @@ impl Cell {
 
 struct Grid {
     inner: Vec<Vec<Cell>>,
+    width: usize,
+    height: usize,
 }
 
 impl Grid {
     pub const fn new() -> Self {
-        Self { inner: Vec::new() }
+        Self {
+            inner: Vec::new(),
+            width: 0,
+            height: 0,
+        }
     }
 
     pub fn load(&mut self, level: u32) {
@@ -32,14 +38,20 @@ impl Grid {
         self.inner = match level {
             // standard board (only really useful for square/rectangular boards)
             0 => {
-                vec![vec![Free; 8]; 8]
+                self.width = 8;
+                self.height = 8;
+                vec![vec![Free; self.height]; self.width]
             }
             1 => {
-                vec![vec![Free; 10]; 10]
+                self.width = 10;
+                self.height = 10;
+                vec![vec![Free; self.height]; self.width]
             }
             // I like this one better cause I think it'll be more readable
             // plus we are making the boards anyway
             2 => {
+                self.width = 8;
+                self.height = 8;
                 vec![
                     vec![Free, Free, Free, Void, Void, Free, Free, Free],
                     vec![Free, Free, Free, Void, Void, Free, Free, Free],
@@ -55,6 +67,50 @@ impl Grid {
                 panic!("unsupported level")
             }
         };
+    }
+
+    pub fn get_width(&self) -> u8 {
+        self.width as u8
+    }
+
+    pub fn get_height(&self) -> u8 {
+        self.height as u8
+    }
+
+    /// Attempts to place a piece in the board and updates the cells if
+    /// successful.
+    pub fn place_piece(&mut self, root: &Coord, piece: &Piece) -> bool {
+        for relative_coord in piece.get_points() {
+            let real_coord = root.add(relative_coord);
+            // check if this coordinate is in-bounds
+            if real_coord.row >= self.get_width() || real_coord.col >= self.get_height() {
+                return false;
+            }
+            // check if this coordinate is available
+            let space = self
+                .inner
+                .get(real_coord.row as usize)
+                .unwrap()
+                .get(real_coord.col as usize)
+                .unwrap();
+            match space {
+                Cell::Free => (),
+                _ => return false,
+            }
+        }
+        // reach this point if all good!
+        for relative_coord in piece.get_points() {
+            let real_coord = root.add(relative_coord);
+            // check if this coordinate is available
+            let space: &mut Cell = self
+                .inner
+                .get_mut(real_coord.row as usize)
+                .unwrap()
+                .get_mut(real_coord.col as usize)
+                .unwrap();
+            *space = Cell::Used;
+        }
+        true
     }
 }
 
@@ -110,9 +166,14 @@ pub struct Coord {
 
 impl Coord {
     pub fn new(x: u8, y: u8) -> Self {
+        Self { row: x, col: y }
+    }
+
+    /// Add two coordinates together and create a new coordinate.
+    pub fn add(&self, c: &Coord) -> Self {
         Self {
-            row: x,
-            col: y,
+            row: self.row + c.row,
+            col: self.col + c.col,
         }
     }
 }
@@ -148,6 +209,10 @@ impl Piece {
             f.col += diff_y;
         })
     }
+
+    pub fn get_points(&self) -> &Vec<Coord> {
+        &self.points
+    }
 }
 
 #[ffi_function]
@@ -177,10 +242,15 @@ pub unsafe extern "C" fn init_game(level: u32) {
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn place_on_board(piece: PieceId, mouse_x: f32, mouse_y: f32) -> Coord {
-    let selected = BUS_MG.pieces.get_mut(piece as usize).unwrap();
-    let root_cell = raw_mouse_pos_transform(mouse_x, mouse_y);
-    root_cell
+pub unsafe extern "C" fn place_on_board(piece: PieceId, mouse_x: f32, mouse_y: f32) -> bool {
+    match raw_mouse_pos_transform(mouse_x, mouse_y) {
+        Some(root) => {
+            // check if the cells are available
+            let selected = BUS_MG.pieces.get(piece as usize).unwrap();
+            BUS_MG.grid.place_piece(&root, selected)
+        }
+        None => false,
+    }
 }
 
 #[ffi_function]
@@ -192,11 +262,17 @@ pub unsafe extern "C" fn set_grid_space(x: f32, y: f32, width: f32, height: f32)
     BUS_MG.grid_space.height = height;
 }
 
-unsafe fn raw_mouse_pos_transform(x: f32, y: f32) -> Coord {
+unsafe fn raw_mouse_pos_transform(x: f32, y: f32) -> Option<Coord> {
+    if x < BUS_MG.grid_space.x || x > BUS_MG.grid_space.x + BUS_MG.grid_space.width {
+        return None;
+    }
+    if y < BUS_MG.grid_space.y || y > BUS_MG.grid_space.y + BUS_MG.grid_space.height {
+        return None;
+    }
     let scaled_x = (x - BUS_MG.grid_space.x) / BUS_MG.grid_space.width;
     let scaled_y = (y - BUS_MG.grid_space.y) / BUS_MG.grid_space.height;
-    let discrete_x = (scaled_x / BUS_MG.grid.inner.len() as f32) as u8;
-    let discrete_y = (scaled_y / BUS_MG.grid.inner.get(0).unwrap().len() as f32) as u8;
+    let discrete_x = (scaled_x * BUS_MG.grid.get_width() as f32) as u8;
+    let discrete_y = (scaled_y * BUS_MG.grid.inner.get(0).unwrap().len() as f32) as u8;
     // scale the position down to discrete numbers within the domain of the grid space
-    Coord::new(discrete_x, discrete_y)
+    Some(Coord::new(discrete_x, discrete_y))
 }
