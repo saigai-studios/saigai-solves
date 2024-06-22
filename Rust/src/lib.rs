@@ -160,6 +160,7 @@ pub unsafe extern "C" fn update_anim() -> Vec2 {
 
     return PLR.curr;
 }
+
 /*
 // minigame stuff
 #[ffi_type]
@@ -172,8 +173,8 @@ enum GameState {
 }
 
 #[derive(Clone)]
-enum Cell {
-    FREE(),
+pub enum Cell {
+    FREE,
     USED,
     VOID
 }
@@ -189,7 +190,8 @@ impl Game {
         }
     }
 }
-struct BusGame {
+
+pub struct BusGame {
     pub game: Game,
     pub grid: Vec<Vec<Cell>>,
 }
@@ -229,6 +231,7 @@ impl BusGame {
         grid
     }
 }
+
 #[ffi_function]
 #[no_mangle]
 // scrap later
