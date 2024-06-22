@@ -14,6 +14,7 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(init_marker))
         .register(function!(update_pos_key))
         .register(function!(update_pos_click))
+        .register(function!(bus_mg::init_game))
         .register(function!(bus_mg::add_piece))
         .register(function!(bus_mg::add_coordinate))
         .inventory()
