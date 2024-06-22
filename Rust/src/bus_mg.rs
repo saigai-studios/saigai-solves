@@ -4,7 +4,7 @@ use interoptopus::{ffi_function, ffi_type};
 /// A container for all the pieces on the board
 static mut BUS_MG: BusMg = BusMg::new();
 
-#[derive(Clone, Copy)]
+#[derive(Clone)]
 enum Cell {
     Free,
     Void,
@@ -89,9 +89,9 @@ impl Grid {
             // check if this coordinate is available
             let space = self
                 .inner
-                .get(real_coord.row as usize)
-                .unwrap()
                 .get(real_coord.col as usize)
+                .unwrap()
+                .get(real_coord.row as usize)
                 .unwrap();
             match space {
                 Cell::Free => (),
@@ -104,9 +104,9 @@ impl Grid {
             // check if this coordinate is available
             let space: &mut Cell = self
                 .inner
-                .get_mut(real_coord.row as usize)
-                .unwrap()
                 .get_mut(real_coord.col as usize)
+                .unwrap()
+                .get_mut(real_coord.row as usize)
                 .unwrap();
             *space = Cell::Used;
         }
@@ -272,7 +272,7 @@ unsafe fn raw_mouse_pos_transform(x: f32, y: f32) -> Option<Coord> {
     let scaled_x = (x - BUS_MG.grid_space.x) / BUS_MG.grid_space.width;
     let scaled_y = (y - BUS_MG.grid_space.y) / BUS_MG.grid_space.height;
     let discrete_x = (scaled_x * BUS_MG.grid.get_width() as f32) as u8;
-    let discrete_y = (scaled_y * BUS_MG.grid.inner.get(0).unwrap().len() as f32) as u8;
+    let discrete_y = (scaled_y * BUS_MG.grid.get_height() as f32) as u8;
     // scale the position down to discrete numbers within the domain of the grid space
     Some(Coord::new(discrete_x, discrete_y))
 }

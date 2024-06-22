@@ -22,7 +22,7 @@ public class Piece : MonoBehaviour
     bool isSelected = false;
     bool isPlaced = false;
 
-    const int distFromCam = 8;
+    float distFromCam;
     
     // Start is called before the first frame update
     void Start()
@@ -31,6 +31,7 @@ public class Piece : MonoBehaviour
         homePosition = transform.position;
 
         game = GameObject.FindObjectOfType<BusMg>();
+        distFromCam = transform.position.z - cam.transform.position.z; //Vector3.Distance(transform.position, cam.transform.position);
 
         //TODO: call add_piece function in BusMG and grab id
     }
@@ -52,16 +53,21 @@ public class Piece : MonoBehaviour
         //TODO keep in grid if placed down
     }
 
-    void OnMouseDown()
+    public void OnPointerDown()
     {
         isSelected = true;
+        Debug.Log("This is hi");
     }
 
-    void OnMouseUp()
+    public void OnPointerUp()
     {
         isSelected = false;
-        game.PlaceOnBoard(pieceId);
-        // TODO get block cell position, run check function in Grid object (Rust)
+        bool ret = Interop.place_on_board(pieceId, Input.mousePosition.x, Input.mousePosition.y);
+
+        Debug.Log(Input.mousePosition.x);
+        Debug.Log(Input.mousePosition.y);
+
+        Debug.Log(ret);
     }
 
     public void SetId(uint id) {
