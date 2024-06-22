@@ -114,11 +114,16 @@ namespace Interoptopus.Utils
                 var destFile = Path.Combine(DestinationAssetFolder, file);
 
                 var text = File.ReadAllText(sourceFile);
-                var newText = text.Replace(DllName, targetDllPrefix);
-                if (File.Exists(destFile) == true) {
-                    File.Delete(destFile);
+                if (text.Contains(targetDllPrefix) == false) {
+                    var newText = text.Replace(DllName, targetDllPrefix);
+                    if (File.Exists(destFile) == true) {
+                        File.Delete(destFile);
+                    }
+                    File.WriteAllText(destFile, newText);
+                    Debug.Log("Updated DLL name in C# file.");
+                } else {
+                    Debug.Log("DLL name in C# file is already latest.");
                 }
-                File.WriteAllText(destFile, newText);
             }
             
             Debug.Log("Hot reloading successful.");
@@ -128,7 +133,7 @@ namespace Interoptopus.Utils
         [InitializeOnLoadMethod]
         static void OnProjectLoadedInEditor()
         {
-
+            // TOOD
         }
         
         [MenuItem("Interoptopus/Hot Reload")]

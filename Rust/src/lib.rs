@@ -1,20 +1,21 @@
+use interoptopus::{extra_type, function, Inventory, InventoryBuilder};
 use interoptopus::{ffi_function, ffi_type};
-use interoptopus::{function, extra_type, Inventory, InventoryBuilder};
 
-pub mod experiments;
+// pub mod experiments;
+mod bus_mg;
 
 /// Include the ffi functions to be generated into the C# bindings file.
 pub fn ffi_inventory() -> Inventory {
     InventoryBuilder::new()
-        .register(extra_type!(Coord))
+        .register(extra_type!(bus_mg::Coord))
         .register(extra_type!(Vec2))
         .register(function!(add_two_nums))
         .register(function!(update_anim))
         .register(function!(init_marker))
         .register(function!(update_pos_key))
         .register(function!(update_pos_click))
-        .register(function!(experiments::e4::add_piece))
-        .register(function!(experiments::e4::add_coordinate))
+        .register(function!(bus_mg::add_piece))
+        .register(function!(bus_mg::add_coordinate))
         .inventory()
 }
 
@@ -39,19 +40,19 @@ impl Vec2 {
     }
 }
 
-#[ffi_type]
-#[repr(C)]
-#[derive(Copy, Clone)]
-pub struct Coord {
-    pub row: i32,
-    pub col: i32,
-}
+// #[ffi_type]
+// #[repr(C)]
+// #[derive(Copy, Clone)]
+// pub struct Coord {
+//     pub row: i32,
+//     pub col: i32,
+// }
 
-impl Coord {
-    const fn new() -> Self {
-        Self { row: 0, col: 0 }
-    }
-}
+// impl Coord {
+//     const fn new() -> Self {
+//         Self { row: 0, col: 0 }
+//     }
+// }
 
 #[ffi_type]
 #[repr(C)]
@@ -172,7 +173,7 @@ enum GameState {
 
 #[derive(Clone)]
 enum Cell {
-    FREE,
+    FREE(),
     USED,
     VOID
 }
@@ -200,7 +201,7 @@ impl BusGame {
             grid: BusGame::make_grid(ver),
         }
     }
-    
+
     fn make_grid(num: u32) -> Vec<Vec<Cell>> {
         let mut grid: Vec<Vec<Cell>> = match num {
             // standard board (only really useful for square/rectangular boards)
@@ -232,7 +233,7 @@ impl BusGame {
 #[no_mangle]
 // scrap later
 pub unsafe extern "C" fn piece_fits() -> bool {
-    // check if a piece fits in the 
+    // check if a piece fits in the
     true
 }
 */

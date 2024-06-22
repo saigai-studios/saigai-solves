@@ -4,7 +4,7 @@ using UnityEngine;
 using Saigai.Studios;
 
 [System.Serializable]
-public class Block : MonoBehaviour
+public class Piece : MonoBehaviour
 {   
     // Camera for position mapping
     public Camera cam;
@@ -13,6 +13,9 @@ public class Block : MonoBehaviour
     // This is editable through the Unity inspector
     public List<Coord> cells;
 
+    private BusMg game;
+    private uint pieceId;
+
     // Position when not selected or placed in grid
     public Vector3 homePosition;
 
@@ -20,13 +23,14 @@ public class Block : MonoBehaviour
     bool isPlaced = false;
 
     const int distFromCam = 8;
-    int pieceId;
     
     // Start is called before the first frame update
     void Start()
     {
         // Set the home position to wherever the piece is at when game starts
         homePosition = transform.position;
+
+        game = GameObject.FindObjectOfType<BusMg>();
 
         //TODO: call add_piece function in BusMG and grab id
     }
@@ -56,8 +60,16 @@ public class Block : MonoBehaviour
     void OnMouseUp()
     {
         isSelected = false;
-
+        game.PlaceOnBoard(pieceId);
         // TODO get block cell position, run check function in Grid object (Rust)
+    }
+
+    public void SetId(uint id) {
+        pieceId = id;
+    }
+
+    public uint GetId() {
+        return pieceId;
     }
 
     //TODO remove piece from grid
