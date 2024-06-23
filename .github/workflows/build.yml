@@ -45,13 +45,12 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           buildName: SaigaiSolves
-          buildsPath: .
           targetPlatform: StandaloneWindows64
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar ./build/StandaloneWindows64/SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
@@ -101,13 +100,12 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           buildName: SaigaiSolves
-          buildsPath: .
           targetPlatform: StandaloneOSX
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar ./build/StandaloneOSX/SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
@@ -157,13 +155,12 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           buildName: SaigaiSolves
-          buildsPath: .
           targetPlatform: StandaloneLinux64
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar ./build/StandaloneLinux64/SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
