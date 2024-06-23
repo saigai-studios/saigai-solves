@@ -44,15 +44,14 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
+          buildName: SaigaiSolves
+          buildsPath: .
           targetPlatform: StandaloneWindows64
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
-      - name: Rename Game
-        run: sudo mv build/StandaloneWindows64 build/SaigaiSolves
-
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
@@ -101,15 +100,14 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
+          buildName: SaigaiSolves
+          buildsPath: .
           targetPlatform: StandaloneOSX
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
-      - name: Rename Game
-        run: sudo mv build/StandaloneOSX build/SaigaiSolves
-
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
@@ -158,15 +156,14 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
+          buildName: SaigaiSolves
+          buildsPath: .
           targetPlatform: StandaloneLinux64
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
-      - name: Rename Game
-        run: sudo mv build/StandaloneLinux64 build/SaigaiSolves
-
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
