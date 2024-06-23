@@ -22,6 +22,7 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(bus_mg::place_on_board))
         .register(function!(bus_mg::place_off_board))
         .register(function!(bus_mg::set_grid_space))
+        .register(function!(bus_mg::get_snap_pos))
         .inventory()
 }
 

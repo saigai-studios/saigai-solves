@@ -172,7 +172,11 @@ pub struct Vec2 {
 }
 
 impl Vec2 {
-    const fn new() -> Self {
+    pub const fn new() -> Self {
         Self { x: 0.0, y: 0.0 }
+    }
+
+    pub fn with(x: f32, y: f32) -> Self {
+        Self { x: x, y: y }
     }
 }
