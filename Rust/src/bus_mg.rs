@@ -26,6 +26,12 @@ pub unsafe extern "C" fn place_on_board(piece: PieceId, mouse_x: f32, mouse_y: f
 
 #[ffi_function]
 #[no_mangle]
+pub unsafe extern "C" fn place_off_board(piece: PieceId, mouse_x: f32, mouse_y: f32) -> bool {
+    BUS_MG.place_off_board(piece, mouse_x, mouse_y)
+}
+
+#[ffi_function]
+#[no_mangle]
 pub unsafe extern "C" fn set_grid_space(x: f32, y: f32, width: f32, height: f32) -> () {
     BUS_MG.grid_space = GridSpace::set(x, y, width, height);
 }
@@ -101,6 +107,19 @@ impl BusMg {
                 self.grid.place_piece(&root, selected)
             }
             None => false,
+        }
+    }
+
+    pub fn place_off_board(&mut self, piece: PieceId, mouse_x: f32, mouse_y: f32) -> bool {
+        match self.raw_mouse_pos_transform(mouse_x, mouse_y) {
+            // we don't want to place the piece anywhere on the board
+            Some(_) => false,
+            // we selected a location off the board
+            None => {
+                let selected = self.pieces.get(piece as usize).unwrap();
+                let _ = self.grid.remove_piece(selected);
+                true
+            }
         }
     }
 }
@@ -229,39 +248,74 @@ impl Grid {
     /// Attempts to place a piece in the board and updates the cells if
     /// successful.
     pub fn place_piece(&mut self, root: &Coord, piece: &Piece) -> bool {
-        for relative_coord in piece.get_points() {
-            let real_coord = root.translate(relative_coord);
+        // check that each real coordinate can map to a valid cell location (check bounds)
+        for relative_cell in piece.get_points() {
+            let real_cell = root.translate(relative_cell);
             // check if this coordinate is in-bounds
-            println!("{:?}", real_coord);
-            if real_coord.row >= self.get_width() || real_coord.col >= self.get_height() {
+            println!("{:?}", real_cell);
+            if real_cell.row >= self.get_width() || real_cell.col >= self.get_height() {
                 return false;
             }
 
             // check if this coordinate is available
             let space = self
                 .inner
-                .get(real_coord.col as usize)
+                .get(real_cell.col as usize)
                 .unwrap()
-                .get(real_coord.row as usize)
+                .get(real_cell.row as usize)
                 .unwrap();
             match space {
+                // allow placement on open cells
                 Cell::Free => (),
+                // allow placement to be placed back on a tile that already is occupied
+                // by this piece because it is currently "lifted"
+                Cell::Used(id) => if id != &piece.get_id() { return false }
                 _ => return false,
             }
         }
-        // reach this point if all good!
-        for relative_coord in piece.get_points() {
-            let real_coord = root.translate(relative_coord);
+
+        // remove previous cell positions
+        let _ = self.remove_piece(piece);
+
+        // fill each cell this piece occupies within the grid
+        for relative_cell in piece.get_points() {
+            let real_cell = root.translate(relative_cell);
             // check if this coordinate is available
             let space: &mut Cell = self
                 .inner
-                .get_mut(real_coord.col as usize)
+                .get_mut(real_cell.col as usize)
                 .unwrap()
-                .get_mut(real_coord.row as usize)
+                .get_mut(real_cell.row as usize)
                 .unwrap();
             *space = Cell::Used(piece.get_id());
         }
         true
+    }
+
+    /// Removes a piece from the grid. This frees the cells it once previously
+    /// occupied.
+    /// 
+    /// Returns false if the piece was not existing in the grid.
+    fn remove_piece(&mut self, piece: &Piece) -> bool {
+        match piece.prev_cell {
+            Some(root) => {
+                for relative_cell in piece.get_points() {
+                    let real_cell = root.translate(relative_cell);
+                    // update the state of this cell
+                    let space: &mut Cell = self
+                        .inner
+                        .get_mut(real_cell.col as usize)
+                        .unwrap()
+                        .get_mut(real_cell.row as usize)
+                        .unwrap();
+                    *space = Cell::Free;
+                }
+                true
+            },
+            None => {
+                false
+            }
+        }
     }
 }
 
@@ -269,6 +323,8 @@ type PieceId = u32;
 
 pub struct Piece {
     points: Vec<Coord>,
+    /// Track the last root coordinate where the piece is on the board, if it exists.
+    prev_cell: Option<Coord>,
     id: PieceId,
 }
 
@@ -276,8 +332,13 @@ impl Piece {
     pub fn new(id: PieceId) -> Self {
         Self {
             points: Vec::new(),
+            prev_cell: None,
             id: id,
         }
+    }
+
+    pub fn is_on_board(&self) -> bool {
+        self.prev_cell.is_some()
     }
 
     pub fn get_id(&self) -> PieceId {
@@ -337,8 +398,8 @@ mod tests {
 
         let mut game = make_basic_game(10.0, 20.0);
         assert_eq!(game.place_on_board(0, 40.0, 99.0), true);
-        // try to add to position that is already occupied
-        assert_eq!(game.place_on_board(0, 40.0, 99.0), false);
+        // try to add to position that is already occupied by a different piece
+        assert_eq!(game.place_on_board(1, 40.0, 99.0), false);
     }
 
     #[test]
@@ -375,7 +436,7 @@ mod tests {
         assert_eq!(game.grid.get_cell_status(2, 2), &Cell::Used(0));
         assert_eq!(game.grid.get_cell_status(3, 2), &Cell::Free);
 
-        // add this piece (invalid- already occupied
-        assert_eq!(game.place_on_board(id0, 20.0, 40.0), false);
+        // add this piece (valid- already occupied by itself)
+        assert_eq!(game.place_on_board(id0, 20.0, 40.0), true);
     }
 }
