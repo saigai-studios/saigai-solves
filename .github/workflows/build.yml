@@ -49,8 +49,11 @@ jobs:
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
+      - name: Move game folder
+        run: sudo mv ./build/StandaloneWindows64 ./SaigaiSolves
+
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar ./build/StandaloneWindows64/SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar ./SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
@@ -104,8 +107,11 @@ jobs:
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
+      - name: Move game folder
+        run: sudo mv ./build/StandaloneOSX.app ./SaigaiSolves.app
+
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar ./build/StandaloneOSX/SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar ./SaigaiSolves.app
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
@@ -159,8 +165,11 @@ jobs:
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
+      - name: Move game folder
+        run: sudo mv ./build/StandaloneLinux64 ./SaigaiSolves
+
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar ./build/StandaloneLinux64/SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar ./SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
@@ -214,8 +223,11 @@ jobs:
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
 
+      - name: Move game folder
+        run: sudo mv ./build/WebGL ./SaigaiSolves
+
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar ./build/WebGL/SaigaiSolves
+        run: tar -cvf SaigaiSolves.tar ./SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
