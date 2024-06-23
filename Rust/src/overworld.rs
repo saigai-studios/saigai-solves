@@ -29,6 +29,9 @@ type Markers = [Vec2; 4];
 // Animation speed
 const SPEED: i32 = 100;
 
+const GAME_MARKER_FIRST: i32 = 0;
+const GAME_MARKER_LAST: i32 = 2;
+
 // Player variables for map traversal
 static mut OVERWORLD: Overworld = Overworld::new();
 static mut PLAYER: Player = Player::new();
@@ -107,33 +110,33 @@ impl Player {
     }
 
     pub fn update_pos_key(&mut self, is_left: bool, markers: &Markers) {
-        // Decrement and wrap
+        // Move to the left
         if is_left == true {
-            // Left
             self.curr_mark -= 1;
-
-            if self.curr_mark < 0 {
-                self.curr_mark = 2;
+            if self.curr_mark < GAME_MARKER_FIRST {
+                self.curr_mark = GAME_MARKER_LAST;
             }
+        // Move to the right
         } else {
-            // Right
             self.curr_mark += 1;
-
-            if self.curr_mark > 2 {
-                self.curr_mark = 0;
+            if self.curr_mark > GAME_MARKER_LAST {
+                self.curr_mark = GAME_MARKER_FIRST;
             }
         }
 
         // Reset animation counter
         self.anim_count = 0;
-
         // Set starting position
         self.old = self.curr;
-
         // Set ending position
         self.dest = markers[self.get_current_mark()];
     }
 
+    /// Sets the marker for the player to move to. This function assumes that
+    /// `marker` is already a valid index in the available minigame markers.
+    ///
+    /// This function returns true when the animation is needed to update
+    /// on the frontend (?).
     pub fn update_pos_click(&mut self, marker: i32, markers: &Markers) -> bool {
         // If marker matches the current, no update is needed
         if marker == self.curr_mark {
@@ -178,5 +181,35 @@ impl Vec2 {
 
     pub fn with(x: f32, y: f32) -> Self {
         Self { x: x, y: y }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_update_pos_key() {
+        let mut world = Overworld::new();
+        // south region
+        world.set_marker(0, Vec2::with(2.0, 0.0));
+        // west region
+        world.set_marker(1, Vec2::with(1.0, 1.0));
+        // east region
+        world.set_marker(2, Vec2::with(3.0, 1.0));
+        // middle waypoint
+        world.set_marker(3, Vec2::with(2.0, 1.0));
+
+        let mut player = Player::new();
+        // move around the map
+        assert_eq!(player.curr_mark, GAME_MARKER_FIRST);
+        player.update_pos_key(true, &world.markers);
+        assert_eq!(player.curr_mark, GAME_MARKER_LAST);
+        player.update_pos_key(true, &world.markers);
+        assert_eq!(player.curr_mark, GAME_MARKER_LAST - 1);
+        player.update_pos_key(true, &world.markers);
+        assert_eq!(player.curr_mark, GAME_MARKER_LAST - 2);
+        player.update_pos_key(false, &world.markers);
+        assert_eq!(player.curr_mark, GAME_MARKER_LAST - 1);
     }
 }
