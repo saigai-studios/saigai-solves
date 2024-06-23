@@ -40,8 +40,14 @@ pub unsafe extern "C" fn place_off_board(piece: PieceId, mouse_x: f32, mouse_y: 
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn set_grid_space(x: f32, y: f32, width: f32, height: f32) -> () {
+pub unsafe extern "C" fn set_window(x: f32, y: f32, width: f32, height: f32) -> () {
     BUS_MG.grid_space = GridSpace::set(x, y, width, height);
+}
+
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn is_game_won() -> bool {
+    BUS_MG.is_game_won()
 }
 
 /// A container for all the pieces on the board
@@ -97,6 +103,15 @@ impl BusMg {
         let screen_x = (cont_x * self.grid_space.width) + self.grid_space.x;
         let screen_y = (cont_y * self.grid_space.height) + self.grid_space.y;
         Vec2::with(screen_x, screen_y)
+    }
+
+    /// Determines if the game is "won" when it fails to find a piece without a
+    /// root occupied cell on the grid.
+    pub fn is_game_won(&self) -> bool {
+        self.pieces
+            .iter()
+            .find(|p| p.get_occupied_root_cell().is_none())
+            .is_none()
     }
 }
 

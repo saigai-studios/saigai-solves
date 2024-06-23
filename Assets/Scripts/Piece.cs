@@ -20,7 +20,6 @@ public class Piece : MonoBehaviour
     public Vector3 homePosition;
 
     bool isSelected = false;
-    bool isPlaced = false;
 
     float distFromCam;
     
@@ -61,17 +60,27 @@ public class Piece : MonoBehaviour
     public void OnPointerUp()
     {
         isSelected = false;
-        isPlaced = Interop.place_on_board(pieceId, Input.mousePosition.x, Input.mousePosition.y);
 
         Debug.Log("Piece placed?");
-        Debug.Log(isPlaced);
-
-        if (isPlaced) {
+        // Try to place into the grid
+        if (Interop.place_on_board(pieceId, Input.mousePosition.x, Input.mousePosition.y) == true) {
+            Debug.Log("Placed on board.");
             Vec2 home_temp = Interop.get_snap_pos(pieceId);
             homePosition = cam.ScreenToWorldPoint(new Vector3(home_temp.x, home_temp.y, distFromCam));
+            // check if we won the game!
+            if (Interop.is_game_won() == true) {
+                // we won: woo-hoo!
+                game.win();
+            }
         }
-        else {
+        // Try to place off the grid
+        else if (Interop.place_off_board(pieceId, Input.mousePosition.x, Input.mousePosition.y) == true) {
+            Debug.Log("Placed off board.");
             homePosition = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distFromCam));
+        // The requested location was invalid
+        } else {
+            Debug.Log("Could not be moved to requested place (staying at original location).");
+            // do not move the piece anywhere - keep it in its original position
         }
     }
 

@@ -8,11 +8,13 @@ public class BusMg : MonoBehaviour {
     // Camera for pixel mapping
     public Camera cam;
 
-    public Piece selected_piece;
+    private bool isGameWon;
 
     void Start() {
         // Initialize game grid
         Interop.init_game(0);
+
+        isGameWon = false;
 
         // Load the blocks into the rust-end
         var foundPieceObjects = GameObject.FindObjectsOfType<Piece>();
@@ -32,10 +34,6 @@ public class BusMg : MonoBehaviour {
             }
         }
         Debug.Log("Pieces initialized.");
-        // bool[,] grid = new bool[8, 8];
-        // load random number of people pieces to fit in the grid
-
-        // game_loop(grid);
 
         Vector3[] corners = new Vector3[4];
         GetComponent<RectTransform>().GetWorldCorners(corners);
@@ -48,15 +46,12 @@ public class BusMg : MonoBehaviour {
         // Debug.Log((corners[3].x - corners[0].x));
         // Debug.Log((corners[2].y - corners[0].y));
 
-        Interop.set_grid_space(corners[0].x, corners[0].y, (corners[3].x - corners[0].x), (corners[2].y - corners[0].y));
+        Interop.set_window(corners[0].x, corners[0].y, (corners[3].x - corners[0].x), (corners[2].y - corners[0].y));
     }
 
-    void game_loop(bool[,] grid) {
-
-    }
-
-    public void PlaceOnBoard(uint id) {
-        Debug.Log("Placing on board.");
+    public void win() {
+        isGameWon = true;
+        Debug.Log("You successfully completed the puzzle: バス!!!");
     }
 }
 

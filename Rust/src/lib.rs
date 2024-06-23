@@ -21,8 +21,9 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(bus_mg::add_coordinate))
         .register(function!(bus_mg::place_on_board))
         .register(function!(bus_mg::place_off_board))
-        .register(function!(bus_mg::set_grid_space))
+        .register(function!(bus_mg::set_window))
         .register(function!(bus_mg::get_snap_pos))
+        .register(function!(bus_mg::is_game_won))
         .inventory()
 }
 
