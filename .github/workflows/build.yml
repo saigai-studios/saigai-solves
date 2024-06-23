@@ -50,7 +50,7 @@ jobs:
           allowDirtyBuild: true
 
       - name: Move game folder
-        run: sudo mv ./build/StandaloneWindows64 ./SaigaiSolves
+        run: mv ./build/StandaloneWindows64 ./SaigaiSolves
 
       - name: Tar game to retain executable permissions
         run: tar -cvf SaigaiSolves.tar ./SaigaiSolves
