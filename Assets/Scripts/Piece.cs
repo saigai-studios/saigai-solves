@@ -56,18 +56,23 @@ public class Piece : MonoBehaviour
     public void OnPointerDown()
     {
         isSelected = true;
-        Debug.Log("This is hi");
     }
 
     public void OnPointerUp()
     {
         isSelected = false;
-        bool ret = Interop.place_on_board(pieceId, Input.mousePosition.x, Input.mousePosition.y);
+        isPlaced = Interop.place_on_board(pieceId, Input.mousePosition.x, Input.mousePosition.y);
 
-        Debug.Log(Input.mousePosition.x);
-        Debug.Log(Input.mousePosition.y);
+        Debug.Log("Piece placed?");
+        Debug.Log(isPlaced);
 
-        Debug.Log(ret);
+        if (isPlaced) {
+            Vec2 home_temp = Interop.get_snap_pos(pieceId);
+            homePosition = cam.ScreenToWorldPoint(new Vector3(home_temp.x, home_temp.y, distFromCam));
+        }
+        else {
+            homePosition = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distFromCam));
+        }
     }
 
     public void SetId(uint id) {
