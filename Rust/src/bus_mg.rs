@@ -1,5 +1,7 @@
 use interoptopus::{ffi_function, ffi_type};
 
+use crate::overworld::Vec2;
+
 #[ffi_function]
 #[no_mangle]
 pub unsafe extern "C" fn add_piece() -> PieceId {
@@ -10,6 +12,12 @@ pub unsafe extern "C" fn add_piece() -> PieceId {
 #[no_mangle]
 pub unsafe extern "C" fn add_coordinate(piece: PieceId, loc: Coord) {
     BUS_MG.add_coordinate(piece, loc);
+}
+
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn get_snap_pos(piece: PieceId) -> Vec2 {
+    BUS_MG.get_snap_pos(piece)
 }
 
 #[ffi_function]
@@ -62,6 +70,7 @@ impl BusMg {
         self.pieces.clear();
     }
 
+    /// Transforms screen position to cell coordinate.
     fn raw_mouse_pos_transform(&self, x: f32, y: f32) -> Option<Coord> {
         if x < self.grid_space.x || x > self.grid_space.x + self.grid_space.width {
             return None;
@@ -76,6 +85,18 @@ impl BusMg {
         // scale the position down to discrete numbers within the domain of the grid space
         //  println!("{:?}", Coord::new(discrete_x, discrete_y));
         Some(Coord::new(discrete_x, discrete_y))
+    }
+
+    /// Transforms cell coordinate to screen position.
+    fn raw_cell_pos_transform(&self, row: u8, col: u8) -> Vec2 {
+        // get a value from [0, 1)
+        let cont_x = row as f32 / self.grid.get_width() as f32;
+        let cont_y = col as f32 / self.grid.get_height() as f32;
+
+        // scale it according to the grid window space
+        let screen_x = (cont_x * self.grid_space.width) + self.grid_space.x;
+        let screen_y = (cont_y * self.grid_space.height) + self.grid_space.y;
+        Vec2::with(screen_x, screen_y)
     }
 }
 
@@ -103,7 +124,7 @@ impl BusMg {
         match self.raw_mouse_pos_transform(mouse_x, mouse_y) {
             Some(root) => {
                 // check if the cells are available
-                let selected = self.pieces.get(piece as usize).unwrap();
+                let selected = self.pieces.get_mut(piece as usize).unwrap();
                 self.grid.place_piece(&root, selected)
             }
             None => false,
@@ -116,10 +137,23 @@ impl BusMg {
             Some(_) => false,
             // we selected a location off the board
             None => {
-                let selected = self.pieces.get(piece as usize).unwrap();
+                let selected = self.pieces.get_mut(piece as usize).unwrap();
                 let _ = self.grid.remove_piece(selected);
                 true
             }
+        }
+    }
+
+    /// Transforms the coordinates of the root cell of this piece into an x, y screen
+    /// position according to the grid space window.
+    ///
+    /// Although this function should never be called for a piece that is not placed
+    /// on the gird, if the piece is not on the grid it returns (0.0, 0.0).
+    pub fn get_snap_pos(&self, piece: PieceId) -> Vec2 {
+        let selected = self.pieces.get(piece as usize).unwrap();
+        match selected.get_occupied_root_cell() {
+            Some(root) => self.raw_cell_pos_transform(root.row, root.col),
+            None => Vec2::new(),
         }
     }
 }
@@ -247,7 +281,7 @@ impl Grid {
 
     /// Attempts to place a piece in the board and updates the cells if
     /// successful.
-    pub fn place_piece(&mut self, root: &Coord, piece: &Piece) -> bool {
+    pub fn place_piece(&mut self, root: &Coord, piece: &mut Piece) -> bool {
         // check that each real coordinate can map to a valid cell location (check bounds)
         for relative_cell in piece.get_points() {
             let real_cell = root.translate(relative_cell);
@@ -269,7 +303,11 @@ impl Grid {
                 Cell::Free => (),
                 // allow placement to be placed back on a tile that already is occupied
                 // by this piece because it is currently "lifted"
-                Cell::Used(id) => if id != &piece.get_id() { return false }
+                Cell::Used(id) => {
+                    if id != &piece.get_id() {
+                        return false;
+                    }
+                }
                 _ => return false,
             }
         }
@@ -289,14 +327,16 @@ impl Grid {
                 .unwrap();
             *space = Cell::Used(piece.get_id());
         }
+        // remember which root cell this piece was placed at
+        piece.prev_cell = Some(root.clone());
         true
     }
 
     /// Removes a piece from the grid. This frees the cells it once previously
     /// occupied.
-    /// 
+    ///
     /// Returns false if the piece was not existing in the grid.
-    fn remove_piece(&mut self, piece: &Piece) -> bool {
+    fn remove_piece(&mut self, piece: &mut Piece) -> bool {
         match piece.prev_cell {
             Some(root) => {
                 for relative_cell in piece.get_points() {
@@ -310,11 +350,11 @@ impl Grid {
                         .unwrap();
                     *space = Cell::Free;
                 }
+                // lose memory of which root cell this piece was placed it (is now removed)
+                piece.prev_cell = None;
                 true
-            },
-            None => {
-                false
             }
+            None => false,
         }
     }
 }
@@ -337,8 +377,8 @@ impl Piece {
         }
     }
 
-    pub fn is_on_board(&self) -> bool {
-        self.prev_cell.is_some()
+    pub fn get_occupied_root_cell(&self) -> Option<&Coord> {
+        self.prev_cell.as_ref()
     }
 
     pub fn get_id(&self) -> PieceId {
