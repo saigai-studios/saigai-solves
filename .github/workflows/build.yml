@@ -47,12 +47,15 @@ jobs:
           targetPlatform: StandaloneWindows64
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
+
+      - name: Rename Game
+        run: mv build/StandaloneWindows64 build/SaigaiSolves
         
-      - name: Store saigai
+      - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
         with:
-          name: sagai-solver-windows-x64
-          path: build/StandaloneWindows64
+          name: saigai-solves-windows-x64
+          path: build/SaigaiSolves
 
   build-macos:
     runs-on: macos-12
@@ -98,12 +101,15 @@ jobs:
           targetPlatform: StandaloneOSX
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
+
+      - name: Rename Game
+        run: mv build/StandaloneOSX build/SaigaiSolves
         
-      - name: Store saigai
+      - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
         with:
-          name: sagai-solver-macos-x64
-          path: build/StandaloneOSX
+          name: saigai-solves-macos-x64
+          path: build/SaigaiSolves
 
   build-linux:
     runs-on: ubuntu-latest
@@ -149,9 +155,12 @@ jobs:
           targetPlatform: StandaloneLinux64
           unityVersion: 2022.3.30f1
           allowDirtyBuild: true
+
+      - name: Rename Game
+        run: mv build/StandaloneLinux64 build/SaigaiSolves
         
-      - name: Store saigai
+      - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
         with:
-          name: sagai-solver-ubuntu-x64
-          path: build/StandaloneLinux64
+          name: saigai-solves-ubuntu-x64
+          path: build/SaigaiSolves
