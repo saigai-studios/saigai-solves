@@ -50,12 +50,15 @@ jobs:
 
       - name: Rename Game
         run: mv build/StandaloneWindows64 build/SaigaiSolves
+
+      - name: Tar game to retain executable permissions
+        run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
         with:
           name: saigai-solves-windows-x64
-          path: build/SaigaiSolves
+          path: SaigaiSolves.tar
 
   build-macos:
     runs-on: macos-12
@@ -104,12 +107,15 @@ jobs:
 
       - name: Rename Game
         run: mv build/StandaloneOSX build/SaigaiSolves
+
+      - name: Tar game to retain executable permissions
+        run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
         with:
           name: saigai-solves-macos-x64
-          path: build/SaigaiSolves
+          path: SaigaiSolves.tar
 
   build-linux:
     runs-on: ubuntu-latest
@@ -158,9 +164,12 @@ jobs:
 
       - name: Rename Game
         run: mv build/StandaloneLinux64 build/SaigaiSolves
+
+      - name: Tar game to retain executable permissions
+        run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
         with:
           name: saigai-solves-ubuntu-x64
-          path: build/SaigaiSolves
+          path: SaigaiSolves.tar
