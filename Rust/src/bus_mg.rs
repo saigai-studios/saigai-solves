@@ -1,5 +1,35 @@
 use interoptopus::{ffi_function, ffi_type};
 
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn add_piece() -> PieceId {
+    BUS_MG.add_piece()
+}
+
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn add_coordinate(piece: PieceId, loc: Coord) {
+    BUS_MG.add_coordinate(piece, loc);
+}
+
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn init_game(level: u32) {
+    BUS_MG.initialize(level);
+}
+
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn place_on_board(piece: PieceId, mouse_x: f32, mouse_y: f32) -> bool {
+    BUS_MG.place_on_board(piece, mouse_x, mouse_y)
+}
+
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn set_grid_space(x: f32, y: f32, width: f32, height: f32) -> () {
+    BUS_MG.grid_space = GridSpace::set(x, y, width, height);
+}
+
 /// A container for all the pieces on the board
 static mut BUS_MG: BusMg = BusMg::new();
 
@@ -261,36 +291,6 @@ impl Piece {
     pub fn get_points(&self) -> &Vec<Coord> {
         &self.points
     }
-}
-
-#[ffi_function]
-#[no_mangle]
-pub unsafe extern "C" fn add_piece() -> PieceId {
-    BUS_MG.add_piece()
-}
-
-#[ffi_function]
-#[no_mangle]
-pub unsafe extern "C" fn add_coordinate(piece: PieceId, loc: Coord) {
-    BUS_MG.add_coordinate(piece, loc);
-}
-
-#[ffi_function]
-#[no_mangle]
-pub unsafe extern "C" fn init_game(level: u32) {
-    BUS_MG.initialize(level);
-}
-
-#[ffi_function]
-#[no_mangle]
-pub unsafe extern "C" fn place_on_board(piece: PieceId, mouse_x: f32, mouse_y: f32) -> bool {
-    BUS_MG.place_on_board(piece, mouse_x, mouse_y)
-}
-
-#[ffi_function]
-#[no_mangle]
-pub unsafe extern "C" fn set_grid_space(x: f32, y: f32, width: f32, height: f32) -> () {
-    BUS_MG.grid_space = GridSpace::set(x, y, width, height);
 }
 
 #[cfg(test)]
