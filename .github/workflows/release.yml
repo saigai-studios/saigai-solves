@@ -1,0 +1,41 @@
+name: release
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag for release'
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fetch Repository
+      uses: actions/checkout@v4
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+
+    - name: Display filesystem contents
+      run: ls -R
+
+    - name: Validate release notes
+      run: ./autocl.py ${{ inputs.version }}
+
+    - name: Write release notes
+      run: echo "$(./scripts/autocl.py ${{ inputs.version }})" > ./RELEASE_NOTES.md
+
+    - name: Tag commit as version
+      run: git tag ${{ inputs.version }}
+
+    - name: Push specific version tag
+      run: git push --tags
+      
+    - name: Upload releases
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: '**/saigai-solves-*'
+        bodyFile: ./RELEASE_NOTES.md
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ inputs.version }}

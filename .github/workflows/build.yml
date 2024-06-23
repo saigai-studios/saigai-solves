@@ -108,10 +108,10 @@ jobs:
           allowDirtyBuild: true
 
       - name: Move game folder
-        run: sudo mv ./build/StandaloneOSX.app ./SaigaiSolves.app
+        run: sudo mv ./build/SaigaiSolves ./SaigaiSolves
 
       - name: Tar game to retain executable permissions
-        run: tar -cvf SaigaiSolves.tar ./SaigaiSolves.app
+        run: tar -cvf SaigaiSolves.tar ./SaigaiSolves
         
       - name: Upload SaigaiSolves!
         uses: actions/upload-artifact@v4
@@ -224,7 +224,7 @@ jobs:
           allowDirtyBuild: true
 
       - name: Move game folder
-        run: sudo mv ./build/WebGL ./SaigaiSolves
+        run: sudo mv ./build/WebGL/SaigaiSolves ./SaigaiSolves
 
       - name: Tar game to retain executable permissions
         run: tar -cvf SaigaiSolves.tar ./SaigaiSolves
