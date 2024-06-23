@@ -108,7 +108,7 @@ jobs:
           allowDirtyBuild: true
 
       - name: Move game folder
-        run: sudo mv ./build/SaigaiSolves ./SaigaiSolves
+        run: sudo mv ./build/StandaloneOSX ./SaigaiSolves
 
       - name: Tar game to retain executable permissions
         run: tar -cvf SaigaiSolves.tar ./SaigaiSolves
