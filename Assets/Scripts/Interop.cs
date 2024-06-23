@@ -16,7 +16,7 @@ namespace Saigai.Studios
 {
     public static partial class Interop
     {
-        public const string NativeLib = "saigai.54c4efaf";
+        public const string NativeLib = "saigai.96d42fec";
 
         static Interop()
         {
@@ -38,11 +38,20 @@ namespace Saigai.Studios
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "update_pos_click")]
         public static extern bool update_pos_click(int marker);
 
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "init_game")]
+        public static extern void init_game(uint level);
+
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "add_piece")]
         public static extern uint add_piece();
 
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "add_coordinate")]
         public static extern void add_coordinate(uint piece, Coord loc);
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "place_on_board")]
+        public static extern bool place_on_board(uint piece, float mouse_x, float mouse_y);
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "set_grid_space")]
+        public static extern void set_grid_space(float x, float y, float width, float height);
 
     }
 
