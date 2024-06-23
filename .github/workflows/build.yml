@@ -49,7 +49,7 @@ jobs:
           allowDirtyBuild: true
 
       - name: Rename Game
-        run: mv build/StandaloneWindows64 build/SaigaiSolves
+        run: sudo mv build/StandaloneWindows64 build/SaigaiSolves
 
       - name: Tar game to retain executable permissions
         run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
@@ -106,7 +106,7 @@ jobs:
           allowDirtyBuild: true
 
       - name: Rename Game
-        run: mv build/StandaloneOSX build/SaigaiSolves
+        run: sudo mv build/StandaloneOSX build/SaigaiSolves
 
       - name: Tar game to retain executable permissions
         run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
@@ -163,7 +163,7 @@ jobs:
           allowDirtyBuild: true
 
       - name: Rename Game
-        run: mv build/StandaloneLinux64 build/SaigaiSolves
+        run: sudo mv build/StandaloneLinux64 build/SaigaiSolves
 
       - name: Tar game to retain executable permissions
         run: tar -cvf SaigaiSolves.tar build/SaigaiSolves
