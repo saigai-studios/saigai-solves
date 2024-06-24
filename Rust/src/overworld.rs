@@ -27,7 +27,7 @@ pub unsafe extern "C" fn update_anim() -> Vec2 {
 type Markers = [Vec2; 4];
 
 // Animation speed
-const SPEED: i32 = 100;
+const SPEED: i32 = 20;
 
 const GAME_MARKER_FIRST: i32 = 0;
 const GAME_MARKER_LAST: i32 = 2;
