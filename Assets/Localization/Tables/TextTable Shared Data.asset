@@ -19,6 +19,10 @@ MonoBehaviour:
     m_Key: "TestKey\t"
     m_Metadata:
       m_Items: []
+  - m_Id: 31254732320768
+    m_Key: TestLanguage
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

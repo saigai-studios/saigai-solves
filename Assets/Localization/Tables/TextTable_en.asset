@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: Bus!!!
     m_Metadata:
       m_Items: []
+  - m_Id: 31254732320768
+    m_Localized: Eng->Jap
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
