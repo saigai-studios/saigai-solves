@@ -12,9 +12,11 @@ PLATFORM = platform.platform().upper().split('-')[0]
 
 DLL_NAME = 'saigai'
 
-DLL_SRC = 'Rust/target/debug'
+DLL_SRC = 'Rust/target/release'
 DLL_DEST = 'Assets/Plugins'
 
+# Use this to specify the source of where the C# bindings are generated
+# otherwise the files may already exist at the destination
 CSHARP_SRC = 'Rust/bindings/csharp'
 CSHARP_DEST = 'Assets/Scripts'
 
@@ -42,7 +44,7 @@ dll_dest_path = os.path.join(DLL_DEST, DLL_FILENAME)
 print('info: copying DLL', dll_src_path, 'to', dll_dest_path, '...')
 shutil.copy(dll_src_path, dll_dest_path)
 
-# Copy the csharp files to the correct Unity folder
+# Copy the csharp files to the correct Unity folder (if they exist)
 cs_files = glob.glob(CSHARP_SRC + '/*.cs')
 for cs in cs_files:
     filename = os.path.basename(cs)

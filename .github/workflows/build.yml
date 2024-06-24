@@ -23,7 +23,7 @@ jobs:
         working-directory: ./Rust
 
       - name: Build Rust dynamic library
-        run: cargo run --verbose
+        run: cargo run --release --verbose
         working-directory: ./Rust
 
       - name: Cache previous Unity builds
@@ -81,7 +81,7 @@ jobs:
         working-directory: ./Rust
 
       - name: Build Rust dynamic library
-        run: cargo run --verbose
+        run: cargo run --release --verbose
         working-directory: ./Rust
 
       - name: Cache previous Unity builds
@@ -139,7 +139,7 @@ jobs:
         working-directory: ./Rust
 
       - name: Build Rust dynamic library
-        run: cargo run --verbose
+        run: cargo run --release --verbose
         working-directory: ./Rust
 
       - name: Cache previous Unity builds
@@ -197,7 +197,7 @@ jobs:
         working-directory: ./Rust
 
       - name: Build Rust dynamic library
-        run: cargo run --verbose
+        run: cargo run --release --verbose
         working-directory: ./Rust
 
       - name: Cache previous Unity builds
