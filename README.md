@@ -51,6 +51,23 @@ cd Rust; cargo run; cd ..
 Unity -projectPath . 
 ```
 
+## Adding text with language translation capabilities
+
+Saigai Solves uses the Localization package from Unity to allow for translatable text throughout the game with the click of a button.
+For this project (and probably general use), follow these steps as a template for your game objects:
+
+__Note:__ This information will be updated as better organizaiton is demanded (creating new tables, etc.)
+
+1. Window -> Asset Management -> Localization Tables. Create a new key and fill with corresponding information.
+
+2. Select your text object and clear the "Text" field. Add a component "Localize String Event".
+
+3. In "String Reference" select your key under the correct translation table. "Table Collection" should be the same table.
+
+4. "Update String": Editor and Runtime; Text -> text; drag object from Hierarchy into dark gray field.
+
+5. Hip Hip Hooray!!
+
 ## Team
 
 Kelly Beaudrot, Joseph Benigno, Thet Ei, Gianna Giliberto, Thomas Le, Yi Min, Chase Ruskin  
