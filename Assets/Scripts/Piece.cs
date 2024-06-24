@@ -88,9 +88,9 @@ public class Piece : MonoBehaviour
             }
         }
         // Try to place off the grid
-        else if (Interop.place_off_board(pieceId, Input.mousePosition.x, Input.mousePosition.y) == true) {
+        else if (Interop.place_off_board(pieceId, Input.mousePosition.x + mouseOffset2D.x, Input.mousePosition.y + mouseOffset2D.y) == true) {
             Debug.Log("Placed off board.");
-            homePosition = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distFromCam));
+            homePosition = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x + mouseOffset2D.x, Input.mousePosition.y + mouseOffset2D.y, distFromCam));
         // The requested location was invalid
         } else {
             Debug.Log("Could not be moved to requested place (staying at original location).");

@@ -86,8 +86,8 @@ impl BusMg {
         }
         let scaled_x = (x - self.grid_space.x) / self.grid_space.width;
         let scaled_y = (y - self.grid_space.y) / self.grid_space.height;
-        let discrete_x = (scaled_x * self.grid.get_width() as f32) as u8;
-        let discrete_y = (scaled_y * self.grid.get_height() as f32) as u8;
+        let discrete_x = (scaled_x * self.grid.get_width() as f32).round() as u8;
+        let discrete_y = (scaled_y * self.grid.get_height() as f32).round() as u8;
         // scale the position down to discrete numbers within the domain of the grid space
         //  println!("{:?}", Coord::new(discrete_x, discrete_y));
         Some(Coord::new(discrete_x, discrete_y))
