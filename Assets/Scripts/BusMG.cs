@@ -8,6 +8,8 @@ public class BusMg : MonoBehaviour {
     // Camera for pixel mapping
     public Camera cam;
 
+    public GameObject winObj;
+
     private bool isGameWon;
 
     void Start() {
@@ -52,6 +54,10 @@ public class BusMg : MonoBehaviour {
     public void win() {
         isGameWon = true;
         Debug.Log("You successfully completed the puzzle: バス!!!");
+
+        if (winObj != null){
+            winObj.SetActive(true);
+        }
     }
 }
 
