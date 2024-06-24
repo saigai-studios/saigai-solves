@@ -77,11 +77,11 @@ impl BusMg {
     }
 
     /// Transforms screen position to cell coordinate.
-    fn raw_mouse_pos_transform(&self, x: f32, y: f32) -> Option<Coord> {
-        if x < self.grid_space.x || x > self.grid_space.x + self.grid_space.width {
+    fn raw_mouse_pos_transform(&self, x: f32, y: f32, del: f32) -> Option<Coord> {
+        if x < self.grid_space.x - del || x > self.grid_space.x + del + self.grid_space.width {
             return None;
         }
-        if y < self.grid_space.y || y > self.grid_space.y + self.grid_space.height {
+        if y < self.grid_space.y - del || y > self.grid_space.y + del + self.grid_space.height {
             return None;
         }
         let scaled_x = (x - self.grid_space.x) / self.grid_space.width;
@@ -136,7 +136,7 @@ impl BusMg {
     }
 
     pub fn place_on_board(&mut self, piece: PieceId, mouse_x: f32, mouse_y: f32) -> bool {
-        match self.raw_mouse_pos_transform(mouse_x, mouse_y) {
+        match self.raw_mouse_pos_transform(mouse_x, mouse_y, 0.0) {
             Some(root) => {
                 // check if the cells are available
                 let selected = self.pieces.get_mut(piece as usize).unwrap();
@@ -147,7 +147,7 @@ impl BusMg {
     }
 
     pub fn place_off_board(&mut self, piece: PieceId, mouse_x: f32, mouse_y: f32) -> bool {
-        match self.raw_mouse_pos_transform(mouse_x, mouse_y) {
+        match self.raw_mouse_pos_transform(mouse_x, mouse_y, 75.0) {
             // we don't want to place the piece anywhere on the board
             Some(_) => false,
             // we selected a location off the board
