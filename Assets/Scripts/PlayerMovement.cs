@@ -6,11 +6,14 @@ using Saigai.Studios;
 public class PlayerMovement : MonoBehaviour
 {
     const float static_y = 10;
+
+    Animator anim;
     
     // Start is called before the first frame update
     void Start()
     {
         Vec2[] marker_xz = new Vec2[4];
+        anim = gameObject.GetComponent<Animator>();
         
         // Get positions
         for (int i = 0; i < 3; ++i){
@@ -40,5 +43,33 @@ public class PlayerMovement : MonoBehaviour
         // Update animation
         Vec2 new_pos = Interop.update_anim();
         transform.position = new Vector3(new_pos.x, static_y, new_pos.y);
+
+        // Update animation state (i.e. walking poses)
+        // switch(Interop.get_anim_state())
+        // {
+        //     case PlayerAnim.IDLE:
+        //         anim.SetBool("idle", true);
+        //         anim.SetBool("left", false);
+        //         anim.SetBool("right", false);
+        //         break;
+
+        //     case PlayerAnim.LEFT:
+        //         anim.SetBool("idle", false);
+        //         anim.SetBool("left", true);
+        //         anim.SetBool("right", false);
+        //         break;
+
+        //     case PlayerAnim.RIGHT:
+        //         anim.SetBool("idle", false);
+        //         anim.SetBool("left", false);
+        //         anim.SetBool("right", true);
+        //         break;
+
+        //     default:
+        //         anim.SetBool("idle", true);
+        //         anim.SetBool("left", false);
+        //         anim.SetBool("right", false);
+        //         break;
+        // }
     }
 }

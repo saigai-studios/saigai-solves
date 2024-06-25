@@ -10,10 +10,12 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(add_two_nums))
         // Overworld ffi exports
         .register(extra_type!(overworld::Vec2))
+        .register(extra_type!(overworld::PlayerAnim))
         .register(function!(overworld::update_anim))
         .register(function!(overworld::init_marker))
         .register(function!(overworld::update_pos_key))
         .register(function!(overworld::update_pos_click))
+        .register(function!(overworld::get_anim_state))
         // Bus minigame ffi exports
         .register(extra_type!(bus_mg::Coord))
         .register(function!(bus_mg::init_game))

@@ -24,6 +24,12 @@ pub unsafe extern "C" fn update_anim() -> Vec2 {
     PLAYER.update_anim(&OVERWORLD.markers[3], &OVERWORLD.markers)
 }
 
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn get_anim_state() -> PlayerAnim {
+    PLAYER.get_anim_state()
+}
+
 type Markers = [Vec2; 4];
 
 // Animation speed
@@ -60,6 +66,7 @@ pub struct Player {
     pub dest: Vec2,
     pub curr_mark: i32,
     pub anim_count: i32,
+    pub anim_state: PlayerAnim,
 }
 
 impl Player {
@@ -70,6 +77,7 @@ impl Player {
             dest: Vec2::new(),
             curr_mark: 0,
             anim_count: SPEED * 2,
+            anim_state: PlayerAnim::IDLE,
         }
     }
 
@@ -87,6 +95,10 @@ impl Player {
     fn get_current_mark(&self) -> usize {
         self.curr_mark as usize
     }
+
+    fn get_anim_state(&self) -> PlayerAnim {
+        self.anim_state
+    }
 }
 
 /// Functions exposed through the ffi.
@@ -102,9 +114,18 @@ impl Player {
             //PLR.curr = move_lerp_rust(PLR.anim_count, PLR.old, PLR.dest);
             self.curr = Self::move_lerp_rust(self.anim_count - SPEED, middle_waypoint, &self.dest);
             self.anim_count += 1;
+
+            // Update player's animation state to move towards from new marker
+            match self.curr_mark {
+                0 => self.anim_state = PlayerAnim::LEFT, // Moving towards left marker
+                1 => self.anim_state = PlayerAnim::LEFT, // Moving towards top marker (no up animation)
+                2 => self.anim_state = PlayerAnim::RIGHT, // Moving towards right marker
+                _ => self.anim_state = PlayerAnim::IDLE,
+            }
         // Stay at the current position
         } else {
             self.curr = markers[self.get_current_mark()];
+            self.anim_state = PlayerAnim::IDLE;
         }
         self.curr
     }
@@ -149,6 +170,7 @@ impl Player {
         }
 
         // Update the player's current marker
+        let old_marker = self.curr_mark;
         self.curr_mark = marker;
 
         // If intersection has been passed
@@ -158,12 +180,29 @@ impl Player {
 
             // Set starting position
             self.old = self.curr;
+
+            // Update player's animation state to move away from old marker
+            match old_marker {
+                0 => self.anim_state = PlayerAnim::RIGHT, // Moving right from left marker
+                1 => self.anim_state = PlayerAnim::RIGHT, // Moving down from top marker (no down animation)
+                2 => self.anim_state = PlayerAnim::LEFT,  // Moving left from right marker
+                _ => self.anim_state = PlayerAnim::IDLE,
+            }
         }
 
         // Set ending position - this is always changed
         self.dest = markers[self.get_current_mark()];
         false
     }
+}
+
+#[ffi_type]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub enum PlayerAnim {
+    IDLE,
+    LEFT,
+    RIGHT,
 }
 
 #[ffi_type]
