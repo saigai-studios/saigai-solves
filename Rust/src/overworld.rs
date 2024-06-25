@@ -30,10 +30,22 @@ pub unsafe extern "C" fn get_anim_state() -> PlayerAnim {
     PLAYER.get_anim_state()
 }
 
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn set_anim_state(new_anim: PlayerAnim) {
+    PLAYER.set_anim_state(new_anim);
+}
+
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn set_speed(new_speed: i32) {
+    PLAYER.set_speed(new_speed);
+}
+
 type Markers = [Vec2; 4];
 
 // Animation speed
-const SPEED: i32 = 20;
+//const SPEED: i32 = 20;
 
 const GAME_MARKER_FIRST: i32 = 0;
 const GAME_MARKER_LAST: i32 = 2;
@@ -67,6 +79,7 @@ pub struct Player {
     pub curr_mark: i32,
     pub anim_count: i32,
     pub anim_state: PlayerAnim,
+    pub speed: i32,
 }
 
 impl Player {
@@ -76,15 +89,16 @@ impl Player {
             old: Vec2::new(),
             dest: Vec2::new(),
             curr_mark: 0,
-            anim_count: SPEED * 2,
+            anim_count: 40,
             anim_state: PlayerAnim::IDLE,
+            speed: 20,
         }
     }
 
-    fn move_lerp_rust(curr_time: i32, src: &Vec2, dest: &Vec2) -> Vec2 {
+    fn move_lerp_rust(speed: i32, curr_time: i32, src: &Vec2, dest: &Vec2) -> Vec2 {
         Vec2 {
-            x: Self::f_lerp(src.x, dest.x, (curr_time as f32) / (SPEED as f32)),
-            y: Self::f_lerp(src.y, dest.y, (curr_time as f32) / (SPEED as f32)),
+            x: Self::f_lerp(src.x, dest.x, (curr_time as f32) / (speed as f32)),
+            y: Self::f_lerp(src.y, dest.y, (curr_time as f32) / (speed as f32)),
         }
     }
 
@@ -99,26 +113,39 @@ impl Player {
     fn get_anim_state(&self) -> PlayerAnim {
         self.anim_state
     }
+
+    fn set_anim_state(&mut self, new_anim: PlayerAnim) {
+        self.anim_state = new_anim;
+    }
+
+    fn set_speed(&mut self, new_speed: i32) {
+        self.speed = new_speed;
+        self.anim_count = new_speed * 2;
+    }
 }
 
 /// Functions exposed through the ffi.
 impl Player {
     pub fn update_anim(&mut self, middle_waypoint: &Vec2, markers: &Markers) -> Vec2 {
         // Move to the middle waypoint
-        if self.anim_count <= SPEED {
-            //PLR.curr = move_lerp_rust(PLR.anim_count, PLR.old, PLR.dest);
-            self.curr = Self::move_lerp_rust(self.anim_count, &self.old, middle_waypoint);
+        if self.anim_count <= self.speed {
+            self.curr =
+                Self::move_lerp_rust(self.speed, self.anim_count, &self.old, middle_waypoint);
             self.anim_count += 1;
         // Now move to the final destination waypoint
-        } else if self.anim_count <= SPEED * 2 {
-            //PLR.curr = move_lerp_rust(PLR.anim_count, PLR.old, PLR.dest);
-            self.curr = Self::move_lerp_rust(self.anim_count - SPEED, middle_waypoint, &self.dest);
+        } else if self.anim_count <= self.speed * 2 {
+            self.curr = Self::move_lerp_rust(
+                self.speed,
+                self.anim_count - self.speed,
+                middle_waypoint,
+                &self.dest,
+            );
             self.anim_count += 1;
 
             // Update player's animation state to move towards from new marker
             match self.curr_mark {
                 0 => self.anim_state = PlayerAnim::LEFT, // Moving towards left marker
-                1 => self.anim_state = PlayerAnim::LEFT, // Moving towards top marker (no up animation)
+                1 => self.anim_state = PlayerAnim::BACK, // Moving towards top marker (no up animation)
                 2 => self.anim_state = PlayerAnim::RIGHT, // Moving towards right marker
                 _ => self.anim_state = PlayerAnim::IDLE,
             }
@@ -162,7 +189,7 @@ impl Player {
         // If marker matches the current, no update is needed
         if marker == self.curr_mark {
             // Check if player has reached marker
-            if self.anim_count <= SPEED * 2 {
+            if self.anim_count <= self.speed * 2 {
                 return false; // Do not update level yet
             } else {
                 return true; // Update the level
@@ -174,7 +201,7 @@ impl Player {
         self.curr_mark = marker;
 
         // If intersection has been passed
-        if self.anim_count > SPEED {
+        if self.anim_count > self.speed {
             // Reset animation counter
             self.anim_count = 0;
 
@@ -184,7 +211,7 @@ impl Player {
             // Update player's animation state to move away from old marker
             match old_marker {
                 0 => self.anim_state = PlayerAnim::RIGHT, // Moving right from left marker
-                1 => self.anim_state = PlayerAnim::RIGHT, // Moving down from top marker (no down animation)
+                1 => self.anim_state = PlayerAnim::FORWARD, // Moving down from top marker
                 2 => self.anim_state = PlayerAnim::LEFT,  // Moving left from right marker
                 _ => self.anim_state = PlayerAnim::IDLE,
             }
@@ -203,6 +230,8 @@ pub enum PlayerAnim {
     IDLE,
     LEFT,
     RIGHT,
+    FORWARD,
+    BACK,
 }
 
 #[ffi_type]

@@ -7,6 +7,15 @@ public class PlayerMovement : MonoBehaviour
 {
     const float static_y = 10;
 
+    public string idle_bool = "isWalking";
+    public string frwd_bool = "goingForward";
+    public string back_bool = "goingBack";
+
+    public int animation_speed = 20;
+
+    Vector3 normal_scl;
+    Vector3 flip_scl;
+
     Animator anim;
     
     // Start is called before the first frame update
@@ -26,6 +35,13 @@ public class PlayerMovement : MonoBehaviour
         marker_xz[3].x = GameObject.Find("Intersection Marker").transform.position.x;
         marker_xz[3].y = GameObject.Find("Intersection Marker").transform.position.z;
         Interop.init_marker(3, marker_xz[3]);
+        Interop.set_anim_state(PlayerAnim.IDLE);
+        Interop.set_speed(animation_speed);
+
+        // Init scales for flipping character when walking left
+        normal_scl = transform.localScale;
+        flip_scl = transform.localScale;
+        flip_scl.x = -flip_scl.x;
     }
 
     // Update is called once per frame
@@ -45,31 +61,49 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(new_pos.x, static_y, new_pos.y);
 
         // Update animation state (i.e. walking poses)
-        // switch(Interop.get_anim_state())
-        // {
-        //     case PlayerAnim.IDLE:
-        //         anim.SetBool("idle", true);
-        //         anim.SetBool("left", false);
-        //         anim.SetBool("right", false);
-        //         break;
+        switch(Interop.get_anim_state())
+        {
+            case PlayerAnim.IDLE:
+                anim.SetBool(idle_bool, false);
+                anim.SetBool(frwd_bool, false);
+                anim.SetBool(back_bool, false);
+                transform.localScale = normal_scl;
+                break;
 
-        //     case PlayerAnim.LEFT:
-        //         anim.SetBool("idle", false);
-        //         anim.SetBool("left", true);
-        //         anim.SetBool("right", false);
-        //         break;
+            case PlayerAnim.LEFT:
+                anim.SetBool(idle_bool, true);
+                anim.SetBool(frwd_bool, false);
+                anim.SetBool(back_bool, false);
+                transform.localScale = flip_scl;
+                break;
 
-        //     case PlayerAnim.RIGHT:
-        //         anim.SetBool("idle", false);
-        //         anim.SetBool("left", false);
-        //         anim.SetBool("right", true);
-        //         break;
+            case PlayerAnim.RIGHT:
+                anim.SetBool(idle_bool, true);
+                anim.SetBool(frwd_bool, false);
+                anim.SetBool(back_bool, false);
+                transform.localScale = normal_scl;
+                break;
 
-        //     default:
-        //         anim.SetBool("idle", true);
-        //         anim.SetBool("left", false);
-        //         anim.SetBool("right", false);
-        //         break;
-        // }
+            case PlayerAnim.FORWARD:
+                anim.SetBool(idle_bool, true);
+                anim.SetBool(frwd_bool, true);
+                anim.SetBool(back_bool, false);
+                transform.localScale = normal_scl;
+                break;
+
+            case PlayerAnim.BACK:
+                anim.SetBool(idle_bool, true);
+                anim.SetBool(frwd_bool, false);
+                anim.SetBool(back_bool, true);
+                transform.localScale = normal_scl;
+                break;
+
+            default:
+                anim.SetBool(idle_bool, true);
+                anim.SetBool(frwd_bool, false);
+                anim.SetBool(back_bool, false);
+                transform.localScale = normal_scl;
+                break;
+        }
     }
 }

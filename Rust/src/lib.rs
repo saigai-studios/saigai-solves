@@ -16,6 +16,8 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(overworld::update_pos_key))
         .register(function!(overworld::update_pos_click))
         .register(function!(overworld::get_anim_state))
+        .register(function!(overworld::set_anim_state))
+        .register(function!(overworld::set_speed))
         // Bus minigame ffi exports
         .register(extra_type!(bus_mg::Coord))
         .register(function!(bus_mg::init_game))
