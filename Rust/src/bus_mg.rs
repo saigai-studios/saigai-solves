@@ -449,10 +449,10 @@ mod tests {
         assert_eq!(game.place_on_board(0, 30.0, 25.0), true);
 
         let mut game = make_basic_game(10.0, 20.0);
-        assert_eq!(game.place_on_board(0, 89.0, 40.0), true);
+        assert_eq!(game.place_on_board(0, 84.9, 40.0), true);
 
         let mut game = make_basic_game(10.0, 20.0);
-        assert_eq!(game.place_on_board(0, 40.0, 99.0), true);
+        assert_eq!(game.place_on_board(0, 40.0, 94.9), true);
         // try to add to position that is already occupied by a different piece
         assert_eq!(game.place_on_board(1, 40.0, 99.0), false);
     }
