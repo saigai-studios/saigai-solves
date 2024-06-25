@@ -26,6 +26,10 @@ MonoBehaviour:
     m_Localized: "\u65E5\u672C\u8A9E->Eng"
     m_Metadata:
       m_Items: []
+  - m_Id: 313294966480896
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

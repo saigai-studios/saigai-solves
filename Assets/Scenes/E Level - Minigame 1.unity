@@ -12084,7 +12084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1814693108}
-  selected_piece: {fileID: 0}
+  winObj: {fileID: 0}
 --- !u!1001 &489529597
 PrefabInstance:
   m_ObjectHideFlags: 0
