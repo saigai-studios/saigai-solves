@@ -16,7 +16,7 @@ namespace Saigai.Studios
 {
     public static partial class Interop
     {
-        public const string NativeLib = "saigai.4345184f";
+        public const string NativeLib = "saigai.a2d2b1d0";
 
         static Interop()
         {
@@ -37,6 +37,15 @@ namespace Saigai.Studios
 
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "update_pos_click")]
         public static extern bool update_pos_click(int marker);
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "get_anim_state")]
+        public static extern PlayerAnim get_anim_state();
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "set_anim_state")]
+        public static extern void set_anim_state(PlayerAnim new_anim);
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "set_speed")]
+        public static extern void set_speed(int new_speed);
 
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "init_game")]
         public static extern void init_game(uint level);
@@ -62,6 +71,15 @@ namespace Saigai.Studios
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "is_game_won")]
         public static extern bool is_game_won();
 
+    }
+
+    public enum PlayerAnim
+    {
+        IDLE = 0,
+        LEFT = 1,
+        RIGHT = 2,
+        FORWARD = 3,
+        BACK = 4,
     }
 
     [Serializable]

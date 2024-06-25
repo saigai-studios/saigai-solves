@@ -10,25 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: TextTable Shared Data
+  m_Name: TranslationTable Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: TextTable
+  m_TableCollectionName: TranslationTable
   m_TableCollectionNameGuidString: 7a03fb83f5e79414bb1e5846f71269d8
   m_Entries:
-  - m_Id: 103984128000
-    m_Key: "TestKey\t"
+  - m_Id: 315968390684672
+    m_Key: Gen-Back Button
     m_Metadata:
       m_Items: []
   - m_Id: 31254732320768
-    m_Key: TestLanguage
+    m_Key: Lang-English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 389912041336832
+    m_Key: Lang-Japanese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 390944855142400
+    m_Key: Menu-Language Button
     m_Metadata:
       m_Items: []
   - m_Id: 313294966480896
-    m_Key: Select Language Title
+    m_Key: Lang-Select Language Title
     m_Metadata:
       m_Items: []
-  - m_Id: 315968390684672
-    m_Key: BackButton
+  - m_Id: 103984128000
+    m_Key: "TestKey\t"
     m_Metadata:
       m_Items: []
   m_Metadata:
