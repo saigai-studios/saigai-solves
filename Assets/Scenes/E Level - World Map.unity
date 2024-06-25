@@ -18459,6 +18459,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a51e7143dbf04fe48268f821612e932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idle_bool: isWalking
+  frwd_bool: goingForward
+  back_bool: goingBack
+  animation_speed: 75
 --- !u!95 &760149658
 Animator:
   serializedVersion: 5
