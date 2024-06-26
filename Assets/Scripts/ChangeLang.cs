@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
@@ -8,9 +7,17 @@ public class ChangeLang : MonoBehaviour {
     private bool translating = false;
 
     public void SelectLocale(int id) {
+        // if a coroutine is currently in progress
         if (translating == true) {
             return;
         }
+
+        // dev warning
+        if (id < 0 || id >= LocalizationSettings.AvailableLocales.Locales.Count) {
+            Debug.Log("Invalid Locales ID!");
+            return;
+        }
+
         StartCoroutine(ChangeLocale(id));
     }
     IEnumerator ChangeLocale(int _id) {
