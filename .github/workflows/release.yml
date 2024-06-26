@@ -10,6 +10,10 @@ on:
 jobs:
   build:
     uses: saigai-studios/saigai-solves/.github/workflows/build.yml@main
+    secrets:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+      UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
   release:
     needs: build
     runs-on: ubuntu-latest
