@@ -7,13 +7,13 @@ public class ChangeLang : MonoBehaviour {
 
     private bool translating = false;
 
-    public void ChangeLocale(int id) {
+    public void SelectLocale(int id) {
         if (translating == true) {
             return;
         }
-        StartCoroutine(SetLocale(id));
+        StartCoroutine(ChangeLocale(id));
     }
-    IEnumerator SetLocale(int _id) {
+    IEnumerator ChangeLocale(int _id) {
         translating = true;
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_id];
