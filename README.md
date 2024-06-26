@@ -25,9 +25,9 @@ just build <unity> <target>
 where:
 - `<unity>` is the full path to the Unity Editor binary on your local file system  
 Examples:
-    - MacOS: `/Applications/Unity/Hub/Editor/<version>/Unity.app/Contents/MacOS/Unity`
-    - Linux: `/Applications/Unity/Hub/Editor/<version>/Unity.app/Contents/Linux/Unity`
-    - Windows: `C:\Program Files\Unity\Hub\Editor\<version>\Editor\Unity.exe`
+    - MacOS: `/Applications/Unity/Hub/Editor/2022.3.30f1/Unity.app/Contents/MacOS/Unity`
+    - Linux: `/Applications/Unity/Hub/Editor/2022.3.30f1/Unity.app/Contents/Linux/Unity`
+    - Windows: `C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe`
 - `<target>` is one of Unity's supported targets
 Examples:
     - MacOS: `osxuniversal`
@@ -35,7 +35,7 @@ Examples:
     - Windows: `win64`
 
 ### Windows Example
-For example, to build on a Windows 64-bit computer with Unity installed to "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe", run:
+To build on a Windows 64-bit computer with Unity installed to "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe":
 ```
 just build "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe" "win64"
 ```
