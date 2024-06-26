@@ -15,3 +15,4 @@
 - Gallery functionality
 - Implements level structure
 - Configures FFI between C# Unity code and Rust back end code
+- One-line compile with build.py script
