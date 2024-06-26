@@ -8,6 +8,38 @@ Saigai Solves is an exploration/puzzle game that focuses on educating players ab
 
 Saigai Solves is available for macOS, Windows, Linux, and webGL. The game is triggered to be rebuilt after commit to the remote repository through GitHub Actions. Visit the [releases page](https://github.com/saigai-studios/saigai-solves/releases) to download and play the game for your preferred computer system.
 
+## Building
+
+To build the project from source, the following dependencies are required:
+- [Unity Editor](https://unity.com/releases/editor/archive) (tested: 2022.3.30f1)
+- [Python](https://www.python.org/downloads/) (tested: 3.8.6)
+- [Just](https://github.com/casey/just/releases) (tested: 1.14.0)
+- [Rust (with Cargo)](https://www.rust-lang.org/tools/install) (tested: 1.77.2)
+
+All tools are assumed to be found on your path can be called with their native name. 
+
+Run the following command for your preferred platform:
+```
+just build <unity> <target>
+```
+where:
+- `<unity>` is the full path to the Unity Editor binary on your local file system  
+Examples:
+    - MacOS: `/Applications/Unity/Hub/Editor/2022.3.30f1/Unity.app/Contents/MacOS/Unity`
+    - Linux: `/Applications/Unity/Hub/Editor/2022.3.30f1/Unity.app/Contents/Linux/Unity`
+    - Windows: `C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe`
+- `<target>` is one of Unity's supported targets
+Examples:
+    - MacOS: `osxuniversal`
+    - Linux: `linux64`
+    - Windows: `win64`
+
+### Windows Example
+To build on a Windows 64-bit computer with Unity installed to "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe":
+```
+just build "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe" "win64"
+```
+
 ## Details
 
 Saigai Solves's overarching goal is to educate players about natural disasters. This includes:
