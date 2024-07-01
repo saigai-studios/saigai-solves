@@ -1,13 +1,18 @@
 # Changelog
 
-## 0.1.0-prototype - unreleased
+## 0.1.0-prototype
 
 ### Features
-- Main character side character sprites
-- Implements bus minigame puzzle piece functionality (drag piece and snap to grid)
-- Overworld implemented with placeholders for 3 minigames in earthquake map
+- 3D card viewer with a particle system
+- Game application icon displays in user's local filesystem
 - CI/CD allows for automated builds for mac, windows, linux, and webassembly targets
-- Main menu functions and transitions to different states
 - Implements splash screen
+- Markers display when minigames are completed
+- Earthquake overworld is complete
+- NPC/Player animations are visible
+- Earthquake minigame 1 complete (puzzle)
+- Implements UI and navigation
+- Gallery functionality
+- Implements level structure
 - Configures FFI between C# Unity code and Rust back end code
-- UI navigation
+- One-line compile with build.py script

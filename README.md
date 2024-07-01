@@ -13,31 +13,36 @@ Saigai Solves is available for macOS, Windows, Linux, and webGL. The game is tri
 To build the project from source, the following dependencies are required:
 - [Unity Editor](https://unity.com/releases/editor/archive) (tested: 2022.3.30f1)
 - [Python](https://www.python.org/downloads/) (tested: 3.8.6)
-- [Just](https://github.com/casey/just/releases) (tested: 1.14.0)
 - [Rust (with Cargo)](https://www.rust-lang.org/tools/install) (tested: 1.77.2)
 
 All tools are assumed to be found on your path can be called with their native name. 
 
+Additionally, to generate a `.msi` installer file, the build machine must be running Windows, the build target must be `win64`,
+and the following software must be installed:
+- [Inno Setup](https://jrsoftware.org/isdl.php) (tested: 6.3.1)
+
 Run the following command for your preferred platform:
 ```
-just build <unity> <target>
+python (or python3) build.py <unity> <target> <iscc (Optional)>
 ```
 where:
 - `<unity>` is the full path to the Unity Editor binary on your local file system  
 Examples:
-    - MacOS: `/Applications/Unity/Hub/Editor/<version>/Unity.app/Contents/MacOS/Unity`
-    - Linux: `/Applications/Unity/Hub/Editor/<version>/Unity.app/Contents/Linux/Unity`
-    - Windows: `C:\Program Files\Unity\Hub\Editor\<version>\Editor\Unity.exe`
+    - MacOS: `/Applications/Unity/Hub/Editor/2022.3.30f1/Unity.app/Contents/MacOS/Unity`
+    - Linux: `/Applications/Unity/Hub/Editor/2022.3.30f1/Unity.app/Contents/Linux/Unity`
+    - Windows: `C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe`
 - `<target>` is one of Unity's supported targets
 Examples:
     - MacOS: `osxuniversal`
     - Linux: `linux64`
     - Windows: `win64`
+- `<iscc>` is the path to Isso Setup's `ISCC.exe` compiler, i.e.
+    - `C:\Program Files (x86)\Inno Setup 6\ISCC.exe`
 
 ### Windows Example
-For example, to build on a Windows 64-bit computer with Unity installed to "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe", run:
+To build the installer on a Windows 64-bit computer with Unity installed to "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe":
 ```
-just build "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe" "win64"
+python build.py "C:\Program Files\Unity\Hub\Editor\2022.3.30f1\Editor\Unity.exe" "win64" "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
 ```
 
 ## Details
