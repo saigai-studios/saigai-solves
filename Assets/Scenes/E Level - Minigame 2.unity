@@ -6977,7 +6977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4943396, g: 0.3770755, b: 0.26768956, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -23603,8 +23603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ccb0534bc1312f4ca85e9a43550b3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pet: {fileID: 866880269942237988, guid: 57cfdaed6bd5f9646bd8c4df65b0d96d, type: 3}
-  rock: {fileID: 0}
+  pet: {fileID: 7345218815637722917, guid: 5c2ede7ce3d4db24a80a6ce802f0c6f0, type: 3}
+  rock: {fileID: 866880269942237988, guid: 0f4a3f640a1bbf64bb16a8f3b81811f4, type: 3}
   spawnPlane: {fileID: 30206617}
   spawnTime: 3
   spawnVar: 2
