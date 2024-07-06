@@ -5,7 +5,6 @@ using Saigai.Studios;
 public class CatchMG : MonoBehaviour
 {
     public GameObject dog, rock, spawnPlane;
-    //public GameObject[] objs = {, rock};
     public float spawnTime;
     public float spawnVar;
     public float spawnWidth = 2.0f;
@@ -14,8 +13,7 @@ public class CatchMG : MonoBehaviour
     
     void Start()
     {
-        resetCount();
-        Debug.Log(dog);
+        ResetCount();
     }
 
     void Update()
@@ -25,7 +23,7 @@ public class CatchMG : MonoBehaviour
         if (count <= 0)
         {
             var newPos = spawnPlane.transform.position;
-            newPos.z = newPos.z + Random.Range(-1.0f * spawnWidth, spawnWidth);
+            newPos.z += Random.Range(-1.0f * spawnWidth, spawnWidth);
             int id = Random.Range(0, 2);
 
             // Spawn item
@@ -35,13 +33,12 @@ public class CatchMG : MonoBehaviour
                 1 => rock,
                 _ => dog,
             };
-            Debug.Log(id);
             Instantiate(obj, newPos, Quaternion.Euler(0,90,0), this.transform);
-            resetCount();
+            ResetCount();
         }
     }
 
-    private void resetCount()
+    private void ResetCount()
     {
         float randTime = spawnTime + Random.Range(-1.0f, 1.0f);
         count = (int)(randTime / Time.deltaTime);
