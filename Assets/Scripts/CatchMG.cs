@@ -15,6 +15,7 @@ public class CatchMG : MonoBehaviour
     void Start()
     {
         resetCount();
+        Debug.Log(dog);
     }
 
     void Update()

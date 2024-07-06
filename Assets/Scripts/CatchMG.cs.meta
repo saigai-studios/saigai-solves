@@ -3,7 +3,10 @@ guid: 4ccb0534bc1312f4ca85e9a43550b3ca
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dog: {instanceID: 0}
+  - rock: {instanceID: 0}
+  - spawnPlane: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
