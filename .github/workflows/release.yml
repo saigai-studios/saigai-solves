@@ -27,6 +27,13 @@ jobs:
     - name: Display filesystem contents
       run: ls -R
 
+    - name: Rename downloads
+      run: |
+        mv ./saigai-solves-macos-x64/SaigaiSolves.tar ./saigai-solves-macos-x64-${{ inputs.version }}.tar
+        mv ./saigai-solves-ubuntu-x64/SaigaiSolves.tar ./saigai-solves-ubuntu-x64-${{ inputs.version }}.tar
+        mv ./saigai-solves-webgl/SaigaiSolves.tar ./saigai-solves-webgl-${{ inputs.version }}.tar
+        mv ./saigai-solves-windows-x64/SaigaiSolves.tar ./saigai-solves-windows-x64-${{ inputs.version }}.tar
+
     - name: Validate release notes
       run: .github/workflows/autocl.py ${{ inputs.version }}
 
@@ -42,7 +49,7 @@ jobs:
     - name: Upload releases
       uses: ncipollo/release-action@v1
       with:
-        artifacts: '**/saigai-solves-*'
+        artifacts: './saigai-solves-*.tar'
         bodyFile: ./RELEASE_NOTES.md
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ inputs.version }}

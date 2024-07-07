@@ -18,10 +18,7 @@ public class CatchMG : MonoBehaviour
 
     void Update()
     {
-        count -= 1;
-
-        if (count <= 0)
-        {
+        if (Interop.is_next_spawn_ready() == true) {
             var newPos = spawnPlane.transform.position;
             newPos.z += Random.Range(-1.0f * spawnWidth, spawnWidth);
             int id = Random.Range(0, 2);

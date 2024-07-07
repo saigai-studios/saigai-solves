@@ -10,13 +10,9 @@ public class BusMg : MonoBehaviour {
 
     public GameObject winObj;
 
-    private bool isGameWon;
-
     void Start() {
         // Initialize game grid
         Interop.init_game(0);
-
-        isGameWon = false;
 
         // Load the blocks into the rust-end
         var foundPieceObjects = GameObject.FindObjectsOfType<Piece>();
@@ -52,7 +48,6 @@ public class BusMg : MonoBehaviour {
     }
 
     public void win() {
-        isGameWon = true;
         Debug.Log("You successfully completed the puzzle: バス!!!");
 
         if (winObj != null){
