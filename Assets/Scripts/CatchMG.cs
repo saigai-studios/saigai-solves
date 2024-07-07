@@ -18,16 +18,13 @@ public class CatchMG : MonoBehaviour
 
     void Update()
     {
-        count -= 1;
-
-        if (count <= 0)
-        {
+        if (Interop.is_next_spawn_ready() == true) {
             var newPos = spawnPlane.transform.position;
             newPos.z = newPos.z + Random.Range(-1.0f * spawnWidth, spawnWidth);
             
             // Spawn item
             Instantiate(pet, newPos, Quaternion.Euler(0,90,0), this.transform);
-            resetCount();
+            // resetCount();
         }
     }
 

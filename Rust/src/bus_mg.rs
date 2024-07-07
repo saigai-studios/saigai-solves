@@ -1,3 +1,5 @@
+//! The game logic and exposed FFI for the bus minigame.
+
 use interoptopus::{ffi_function, ffi_type};
 
 use crate::overworld::Vec2;
@@ -46,7 +48,7 @@ pub unsafe extern "C" fn set_window(x: f32, y: f32, width: f32, height: f32) -> 
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn is_game_won() -> bool {
+pub unsafe extern "C" fn is_bus_game_won() -> bool {
     BUS_MG.is_game_won()
 }
 

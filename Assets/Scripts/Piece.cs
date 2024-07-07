@@ -82,7 +82,7 @@ public class Piece : MonoBehaviour
             Vec2 home_temp = Interop.get_snap_pos(pieceId);
             homePosition = cam.ScreenToWorldPoint(new Vector3(home_temp.x, home_temp.y, distFromCam));
             // check if we won the game!
-            if (Interop.is_game_won() == true) {
+            if (Interop.is_bus_game_won() == true) {
                 // we won: woo-hoo!
                 game.win();
             }
