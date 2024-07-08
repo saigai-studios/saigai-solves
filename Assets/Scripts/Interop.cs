@@ -16,7 +16,7 @@ namespace Saigai.Studios
 {
     public static partial class Interop
     {
-        public const string NativeLib = "saigai.a2d2b1d0";
+        public const string NativeLib = "saigai.c7c4f611";
 
         static Interop()
         {
