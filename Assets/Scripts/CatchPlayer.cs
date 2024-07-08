@@ -5,12 +5,15 @@ using UnityEngine;
 public class CatchPlayer : MonoBehaviour
 {
     public Camera cam;
+    
     private float camXDist;
+    private float startX;
     
     // Start is called before the first frame update
     void Start()
     {
         camXDist = Mathf.Abs(transform.position.x - cam.transform.position.x);
+        startX = transform.position.x;
     }
 
     // On object collision
@@ -38,6 +41,6 @@ public class CatchPlayer : MonoBehaviour
     void OnMouseDrag()
     {
         var newPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camXDist));
-        transform.position = new Vector3(transform.position.x, transform.position.y, newPos.z);
+        transform.position = new Vector3(startX, this.transform.position.y, newPos.z);
     }
 }
