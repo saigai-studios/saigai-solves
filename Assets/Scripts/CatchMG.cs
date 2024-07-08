@@ -7,7 +7,7 @@ public class CatchMG : MonoBehaviour
 {
     public GameObject pet, rock, spawnPlane, tutorial;
     public Text score;
-    public int val = 0;
+    public static int val = 0;
     public float spawnTime;
     public float spawnVar;
     public float spawnWidth = 2.0f;
@@ -22,6 +22,7 @@ public class CatchMG : MonoBehaviour
 
     void FixedUpdate()
     {
+        score.text = val.ToString();
         if (Interop.is_next_spawn_ready() == true && !tutorial.activeInHierarchy) {
             var newPos = spawnPlane.transform.position;
             newPos.z += Random.Range(-1.0f * spawnWidth, spawnWidth);
@@ -36,7 +37,6 @@ public class CatchMG : MonoBehaviour
             };
             Instantiate(obj, newPos, Quaternion.Euler(0,90,0), this.transform);
             ResetCount();
-            score.text = val.ToString();
         }
     }
 
@@ -44,5 +44,15 @@ public class CatchMG : MonoBehaviour
     {
         float randTime = spawnTime + Random.Range(-1.0f, 1.0f);
         count = (int)(randTime / Time.deltaTime);
+    }
+
+    public static void IncScore() {
+        val += 100;
+    }    
+    public static void DecScore() {
+        if (val <= 0) {
+            return;
+        }
+        val -= 100;
     }
 }

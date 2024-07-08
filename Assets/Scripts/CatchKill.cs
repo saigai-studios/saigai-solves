@@ -10,14 +10,15 @@ public class CatchKill : MonoBehaviour
         // Get collider name
         var name = obj.gameObject.name;
 
-        // if (name == "pet") // TODO match
-        // {
-        //     // TODO increment points, etc.?
-        // }
-        // else if (name == "rock") // TODO match name
-        // {
-        //     // TODO decrement points/health
-        // }
+        if (name == "pet")
+        {
+            CatchMG.DecScore();
+            // TODO inc count for stats page
+        }
+        else if (name == "rock")
+        {
+            // TODO inc count for stats page
+        }
         
         Destroy(obj.gameObject);
     }

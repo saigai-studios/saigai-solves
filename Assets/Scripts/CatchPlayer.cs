@@ -23,15 +23,14 @@ public class CatchPlayer : MonoBehaviour
         var name = obj.gameObject.name;
 
         // TODO verify case sensitivity Dog vs dog etc.
-        if (name == "pet")
+        if (name == "Pet(Clone)")
         {
-            
+            CatchMG.IncScore();
         }
-        else if (name == "rock")
+        else if (name == "Rock(Clone)")
         {
-            
+            CatchMG.DecScore();
         }
-        //Debug.Log(score);
         Debug.Log("Player collided with " + name);
         Destroy(obj.gameObject);
     }
