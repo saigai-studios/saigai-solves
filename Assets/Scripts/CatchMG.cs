@@ -1,10 +1,13 @@
 using UnityEngine;
 using Saigai.Studios;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class CatchMG : MonoBehaviour
 {
     public GameObject pet, rock, spawnPlane, tutorial;
+    public Text score;
+    public int val = 0;
     public float spawnTime;
     public float spawnVar;
     public float spawnWidth = 2.0f;
@@ -14,6 +17,7 @@ public class CatchMG : MonoBehaviour
     void Start()
     {
         ResetCount();
+        score.text = val.ToString();
     }
 
     void FixedUpdate()
@@ -32,6 +36,7 @@ public class CatchMG : MonoBehaviour
             };
             Instantiate(obj, newPos, Quaternion.Euler(0,90,0), this.transform);
             ResetCount();
+            score.text = val.ToString();
         }
     }
 
