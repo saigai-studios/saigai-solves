@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1184115370276456841}
   - component: {fileID: 16362293309551785}
   - component: {fileID: -2479755320003594977}
+  - component: {fileID: -5385526902075210238}
   m_Layer: 5
   m_Name: Dog
   m_TagString: Untagged
@@ -138,3 +139,24 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &-5385526902075210238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345218815637722917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a24b7563de96245b859bb3d70f38cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprList:
+  - {fileID: 21300000, guid: 4ec6f06c365ad8a4283f23f58e078809, type: 3}
+  - {fileID: 21300000, guid: 7c009ac008b617943a01a0813cb1184b, type: 3}
+  - {fileID: 21300000, guid: 9194476b81c38e247a58322800aa8e7f, type: 3}
+  - {fileID: 21300000, guid: 344e82226a0e2de4a9c27656288e471c, type: 3}
+  - {fileID: 21300000, guid: c6532331027ec7547abf70c46b7ed4ba, type: 3}
+  - {fileID: 21300000, guid: 41fa9ff0a3f2abb459a9796d36cd40e2, type: 3}
+  - {fileID: 21300000, guid: 64a82348411ac7f4482dfeb17353bf49, type: 3}
+  - {fileID: 21300000, guid: b5c1efb5e4c151340b92418e7e0c2440, type: 3}
