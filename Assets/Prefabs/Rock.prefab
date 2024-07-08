@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6167462735229842423}
   - component: {fileID: 1285204976968418490}
   - component: {fileID: 8064341811508920551}
+  - component: {fileID: -9127647462400717812}
   m_Layer: 5
   m_Name: Rock
   m_TagString: Untagged
@@ -138,3 +139,18 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!114 &-9127647462400717812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866880269942237988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a24b7563de96245b859bb3d70f38cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprList:
+  - {fileID: 21300000, guid: 66d51c0a878e1484db3e88ed6d0b5509, type: 3}
+  - {fileID: 21300000, guid: c992caab2d0a59949bd3df1a79d7abbd, type: 3}

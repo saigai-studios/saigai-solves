@@ -4,7 +4,7 @@ using Saigai.Studios;
 [System.Serializable]
 public class CatchMG : MonoBehaviour
 {
-    public GameObject dog, rock, spawnPlane;
+    public GameObject dog, rock, spawnPlane, tutorial;
     public float spawnTime;
     public float spawnVar;
     public float spawnWidth = 2.0f;
@@ -16,9 +16,9 @@ public class CatchMG : MonoBehaviour
         ResetCount();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Interop.is_next_spawn_ready() == true) {
+        if (Interop.is_next_spawn_ready() == true && !tutorial.activeInHierarchy) {
             var newPos = spawnPlane.transform.position;
             newPos.z += Random.Range(-1.0f * spawnWidth, spawnWidth);
             int id = Random.Range(0, 2);

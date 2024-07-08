@@ -23608,6 +23608,7 @@ MonoBehaviour:
   dog: {fileID: 7345218815637722917, guid: 5c2ede7ce3d4db24a80a6ce802f0c6f0, type: 3}
   rock: {fileID: 866880269942237988, guid: 0f4a3f640a1bbf64bb16a8f3b81811f4, type: 3}
   spawnPlane: {fileID: 30206617}
+  tutorial: {fileID: 5324511107858141322}
   spawnTime: 3
   spawnVar: 2
   spawnWidth: 2
