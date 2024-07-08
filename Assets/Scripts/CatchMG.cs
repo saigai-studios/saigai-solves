@@ -1,6 +1,7 @@
 using UnityEngine;
 using Saigai.Studios;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class CatchMG : MonoBehaviour
@@ -35,7 +36,14 @@ public class CatchMG : MonoBehaviour
                 1 => rock,
                 _ => pet,
             };
-            Instantiate(obj, newPos, Quaternion.Euler(0,90,0), this.transform);
+            string title = id switch
+            {
+                0 => "pet",
+                1 => "rock",
+                _ => "pet",
+            };
+            GameObject inst = Instantiate(obj, newPos, Quaternion.Euler(0,90,0), this.transform);
+            inst.name = title;
             ResetCount();
         }
     }
