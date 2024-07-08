@@ -23,16 +23,15 @@ public class CatchPlayer : MonoBehaviour
         var name = obj.gameObject.name;
 
         // TODO verify case sensitivity Dog vs dog etc.
-        // if (name == "dog") // TODO match
-        // {
-        //     // TODO increment points, etc.?
-        // }
-        // else if (name == "rock") // TODO match name
-        // {
-        //     // TODO decrement points/health
-        //     // Make life sprites invisible/vanish upon decrement
-        // }
-
+        if (name == "pet")
+        {
+            
+        }
+        else if (name == "rock")
+        {
+            
+        }
+        //Debug.Log(score);
         Debug.Log("Player collided with " + name);
         Destroy(obj.gameObject);
     }
