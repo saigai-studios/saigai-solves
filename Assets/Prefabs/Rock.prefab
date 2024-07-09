@@ -154,3 +154,4 @@ MonoBehaviour:
   sprList:
   - {fileID: 21300000, guid: 66d51c0a878e1484db3e88ed6d0b5509, type: 3}
   - {fileID: 21300000, guid: c992caab2d0a59949bd3df1a79d7abbd, type: 3}
+  - {fileID: 21300000, guid: 28a6293be53805340a81a80ceb3670ef, type: 3}
