@@ -24,6 +24,10 @@ public class CatchMG : MonoBehaviour
     void FixedUpdate()
     {
         score.text = val.ToString();
+        if (val >= 1000) {
+            Debug.Log("You win!!");
+        }
+        
         if (Interop.is_next_spawn_ready() == true && !tutorial.activeInHierarchy) {
             var newPos = spawnPlane.transform.position;
             newPos.z += Random.Range(-1.0f * spawnWidth, spawnWidth);
