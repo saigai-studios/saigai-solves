@@ -12,6 +12,7 @@ public class Score : MonoBehaviour {
     }
     void Update() {
         score.text = val.ToString();
+
     }
     void Inc() {
         val += 100;

@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 875905095}
   - component: {fileID: 875905094}
   m_Layer: 5
-  m_Name: Bus_EQ_Card
+  m_Name: Inside_Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1265,10 +1265,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   busCard: {fileID: 1874908835}
   busPlaceholder: {fileID: 1449163323}
-  outsideCard: {fileID: 0}
-  outsidePlaceholder: {fileID: 0}
-  insideCard: {fileID: 0}
-  insidePlaceholder: {fileID: 0}
+  outsideCard: {fileID: 1658546248}
+  outsidePlaceholder: {fileID: 2087854903}
+  insideCard: {fileID: 875905092}
+  insidePlaceholder: {fileID: 969450814}
 --- !u!4 &1618015362
 Transform:
   m_ObjectHideFlags: 0
@@ -1296,7 +1296,7 @@ GameObject:
   - component: {fileID: 1658546251}
   - component: {fileID: 1658546250}
   m_Layer: 5
-  m_Name: Bus_EQ_Card
+  m_Name: Outside_Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a4806a88ab732eb47b7a83913aa53ade, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38832f0706d46664583945e551f6b611, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

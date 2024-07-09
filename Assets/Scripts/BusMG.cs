@@ -8,7 +8,7 @@ public class BusMg : MonoBehaviour {
     // Camera for pixel mapping
     public Camera cam;
 
-    public GameObject winObj;
+    public GameObject winObj, winTransition;
 
     void Start() {
         // Initialize game grid
@@ -49,8 +49,20 @@ public class BusMg : MonoBehaviour {
 
     public void win() {
         Debug.Log("You successfully completed the puzzle: バス!!!");
+        
+        if (winTransition != null)
+        {
+            winTransition.SetActive(true);
+        }
+        StartCoroutine(WinScreen());
+    }
 
-        if (winObj != null){
+    IEnumerator WinScreen()
+    {
+        yield return new WaitForSeconds(3);
+
+        if (winObj != null)
+        {
             winObj.SetActive(true);
         }
     }
