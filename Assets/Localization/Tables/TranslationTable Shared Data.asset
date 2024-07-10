@@ -39,6 +39,34 @@ MonoBehaviour:
     m_Key: "TestKey\t"
     m_Metadata:
       m_Items: []
+  - m_Id: 5733967345500160
+    m_Key: Menu-Play Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5734360775409664
+    m_Key: Menu-Gallery Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5734457588334592
+    m_Key: Menu-Credits Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5734564207542272
+    m_Key: Gen-Exit Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5735054865612800
+    m_Key: Levels-Choose Level Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5735369631350784
+    m_Key: Levels-Earthquake Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5735428880089088
+    m_Key: Levels-Tsunami Button
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

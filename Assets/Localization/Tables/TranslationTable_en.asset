@@ -42,6 +42,34 @@ MonoBehaviour:
     m_Localized: Language
     m_Metadata:
       m_Items: []
+  - m_Id: 5733967345500160
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5734360775409664
+    m_Localized: Gallery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5734457588334592
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5734564207542272
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5735054865612800
+    m_Localized: Choose Level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5735369631350784
+    m_Localized: Earthquake
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5735428880089088
+    m_Localized: Tsunami
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
