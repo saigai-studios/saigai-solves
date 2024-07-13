@@ -4,6 +4,7 @@ use interoptopus::{extra_type, function, Inventory, InventoryBuilder};
 mod bus_mg;
 mod catch_mg;
 mod overworld;
+mod save;
 
 /// Include the ffi functions to be generated into the C# bindings file.
 pub fn ffi_inventory() -> Inventory {

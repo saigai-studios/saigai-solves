@@ -11,3 +11,6 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 interoptopus = "0.14.23"
 interoptopus_backend_csharp = "0.14.24"
+serde_json = "1.0.120"
+serde = "1.0.204"
+serde_derive = "1.0.204"
