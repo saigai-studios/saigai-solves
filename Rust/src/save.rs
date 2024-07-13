@@ -27,12 +27,12 @@ pub unsafe extern "C" fn data_save() -> bool {
 #[ffi_function]
 #[no_mangle]
 pub unsafe extern "C" fn data_get_language() -> u8 {
-    SAVE_STATE.lang.into()
+    SAVE_STATE.language.into()
 }
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn data_has_earthquake_card(index: u8) -> bool {
+pub unsafe extern "C" fn data_has_earthquake_card(index: i32) -> bool {
     SAVE_STATE.earthquake[index as usize]
 }
 
@@ -40,14 +40,14 @@ pub unsafe extern "C" fn data_has_earthquake_card(index: u8) -> bool {
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn data_set_language(index: u8) -> bool {
-    SAVE_STATE.set_lang(Language::from(index));
+pub unsafe extern "C" fn data_set_language(index: i32) -> bool {
+    SAVE_STATE.set_lang(Language::from(index as u8));
     true
 }
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn data_unlock_earthquake_card(index: u8) -> bool {
+pub unsafe extern "C" fn data_unlock_earthquake_card(index: i32) -> bool {
     // return false if index is out of bounds
     if index as usize >= SAVE_STATE.earthquake.len() {
         false
@@ -63,7 +63,7 @@ static mut SAVE_STATE: Save = Save::new();
 /// The path to the save file.
 const SAVE_FILE: &str = "saigai-saves.json";
 
-#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq)]
 pub enum Language {
     English,
     Japanese,
@@ -74,7 +74,7 @@ impl From<u8> for Language {
         match value {
             0 => Self::English,
             1 => Self::Japanese,
-            _ => panic!("impossible language value!"),
+            _ => panic!("impossible language value!!"),
         }
     }
 }
@@ -82,8 +82,8 @@ impl From<u8> for Language {
 impl Into<u8> for Language {
     fn into(self) -> u8 {
         match self {
-            Self::English => 1,
-            Self::Japanese => 2,
+            Self::English => 0,
+            Self::Japanese => 1,
         }
     }
 }
@@ -92,16 +92,16 @@ pub enum Map {
     Earthquake,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
 struct Save {
-    lang: Language,
+    language: Language,
     earthquake: [bool; 3],
 }
 
 impl Save {
     pub const fn new() -> Self {
         Self {
-            lang: Language::English,
+            language: Language::English,
             earthquake: [false; 3],
         }
     }
@@ -120,12 +120,29 @@ impl Save {
     }
 
     pub fn set_lang(&mut self, lang: Language) -> () {
-        self.lang = lang;
+        self.language = lang;
     }
 
     pub fn unlock_card(&mut self, map: Map, zone: usize) -> () {
         match map {
             Map::Earthquake => self.earthquake[zone] = true,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ut_save_and_load() {
+        let mut data1 = Save::new();
+        data1.set_lang(Language::Japanese);
+        let _ = data1.write("./data.json").unwrap();
+
+        let mut data2 = Save::new();
+        let _ = data2.read("./data.json").unwrap();
+        assert_eq!(data1, data2);
+        let _ = std::fs::remove_file("./data.json").unwrap();
     }
 }

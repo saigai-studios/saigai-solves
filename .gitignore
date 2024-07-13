@@ -87,3 +87,6 @@ crashlytics-build.properties
 
 # Ignore generated bindings files
 /Assets/Scripts/Interop.cs
+
+# Ignore save file during development
+/saigai-saves.json

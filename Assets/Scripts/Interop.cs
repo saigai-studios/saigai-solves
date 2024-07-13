@@ -23,8 +23,23 @@ namespace Saigai.Studios
         }
 
 
-        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "add_two_nums")]
-        public static extern int add_two_nums(int x, int y);
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "data_load")]
+        public static extern bool data_load();
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "data_save")]
+        public static extern bool data_save();
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "data_get_language")]
+        public static extern byte data_get_language();
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "data_set_language")]
+        public static extern bool data_set_language(int index);
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "data_has_earthquake_card")]
+        public static extern bool data_has_earthquake_card(int index);
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "data_unlock_earthquake_card")]
+        public static extern bool data_unlock_earthquake_card(int index);
 
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "update_anim")]
         public static extern Vec2 update_anim();

@@ -9,7 +9,13 @@ mod save;
 /// Include the ffi functions to be generated into the C# bindings file.
 pub fn ffi_inventory() -> Inventory {
     InventoryBuilder::new()
-        .register(function!(add_two_nums))
+        // Save state ffi exports
+        .register(function!(save::data_load))
+        .register(function!(save::data_save))
+        .register(function!(save::data_get_language))
+        .register(function!(save::data_set_language))
+        .register(function!(save::data_has_earthquake_card))
+        .register(function!(save::data_unlock_earthquake_card))
         // Overworld ffi exports
         .register(extra_type!(overworld::Vec2))
         .register(extra_type!(overworld::PlayerAnim))

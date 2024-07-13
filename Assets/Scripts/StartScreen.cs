@@ -3,7 +3,18 @@ using UnityEngine;
 using UnityEngine.Localization.Settings;
 using Saigai.Studios;
 
-public class ChangeLang : MonoBehaviour {
+public class StartScreen : MonoBehaviour
+{
+
+    public void Start() {
+        // Load the data if possible
+        if (Interop.data_load() == true) {
+            Debug.Log("Loaded data successfully.");
+            // Update all settings
+            SelectLocale(Interop.data_get_language());
+        }
+        Debug.Log("Hello world!");
+    }
 
     private bool translating = false;
 
