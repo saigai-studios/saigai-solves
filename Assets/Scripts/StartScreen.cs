@@ -5,15 +5,19 @@ using Saigai.Studios;
 
 public class StartScreen : MonoBehaviour
 {
-
     public void Start() {
         // Load the data if possible
         if (Interop.data_load() == true) {
             Debug.Log("Loaded data successfully.");
             // Update all settings
             SelectLocale(Interop.data_get_language());
+            // Update the status of the completed minigames
+            MinigameWin.doneMinigame1 = Interop.data_has_earthquake_card(0);
+            MinigameWin.doneMinigame2 = Interop.data_has_earthquake_card(1);
+            MinigameWin.doneMinigame3 = Interop.data_has_earthquake_card(2);
+        } else {
+            Debug.Log("Failed to load data.");
         }
-        Debug.Log("Hello world!");
     }
 
     private bool translating = false;
