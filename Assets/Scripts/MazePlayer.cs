@@ -8,8 +8,9 @@ public class MazePlayer : MonoBehaviour
     // These must be set to detect tiles in grid
     public Grid grid;
     public Tilemap tilemap;
+    public Maze maze;
 
-    // Playe size in Unity units
+    // Player size in Unity units
     public int playerWidth = 1;
     public int playerHeight = 2;
 
@@ -24,8 +25,8 @@ public class MazePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        old = transform.position;
-        cell_pos = grid.WorldToCell(transform.position);
+        old = transform.localPosition;
+        cell_pos = grid.LocalToCell(transform.localPosition);
     }
 
     // Update is called once per frame
@@ -37,9 +38,8 @@ public class MazePlayer : MonoBehaviour
             // Reset animation
             isAnim = true;
             counter = 0;
-            old = transform.position;
-
-            // TODO change user input to arrows on screen?
+            old = transform.localPosition;
+            
             if (Input.GetKeyDown("down"))
             {
                 // Check if tile below is occupied
@@ -48,11 +48,20 @@ public class MazePlayer : MonoBehaviour
                 // Move if tile is empty
                 if (temp == null)
                 {
+                    // Preemptively move
+                    var new_cell_pos = new Vector3Int(cell_pos.x, cell_pos.y - 1, cell_pos.z);
+                    
+                    // Check if no obstacles are in the way
+                    if(!maze.checkCanMove(new_cell_pos, playerWidth, playerHeight, 2))
+                    {
+                        return;
+                    }
+                    
                     // Update internal state
-                    cell_pos = new Vector3Int(cell_pos.x, cell_pos.y - 1, cell_pos.z);
+                    cell_pos = new_cell_pos;
 
                     // Set next animation position
-                    next = tilemap.CellToWorld(cell_pos) + offset;
+                    next = tilemap.CellToLocal(cell_pos) + offset;
                 }
             }
             else if (Input.GetKeyDown("up"))
@@ -61,8 +70,17 @@ public class MazePlayer : MonoBehaviour
 
                 if (temp == null)
                 {
-                    cell_pos = new Vector3Int(cell_pos.x, cell_pos.y + 1, cell_pos.z);
-                    next = tilemap.CellToWorld(cell_pos) + offset;
+                    // Preemptively move
+                    var new_cell_pos = new Vector3Int(cell_pos.x, cell_pos.y + 1, cell_pos.z);
+                    
+                    // Check if no obstacles are in the way
+                    if(!maze.checkCanMove(new_cell_pos, playerWidth, playerHeight, 0))
+                    {
+                        return;
+                    }
+                    
+                    cell_pos = new_cell_pos;
+                    next = tilemap.CellToLocal(cell_pos) + offset;
                 }
             }
             else if (Input.GetKeyDown("left"))
@@ -71,8 +89,17 @@ public class MazePlayer : MonoBehaviour
 
                 if (temp == null)
                 {
-                    cell_pos = new Vector3Int(cell_pos.x - 1, cell_pos.y, cell_pos.z);
-                    next = tilemap.CellToWorld(cell_pos) + offset;
+                    // Preemptively move
+                    var new_cell_pos = new Vector3Int(cell_pos.x - 1, cell_pos.y, cell_pos.z);
+                    
+                    // Check if no obstacles are in the way
+                    if(!maze.checkCanMove(new_cell_pos, playerWidth, playerHeight, 3))
+                    {
+                        return;
+                    }
+                    
+                    cell_pos = new_cell_pos;
+                    next = tilemap.CellToLocal(cell_pos) + offset;
                 }
             }
             else if (Input.GetKeyDown("right"))
@@ -81,8 +108,17 @@ public class MazePlayer : MonoBehaviour
 
                 if (temp == null)
                 {
-                    cell_pos = new Vector3Int(cell_pos.x + 1, cell_pos.y, cell_pos.z);
-                    next = tilemap.CellToWorld(cell_pos) + offset;
+                    // Preemptively move
+                    var new_cell_pos = new Vector3Int(cell_pos.x + 1, cell_pos.y, cell_pos.z);
+                    
+                    // Check if no obstacles are in the way
+                    if(!maze.checkCanMove(new_cell_pos, playerWidth, playerHeight, 1))
+                    {
+                        return;
+                    }
+                    
+                    cell_pos = new_cell_pos;
+                    next = tilemap.CellToLocal(cell_pos) + offset;
                 }
             }
             else
@@ -106,19 +142,19 @@ public class MazePlayer : MonoBehaviour
             if (counter == (int)ANIM_MAX)
             {
                 isAnim = false;
-                transform.position = next;
+                transform.localPosition = next;
                 old = next;
             }
             // Otherwise, determine intermediate position and move
             else
             {
-                transform.position = Vector3.Lerp(old, next, counter / ANIM_MAX);
+                transform.localPosition = Vector3.Lerp(old, next, counter / ANIM_MAX);
             }
         }
         // Store position otherwise (maybe unnecessary?)
         else
         {
-            transform.position = old;
+            transform.localPosition = old;
         }
     }
 }
