@@ -44,11 +44,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5734360775409664
-    m_Key: Menu-Gallery Button
+    m_Key: Gen/Menu-Gallery Text
     m_Metadata:
       m_Items: []
   - m_Id: 5734457588334592
-    m_Key: Menu-Credits Button
+    m_Key: Gen/Menu-Credits Text
     m_Metadata:
       m_Items: []
   - m_Id: 5734564207542272
@@ -65,6 +65,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 5735428880089088
     m_Key: Levels-Tsunami Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7596708209377280
+    m_Key: Gallery-BackToStart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7597035067293696
+    m_Key: Gallery-BackToMap
     m_Metadata:
       m_Items: []
   m_Metadata:

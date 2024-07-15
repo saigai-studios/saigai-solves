@@ -52751,9 +52751,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Click and drag to move Psyguy across the screen. \nAvoid the debris while
-    catching the poor animals that happen\nto be falling from the sky. Why are there
-    animals falling\nfrom the sky in an earthquake? Don't think about it too hard."
+  m_Text: 'Click and drag to move Psyguy across the screen.
+
+    Avoid the debris
+    while catching the poor animals that happen
+
+    to be falling from the sky.
+    Why are there animals falling
+
+    from the sky in an earthquake? Don''t think
+    about it too hard.'
 --- !u!114 &9201645548405922648
 MonoBehaviour:
   m_ObjectHideFlags: 0

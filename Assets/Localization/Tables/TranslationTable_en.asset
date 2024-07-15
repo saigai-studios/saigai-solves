@@ -70,6 +70,14 @@ MonoBehaviour:
     m_Localized: Tsunami
     m_Metadata:
       m_Items: []
+  - m_Id: 7596708209377280
+    m_Localized: Back to Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7597035067293696
+    m_Localized: Back to Map
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
