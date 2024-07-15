@@ -78,6 +78,68 @@ MonoBehaviour:
     m_Localized: Back to Map
     m_Metadata:
       m_Items: []
+  - m_Id: 7608354835283968
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7608440227119104
+    m_Localized: 'Psyguy happens to be on a bus when he receives an alert
+
+      that
+      an earthquake is imminent. All the passengers need to
+
+      get off the bus
+      as soon as possible.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7608550432456704
+    m_Localized: "Help the passengers disembark by clicking on the pieces and dragging
+      \nthem into the grid to the left. Victory is achieved when all passengers\nhave
+      been placed in the grid. If you try to place a piece in a spot that is \noccupied,
+      it will return to its original position."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7609021767368704
+    m_Localized: Exit Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7610539639848960
+    m_Localized: Victory!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7612110863876096
+    m_Localized: View in Gallery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7613167421636608
+    m_Localized: Psyguy successfully got all the passengers off the bus and received
+      a disaster preparation card!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7613854834507776
+    m_Localized: Psyguy successfully dodged the debris and saved the pets!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7608609794441216
+    m_Localized: 'Psyguy is standing on the street when an earthquake strikes.
+
+      Debris
+      begins to fall from above, along with other things.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7608653557809152
+    m_Localized: 'Click and drag to move Psyguy across the screen.
+
+      Avoid the
+      debris while catching the poor animals that happen
+
+      to be falling from
+      the sky. Why are there animals falling
+
+      from the sky in an earthquake?
+      Don''t think about it too hard.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
