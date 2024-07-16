@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 16362293309551785}
   - component: {fileID: -2479755320003594977}
   - component: {fileID: -5385526902075210238}
+  - component: {fileID: -9127346359463635659}
   m_Layer: 5
   m_Name: Pet
   m_TagString: Untagged
@@ -160,3 +161,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 41fa9ff0a3f2abb459a9796d36cd40e2, type: 3}
   - {fileID: 21300000, guid: 64a82348411ac7f4482dfeb17353bf49, type: 3}
   - {fileID: 21300000, guid: b5c1efb5e4c151340b92418e7e0c2440, type: 3}
+--- !u!114 &-9127346359463635659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7345218815637722917}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 1, b: 0.013594866, a: 0.49411765}
+  m_EffectDistance: {x: 1.43, y: -0.68}
+  m_UseGraphicAlpha: 1

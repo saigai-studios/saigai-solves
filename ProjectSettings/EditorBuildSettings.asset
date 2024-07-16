@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/View3DCard.unity
     guid: 73cdaab12b41d754f9bfd64c751b68f2
+  - enabled: 1
+    path: Assets/Scenes/View3DCard Outside.unity
+    guid: a02e03de5c6b50f41b370c9983c2bc8d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: a02d6151f6109f346a13ea6af93b5083, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: ae2ea5526dadd554fa7dda0fc83b3a3e, type: 2}
