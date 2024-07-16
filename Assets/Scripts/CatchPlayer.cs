@@ -41,4 +41,15 @@ public class CatchPlayer : MonoBehaviour
         var newPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, camXDist));
         transform.position = new Vector3(startX, this.transform.position.y, newPos.z);
     }
+
+    // If player is moved off screen, return to center position
+    void OnMouseUp()
+    {
+        if(Input.mousePosition.x < 0 || Input.mousePosition.x > Screen.width || Input.mousePosition.y < 0 || Input.mousePosition.y > Screen.height) {
+            Debug.Log("Player moved off screen. Moving back to original position...");
+
+            var newPos = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, camXDist));
+            transform.position = new Vector3(startX, this.transform.position.y, newPos.z);
+        }
+    }
 }

@@ -76,8 +76,13 @@ public class Piece : MonoBehaviour
 
         Debug.Log("Piece placed?");
         // Try to place into the grid
+        // Make sure piece is not off of the screen
+        if(Input.mousePosition.x < 0 || Input.mousePosition.x > Screen.width || Input.mousePosition.y < 0 || Input.mousePosition.y > Screen.height) {
+            Debug.Log("Piece placed off screen. Moving back to original position...");
+            // don't move the piece anywhere
+        }
         // Add the 2D offset to the mouse position
-        if (Interop.place_on_board(pieceId, Input.mousePosition.x + mouseOffset2D.x, Input.mousePosition.y + mouseOffset2D.y) == true) {
+        else if (Interop.place_on_board(pieceId, Input.mousePosition.x + mouseOffset2D.x, Input.mousePosition.y + mouseOffset2D.y) == true) {
             Debug.Log("Placed on board.");
             Vec2 home_temp = Interop.get_snap_pos(pieceId);
             homePosition = cam.ScreenToWorldPoint(new Vector3(home_temp.x, home_temp.y, distFromCam));
