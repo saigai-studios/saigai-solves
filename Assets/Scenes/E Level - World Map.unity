@@ -235,6 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 13645858}
+  - component: {fileID: 13645859}
   m_Layer: 0
   m_Name: Dialogue Box
   m_TagString: Untagged
@@ -261,6 +262,19 @@ Transform:
   - {fileID: 262322852}
   m_Father: {fileID: 374350343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13645859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13645857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0810e2f2aaed652428f42a4601c810a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue: {fileID: 13645857}
 --- !u!1001 &16694625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34913,8 +34927,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1417349270}
-        m_TargetAssemblyTypeName: SetActive, Assembly-CSharp
-        m_MethodName: Deactivate
+        m_TargetAssemblyTypeName: DeactivateForGood, Assembly-CSharp
+        m_MethodName: Disappear
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34971,11 +34985,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1417349265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00943f034031c99479814d981ac2b30e, type: 3}
+  m_Script: {fileID: 11500000, guid: 893edef6b3f6f4a409f08f36ccb89748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toActivate: {fileID: 0}
-  toDeactivate: {fileID: 13645857}
+  dialogueBox: {fileID: 13645857}
 --- !u!1001 &1419152242
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -140,6 +140,10 @@ MonoBehaviour:
       Don''t think about it too hard.'
     m_Metadata:
       m_Items: []
+  - m_Id: 7932146167246848
+    m_Localized: DLC Coming Soon
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

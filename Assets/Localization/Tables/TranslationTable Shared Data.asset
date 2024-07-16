@@ -115,6 +115,10 @@ MonoBehaviour:
     m_Key: Victory-OutsideMG-Message
     m_Metadata:
       m_Items: []
+  - m_Id: 7932146167246848
+    m_Key: DLC
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
