@@ -44,6 +44,7 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(catch_mg::good_catch))
         .register(function!(catch_mg::missed_catch))
         .register(function!(catch_mg::bad_catch))
+        .register(function!(catch_mg::spawn_new_item))
         // Maze minigame ffi exports
         // Finalize the inventory
         .inventory()

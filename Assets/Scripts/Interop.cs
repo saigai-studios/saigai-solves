@@ -16,7 +16,7 @@ namespace Saigai.Studios
 {
     public static partial class Interop
     {
-        public const string NativeLib = "saigai.eca0295e";
+        public const string NativeLib = "saigai";
 
         static Interop()
         {
@@ -103,6 +103,9 @@ namespace Saigai.Studios
 
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "bad_catch")]
         public static extern int bad_catch();
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "spawn_new_item")]
+        public static extern int spawn_new_item();
 
     }
 

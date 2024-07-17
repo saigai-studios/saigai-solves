@@ -27,8 +27,8 @@ public class CatchMG : MonoBehaviour
         if (Interop.is_next_spawn_ready() == true && tutorial.activeInHierarchy == false) {
             var newPos = spawnPlane.transform.position;
             newPos.z += Random.Range(-1.0f * spawnWidth, spawnWidth);
-            int id = Random.Range(0, 2);
-
+            
+            int id = Interop.spawn_new_item();
             // Spawn item
             GameObject obj = id switch
             {
@@ -52,7 +52,12 @@ public class CatchMG : MonoBehaviour
         score.text = val.ToString();
         // Check to see if we won the game yet
         if (Interop.is_catch_game_won() == true) {
-            Debug.Log("You win!!");
+            if (Interop.data_has_earthquake_card(1) == true) {
+                Debug.Log("You win against hard mode!! すごい!");
+            } else {
+                Debug.Log("You win!!");
+            }
+
             if (winAnimation != null)
             {
                 winAnimation.SetActive(true);

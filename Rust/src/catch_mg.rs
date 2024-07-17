@@ -19,6 +19,12 @@ pub unsafe extern "C" fn is_next_spawn_ready() -> bool {
 
 #[ffi_function]
 #[no_mangle]
+pub unsafe extern "C" fn spawn_new_item() -> i32 {
+    CATCH_MG.spawn_new_item().into()
+}
+
+#[ffi_function]
+#[no_mangle]
 pub unsafe extern "C" fn is_catch_game_won() -> bool {
     CATCH_MG.is_game_won()
 }
@@ -58,6 +64,20 @@ static mut CATCH_MG: CatchMg = CatchMg::new();
 
 /// The number of points to earn in the game in order to win.
 const POINTS_GOAL: i32 = 1_000;
+
+enum Item {
+    Pet,
+    Rock,
+}
+
+impl Into<i32> for Item {
+    fn into(self) -> i32 {
+        match self {
+            Self::Pet => 0,
+            Self::Rock => 1,
+        }
+    }
+}
 
 struct CatchMg {
     points: i32,
@@ -109,6 +129,28 @@ impl CatchMg {
         match self.hard_mode {
             false => 120, // roughly ~2 seconds per drop
             true => 85,   // roughly ~1.5 seconds per drop
+        }
+    }
+
+    /// Randomize how to select next item to drop.
+    pub fn spawn_new_item(&self) -> Item {
+        let draw = rand::random::<u8>();
+        // determine odds of selecting a pet if draw < odds
+        let odds = match &self.hard_mode {
+            // roughly ~2/3 chance
+            false => 171,
+            true => {
+                match self.points >= 950 {
+                    // roughly ~1/10 chance
+                    true => 25,
+                    // roughly ~1/2 chance
+                    false => 128,
+                }
+            }
+        };
+        match draw < odds {
+            true => Item::Pet,
+            false => Item::Rock,
         }
     }
 

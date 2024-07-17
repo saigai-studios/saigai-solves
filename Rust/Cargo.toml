@@ -9,6 +9,7 @@ crate-type = ["cdylib", "rlib"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+rand = "0.8.5"
 interoptopus = "0.14.23"
 interoptopus_backend_csharp = "0.14.24"
 serde_json = "1.0.120"
