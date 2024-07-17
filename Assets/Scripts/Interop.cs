@@ -16,7 +16,7 @@ namespace Saigai.Studios
 {
     public static partial class Interop
     {
-        public const string NativeLib = "saigai.f263f909";
+        public const string NativeLib = "saigai.7ab10fcf";
 
         static Interop()
         {
@@ -62,8 +62,8 @@ namespace Saigai.Studios
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "set_speed")]
         public static extern void set_speed(int new_speed);
 
-        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "init_game")]
-        public static extern void init_game(uint level);
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "init_bus_game")]
+        public static extern void init_bus_game(uint level);
 
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "add_piece")]
         public static extern uint add_piece();
@@ -86,11 +86,20 @@ namespace Saigai.Studios
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "is_bus_game_won")]
         public static extern bool is_bus_game_won();
 
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "init_catch_game")]
+        public static extern void init_catch_game(bool hard_mode);
+
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "is_next_spawn_ready")]
         public static extern bool is_next_spawn_ready();
 
         [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "is_catch_game_won")]
         public static extern bool is_catch_game_won();
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "good_catch")]
+        public static extern int good_catch();
+
+        [DllImport(NativeLib, CallingConvention = CallingConvention.Cdecl, EntryPoint = "bad_catch")]
+        public static extern int bad_catch();
 
     }
 

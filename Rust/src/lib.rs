@@ -29,7 +29,7 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(overworld::set_speed))
         // Bus minigame ffi exports
         .register(extra_type!(bus_mg::Coord))
-        .register(function!(bus_mg::init_game))
+        .register(function!(bus_mg::init_bus_game))
         .register(function!(bus_mg::add_piece))
         .register(function!(bus_mg::add_coordinate))
         .register(function!(bus_mg::place_on_board))
@@ -38,8 +38,11 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(bus_mg::get_snap_pos))
         .register(function!(bus_mg::is_bus_game_won))
         // Catch minigame ffi exports
+        .register(function!(catch_mg::init_catch_game))
         .register(function!(catch_mg::is_next_spawn_ready))
         .register(function!(catch_mg::is_catch_game_won))
+        .register(function!(catch_mg::good_catch))
+        .register(function!(catch_mg::bad_catch))
         // Maze minigame ffi exports
         
         // Finalize the inventory

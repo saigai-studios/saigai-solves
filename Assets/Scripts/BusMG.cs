@@ -12,7 +12,7 @@ public class BusMg : MonoBehaviour {
 
     void Start() {
         // Initialize game grid
-        Interop.init_game(0);
+        Interop.init_bus_game(0);
 
         // Load the blocks into the rust-end
         var foundPieceObjects = GameObject.FindObjectsOfType<Piece>();

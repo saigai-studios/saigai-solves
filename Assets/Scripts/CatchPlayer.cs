@@ -5,6 +5,8 @@ using UnityEngine;
 public class CatchPlayer : MonoBehaviour
 {
     public Camera cam;
+
+    private CatchMG game;
     
     private float camXDist;
     private float startX;
@@ -12,6 +14,7 @@ public class CatchPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        game = GameObject.FindObjectOfType<CatchMG>();
         camXDist = Mathf.Abs(transform.position.x - cam.transform.position.x);
         startX = transform.position.x;
     }
@@ -25,11 +28,11 @@ public class CatchPlayer : MonoBehaviour
         // TODO verify case sensitivity Dog vs dog etc.
         if (name == "pet")
         {
-            CatchMG.IncScore();
+            game.IncScore();
         }
         else if (name == "rock")
         {
-            CatchMG.DecScore();
+            game.DecScore();
         }
         Debug.Log("Player collided with " + name);
         Destroy(obj.gameObject);

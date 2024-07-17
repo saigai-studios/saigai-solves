@@ -10,44 +10,21 @@ public class CatchMG : MonoBehaviour
 {
     public GameObject pet, rock, spawnPlane, tutorial, winObject, winAnimation;
     public Text score;
-    public static int val = 0;
-    public float spawnTime;
-    public float spawnVar;
+    private int val;
     public float spawnWidth = 2.0f;
-    public bool victory = false;
-
-    private int count;
     
     void Start()
     {
-        ResetCount();
+        val = 0;
+        // set to HARD MODE if the user already has the earthquake card for this game!
+        Interop.init_catch_game(Interop.data_has_earthquake_card(1));
         score.text = val.ToString();
     }
 
     void FixedUpdate()
     {
-        score.text = val.ToString();
-        if (val >= 1000) {
-            victory = true;
-            Debug.Log("You win!!");
-            if (winAnimation != null)
-            {
-                winAnimation.SetActive(true);
-            }
-            StartCoroutine(WinScreen());
-
-            IEnumerator WinScreen()
-            {
-                yield return new WaitForSeconds(3);
-
-                if (winObject != null)
-                {
-                    winObject.SetActive(true);
-                }
-            }
-        }
-
-        if (Interop.is_next_spawn_ready() == true && !tutorial.activeInHierarchy && victory == false) {
+        // otherwise try to send down a new item
+        if (Interop.is_next_spawn_ready() == true && tutorial.activeInHierarchy == false) {
             var newPos = spawnPlane.transform.position;
             newPos.z += Random.Range(-1.0f * spawnWidth, spawnWidth);
             int id = Random.Range(0, 2);
@@ -67,23 +44,35 @@ public class CatchMG : MonoBehaviour
             };
             GameObject inst = Instantiate(obj, newPos, Quaternion.Euler(0,90,0), this.transform);
             inst.name = title;
-            ResetCount();
         }
     }
 
-    private void ResetCount()
-    {
-        float randTime = spawnTime + Random.Range(-1.0f, 1.0f);
-        count = (int)(randTime / Time.deltaTime);
-    }
+    public void IncScore() {
+        val = Interop.good_catch();
+        score.text = val.ToString();
+        // Check to see if we won the game yet
+        if (Interop.is_catch_game_won() == true) {
+            Debug.Log("You win!!");
+            if (winAnimation != null)
+            {
+                winAnimation.SetActive(true);
+            }
+            StartCoroutine(WinScreen());
 
-    public static void IncScore() {
-        val += 100;
-    }    
-    public static void DecScore() {
-        if (val <= 0) {
-            return;
+            IEnumerator WinScreen()
+            {
+                yield return new WaitForSeconds(3);
+
+                if (winObject != null)
+                {
+                    winObject.SetActive(true);
+                }
+            }
         }
-        val -= 100;
+    }   
+
+    public void DecScore() {
+        val = Interop.bad_catch();
+        score.text = val.ToString();
     }
 }

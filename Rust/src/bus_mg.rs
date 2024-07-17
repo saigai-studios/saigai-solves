@@ -24,7 +24,7 @@ pub unsafe extern "C" fn get_snap_pos(piece: PieceId) -> Vec2 {
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn init_game(level: u32) {
+pub unsafe extern "C" fn init_bus_game(level: u32) {
     BUS_MG.initialize(level);
 }
 

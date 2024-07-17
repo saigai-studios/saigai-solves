@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class CatchKill : MonoBehaviour
 {
+    private CatchMG game;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        game = GameObject.FindObjectOfType<CatchMG>();
+    }
+
     // On object collision
     private void OnTriggerEnter(Collider obj)
     {
@@ -12,12 +20,7 @@ public class CatchKill : MonoBehaviour
 
         if (name == "pet")
         {
-            CatchMG.DecScore();
-            // TODO inc count for stats page
-        }
-        else if (name == "rock")
-        {
-            // TODO inc count for stats page
+            game.DecScore();
         }
         
         Destroy(obj.gameObject);
