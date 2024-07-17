@@ -20,6 +20,8 @@ public class MazeObstacle : MonoBehaviour
 
     private const float ANIM_MAX = 10.0f; // one-tenth of a second?
     private Vector3 offset = new Vector3(0.0f, 0.0f, 0.0f); // Offset since obstacle is moved from center
+
+    private string wall_name = "temp_block";
     
     // Start is called before the first frame update
     void Start()
@@ -28,9 +30,13 @@ public class MazeObstacle : MonoBehaviour
         grid = FindObjectsOfType<Grid>()[0];
         tilemap = FindObjectsOfType<Tilemap>()[0];
         
-        // Get cell position
+        // Get cell position (top-right corner)
         cell_pos = grid.LocalToCell(transform.localPosition);
-
+        if(obsWidth > 2 || obsHeight > 2)
+        {
+            cell_pos += new Vector3Int(obsWidth / 2, obsHeight / 2, 0); // Convert center to top-right
+        }
+        
         // Set animation variables
         old = transform.localPosition;
         next = transform.localPosition;
@@ -46,6 +52,8 @@ public class MazeObstacle : MonoBehaviour
         {
             offset += new Vector3(0.0f, 0.5f, 0.0f);
         }
+
+        Debug.Log(gameObject.name + " : " + cell_pos);
     }
 
     // Update is called once per frame
@@ -86,9 +94,9 @@ public class MazeObstacle : MonoBehaviour
                 // Check along top edge of obstacle
                 for (int ofst = 0; ofst < obsWidth; ++ofst)
                 {
-                    var temp = tilemap.GetTile(new Vector3Int(cell_pos.x + ofst, cell_pos.y + 1, cell_pos.z));
+                    var temp = tilemap.GetTile(new Vector3Int(cell_pos.x - ofst, cell_pos.y + 1, cell_pos.z));
 
-                    if (temp != null)
+                    if (temp != null && temp.name == wall_name)
                     {
                         return false;
                     }
@@ -102,7 +110,7 @@ public class MazeObstacle : MonoBehaviour
                 {
                     var temp = tilemap.GetTile(new Vector3Int(cell_pos.x + 1, cell_pos.y - ofst, cell_pos.z));
 
-                    if (temp != null)
+                    if (temp != null && temp.name == wall_name)
                     {
                         return false;
                     }
@@ -114,10 +122,12 @@ public class MazeObstacle : MonoBehaviour
                 // Check along bottom edge of obstacle
                 for (int ofst = 0; ofst < obsWidth; ++ofst)
                 {
-                    var temp = tilemap.GetTile(new Vector3Int(cell_pos.x + ofst, cell_pos.y - obsHeight, cell_pos.z));
+                    var coord = new Vector3Int(cell_pos.x - ofst, cell_pos.y - obsHeight, cell_pos.z);
+                    var temp = tilemap.GetTile(coord);
 
-                    if (temp != null)
+                    if (temp != null && temp.name == wall_name)
                     {
+                        Debug.Log("wall tile found at "+ coord);
                         return false;
                     }
                 }
@@ -130,7 +140,8 @@ public class MazeObstacle : MonoBehaviour
                 {
                     var temp = tilemap.GetTile(new Vector3Int(cell_pos.x - obsWidth, cell_pos.y - ofst, cell_pos.z));
 
-                    if (temp != null)
+                    // Return if cell is a wall
+                    if (temp != null && temp.name == wall_name)
                     {
                         return false;
                     }
@@ -147,26 +158,28 @@ public class MazeObstacle : MonoBehaviour
     // This assumes the obstacle has already been checked with the above function
     public void push(int dir)
     {
+        Vector3Int movOffset;
+        
         switch(dir)
         {
             case 0:
                 // Move up by one
-                cell_pos += new Vector3Int(0,1,0);
+                movOffset = new Vector3Int(0,1,0);
                 break;
 
             case 1:
                 // Move right by one
-                cell_pos += new Vector3Int(1,0,0);
+                movOffset = new Vector3Int(1,0,0);
                 break;
 
             case 2:
                 // Move down by one
-                cell_pos += new Vector3Int(0,-1,0);
+                movOffset = new Vector3Int(0,-1,0);
                 break;
 
             case 3:
                 // Move left by one
-                cell_pos += new Vector3Int(-1,0,0);
+                movOffset = new Vector3Int(-1,0,0);
                 break;
 
             default:
@@ -174,7 +187,9 @@ public class MazeObstacle : MonoBehaviour
         }
 
         // Reset animation variables to start animation
-        next = tilemap.CellToLocal(cell_pos) + offset;
+        //next = tilemap.CellToLocal(cell_pos) + offset;
+        cell_pos += movOffset;
+        next = transform.localPosition + movOffset;
         isAnim = true;
         counter = 0;
         old = transform.localPosition;
