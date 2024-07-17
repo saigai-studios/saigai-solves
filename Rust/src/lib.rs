@@ -1,11 +1,11 @@
 use interoptopus::ffi_function;
 use interoptopus::{extra_type, function, Inventory, InventoryBuilder};
 
-mod overworld;
-mod save;
 mod bus_mg;
 mod catch_mg;
 mod maze_mg;
+mod overworld;
+mod save;
 
 /// Include the ffi functions to be generated into the C# bindings file.
 pub fn ffi_inventory() -> Inventory {
@@ -42,9 +42,9 @@ pub fn ffi_inventory() -> Inventory {
         .register(function!(catch_mg::is_next_spawn_ready))
         .register(function!(catch_mg::is_catch_game_won))
         .register(function!(catch_mg::good_catch))
+        .register(function!(catch_mg::missed_catch))
         .register(function!(catch_mg::bad_catch))
         // Maze minigame ffi exports
-        
         // Finalize the inventory
         .inventory()
 }

@@ -32,7 +32,7 @@ public class CatchPlayer : MonoBehaviour
         }
         else if (name == "rock")
         {
-            game.DecScore();
+            game.DecScoreBad();
         }
         Debug.Log("Player collided with " + name);
         Destroy(obj.gameObject);

@@ -26,13 +26,31 @@ pub unsafe extern "C" fn is_catch_game_won() -> bool {
 #[ffi_function]
 #[no_mangle]
 pub unsafe extern "C" fn good_catch() -> i32 {
-    CATCH_MG.increase_score(100)
+    let reward = match CATCH_MG.is_hard_mode_enabled() {
+        false => 100,
+        true => 50,
+    };
+    CATCH_MG.increase_score(reward)
 }
 
 #[ffi_function]
 #[no_mangle]
 pub unsafe extern "C" fn bad_catch() -> i32 {
-    CATCH_MG.decrease_score(100)
+    let penalty = match CATCH_MG.is_hard_mode_enabled() {
+        false => 100,
+        true => 500,
+    };
+    CATCH_MG.decrease_score(penalty)
+}
+
+#[ffi_function]
+#[no_mangle]
+pub unsafe extern "C" fn missed_catch() -> i32 {
+    let penalty = match CATCH_MG.is_hard_mode_enabled() {
+        false => 100,
+        true => 200,
+    };
+    CATCH_MG.decrease_score(penalty)
 }
 
 /// A container for the catch minigame
@@ -58,6 +76,10 @@ impl CatchMg {
         }
     }
 
+    pub fn is_hard_mode_enabled(&self) -> bool {
+        self.hard_mode
+    }
+
     pub fn enable_hard_mode(&mut self) -> () {
         self.hard_mode = true;
     }
@@ -68,13 +90,13 @@ impl CatchMg {
         }
 
         if self.count_limit.is_none() == true {
-            self.count_limit = Some(Self::set_count_limit());
+            self.count_limit = Some(self.set_count_limit());
         }
 
         if self.count_index >= self.count_limit.unwrap() {
             // reset the counter
             self.count_index = 0;
-            self.count_limit = Some(Self::set_count_limit());
+            self.count_limit = Some(self.set_count_limit());
             true
         } else {
             //  increment the counter
@@ -83,8 +105,11 @@ impl CatchMg {
         }
     }
 
-    const fn set_count_limit() -> u32 {
-        120
+    fn set_count_limit(&self) -> u32 {
+        match self.hard_mode {
+            false => 120, // roughly ~2 seconds per drop
+            true => 85,   // roughly ~1.5 seconds per drop
+        }
     }
 
     /// Checks if enough points are earned to complete the game.

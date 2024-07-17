@@ -71,8 +71,13 @@ public class CatchMG : MonoBehaviour
         }
     }   
 
-    public void DecScore() {
+    public void DecScoreBad() {
         val = Interop.bad_catch();
+        score.text = val.ToString();
+    }
+
+    public void DecScoreMiss() {
+        val = Interop.missed_catch();
         score.text = val.ToString();
     }
 }

@@ -1,4 +1,3 @@
-
 /// A container for the catch minigame
 static mut MAZE_MG: MazeMg = MazeMg::new();
 

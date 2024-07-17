@@ -20,7 +20,7 @@ public class CatchKill : MonoBehaviour
 
         if (name == "pet")
         {
-            game.DecScore();
+            game.DecScoreMiss();
         }
         
         Destroy(obj.gameObject);
