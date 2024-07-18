@@ -8,6 +8,7 @@ public class MazeObstacle : MonoBehaviour
     // These must be set to detect tiles in grid
     private Grid grid;
     private Tilemap tilemap;
+    private Maze maze;
     
     // Player size in Unity units
     public int obsWidth = 1;
@@ -26,9 +27,10 @@ public class MazeObstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Get grid and tilemap automatically
+        // Get scene objects automatically
         grid = FindObjectsOfType<Grid>()[0];
         tilemap = FindObjectsOfType<Tilemap>()[0];
+        maze = FindObjectsOfType<Maze>()[0];
         
         // Get cell position (top-right corner)
         cell_pos = grid.LocalToCell(transform.localPosition);
@@ -110,10 +112,18 @@ public class MazeObstacle : MonoBehaviour
                 // Check along top edge of obstacle
                 for (int ofst = 0; ofst < obsWidth; ++ofst)
                 {
-                    var temp = tilemap.GetTile(new Vector3Int(cell_pos.x - ofst, cell_pos.y + 1, cell_pos.z));
+                    var test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y + 1, cell_pos.z);
+                    var temp = tilemap.GetTile(test_cell_pos);
 
                     if (temp != null && temp.name == wall_name)
                     {
+                        return false;
+                    }
+
+                    // Check if no obstacles are in the way
+                    if(!maze.checkCanMove(test_cell_pos, 1, 1, dir, gameObject.name))
+                    {
+                        Debug.Log("Obstacle: " + gameObject.name + ": another obstacle in way");
                         return false;
                     }
                 }
@@ -124,10 +134,18 @@ public class MazeObstacle : MonoBehaviour
                 // Check along right edge of obstacle
                 for (int ofst = 0; ofst < obsHeight; ++ofst)
                 {
-                    var temp = tilemap.GetTile(new Vector3Int(cell_pos.x + 1, cell_pos.y - ofst, cell_pos.z));
+                    var test_cell_pos = new Vector3Int(cell_pos.x + 1, cell_pos.y - ofst, cell_pos.z);
+                    var temp = tilemap.GetTile(test_cell_pos);
 
                     if (temp != null && temp.name == wall_name)
                     {
+                        return false;
+                    }
+
+                    // Check if no obstacles are in the way
+                    if(!maze.checkCanMove(test_cell_pos, 1, 1, dir, gameObject.name))
+                    {
+                        Debug.Log("Obstacle: " + gameObject.name + ": another obstacle in way");
                         return false;
                     }
                 }
@@ -138,12 +156,18 @@ public class MazeObstacle : MonoBehaviour
                 // Check along bottom edge of obstacle
                 for (int ofst = 0; ofst < obsWidth; ++ofst)
                 {
-                    var coord = new Vector3Int(cell_pos.x - ofst, cell_pos.y - obsHeight, cell_pos.z);
-                    var temp = tilemap.GetTile(coord);
+                    var test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y - obsHeight, cell_pos.z);
+                    var temp = tilemap.GetTile(test_cell_pos);
 
                     if (temp != null && temp.name == wall_name)
                     {
-                        Debug.Log("wall tile found at "+ coord);
+                        return false;
+                    }
+
+                    // Check if no obstacles are in the way
+                    if(!maze.checkCanMove(test_cell_pos, 1, 1, dir, gameObject.name))
+                    {
+                        Debug.Log("Obstacle: " + gameObject.name + ": another obstacle in way");
                         return false;
                     }
                 }
@@ -154,11 +178,18 @@ public class MazeObstacle : MonoBehaviour
                 // Check along left edge of obstacle
                 for (int ofst = 0; ofst < obsHeight; ++ofst)
                 {
-                    var temp = tilemap.GetTile(new Vector3Int(cell_pos.x - obsWidth, cell_pos.y - ofst, cell_pos.z));
+                    var test_cell_pos = new Vector3Int(cell_pos.x - obsWidth, cell_pos.y - ofst, cell_pos.z);
+                    var temp = tilemap.GetTile(test_cell_pos);
 
-                    // Return if cell is a wall
                     if (temp != null && temp.name == wall_name)
                     {
+                        return false;
+                    }
+
+                    // Check if no obstacles are in the way
+                    if(!maze.checkCanMove(test_cell_pos, 1, 1, dir, gameObject.name))
+                    {
+                        Debug.Log("Obstacle: " + gameObject.name + ": another obstacle in way");
                         return false;
                     }
                 }

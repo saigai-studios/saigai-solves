@@ -14,7 +14,7 @@ public class Maze : MonoBehaviour
     }
 
     // Check if the player can move into a space
-    public bool checkCanMove(Vector3Int pos, int playerWidth, int playerHeight, int dir)
+    public bool checkCanMove(Vector3Int pos, int playerWidth, int playerHeight, int dir, string name)
     {
         // If multiple objects can be pushed, they will all be stored in this list
         List<MazeObstacle> canPush = new List<MazeObstacle>();
@@ -22,6 +22,12 @@ public class Maze : MonoBehaviour
         // Check for collision with each obstacle in the scene
         foreach(MazeObstacle obs in obstacles)
         {
+            if (obs.gameObject.name == name)
+            {
+                Debug.Log("checkCanMove: name matches, skipping");
+                continue;
+            }
+            
             // Check for collision against each block of the player
             for(int row = 0; row < playerWidth; ++row)
             {

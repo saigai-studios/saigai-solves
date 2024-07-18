@@ -44,7 +44,7 @@ public class MazePlayer : MonoBehaviour
             if (hasWon)
             {
                 Debug.Log("You won!");
-                // TODO add transition code here
+                // TODO add transition code here, delete on win?
 
                 return; // Don't move any more
             }
@@ -137,7 +137,7 @@ public class MazePlayer : MonoBehaviour
             var new_cell_pos = new Vector3Int(cell_pos.x + horiz, cell_pos.y + vert, cell_pos.z);
             
             // Check if no obstacles are in the way
-            if(!maze.checkCanMove(new_cell_pos, playerWidth, playerHeight, dir))
+            if(!maze.checkCanMove(new_cell_pos, playerWidth, playerHeight, dir, ""))
             {
                 Debug.Log("Player: obstacle in way");
                 return;
