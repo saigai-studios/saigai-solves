@@ -32,9 +32,16 @@ public class MazeObstacle : MonoBehaviour
         
         // Get cell position (top-right corner)
         cell_pos = grid.LocalToCell(transform.localPosition);
-        if(obsWidth > 2 || obsHeight > 2)
+        Debug.Log(gameObject.name + " (original) : " + cell_pos);
+
+         // Convert center to top-right
+        if(obsWidth > 2)
         {
-            cell_pos += new Vector3Int(obsWidth / 2, obsHeight / 2, 0); // Convert center to top-right
+            cell_pos += new Vector3Int(obsWidth / 2, 0, 0);
+        }
+        if(obsHeight > 2)
+        {
+            cell_pos += new Vector3Int(0, obsHeight / 2, 0);
         }
         
         // Set animation variables
@@ -48,9 +55,18 @@ public class MazeObstacle : MonoBehaviour
         {
             offset += new Vector3(0.5f, 0.0f, 0.0f);
         }
+        else if(obsWidth > 2)
+        {
+            cell_pos += new Vector3Int(-1, 0, 0);
+        }
+
         if(obsHeight % 2 == 1)
         {
             offset += new Vector3(0.0f, 0.5f, 0.0f);
+        }
+        else if(obsHeight > 2)
+        {
+            cell_pos += new Vector3Int(0, -1, 0);
         }
 
         Debug.Log(gameObject.name + " : " + cell_pos);

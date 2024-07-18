@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7574268564434823757}
   - component: {fileID: -8175872018751054424}
-  - component: {fileID: 2410945191185499640}
+  - component: {fileID: 5335386014948486821}
   m_Layer: 0
-  m_Name: Table 2
+  m_Name: Couch 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,18 +74,18 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2ba289f7077fb4a998b9b53a306c328e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef31bb5f46eda418c8665879c0511c72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1.9078947}
+  m_Size: {x: 2.11, y: 0.76}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2410945191185499640
+--- !u!114 &5335386014948486821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f470b76d0a508f34fa95716079e813b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obsWidth: 1
+  obsWidth: 3
   obsHeight: 2
