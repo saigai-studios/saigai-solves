@@ -112,8 +112,18 @@ public class MazeObstacle : MonoBehaviour
                 // Check along top edge of obstacle
                 for (int ofst = 0; ofst < obsWidth; ++ofst)
                 {
-                    var test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y + 1, cell_pos.z);
+                    // Check if current tile has restrictions
+                    var test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y, cell_pos.z);
                     var temp = tilemap.GetTile(test_cell_pos);
+
+                    if(temp != null && temp.name == "no_up")
+                    {
+                        return false;
+                    }
+                    
+                    // Look ahead to potential cell
+                    test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y + 1, cell_pos.z);
+                    temp = tilemap.GetTile(test_cell_pos);
 
                     if (temp != null && temp.name == wall_name)
                     {
@@ -134,8 +144,18 @@ public class MazeObstacle : MonoBehaviour
                 // Check along right edge of obstacle
                 for (int ofst = 0; ofst < obsHeight; ++ofst)
                 {
-                    var test_cell_pos = new Vector3Int(cell_pos.x + 1, cell_pos.y - ofst, cell_pos.z);
+                    // Check if current tile has restrictions
+                    var test_cell_pos = new Vector3Int(cell_pos.x, cell_pos.y - ofst, cell_pos.z);
                     var temp = tilemap.GetTile(test_cell_pos);
+
+                    if(temp != null && temp.name == "no_right")
+                    {
+                        return false;
+                    }
+                    
+                    // Look ahead to potential cell
+                    test_cell_pos = new Vector3Int(cell_pos.x + 1, cell_pos.y - ofst, cell_pos.z);
+                    temp = tilemap.GetTile(test_cell_pos);
 
                     if (temp != null && temp.name == wall_name)
                     {
@@ -156,8 +176,18 @@ public class MazeObstacle : MonoBehaviour
                 // Check along bottom edge of obstacle
                 for (int ofst = 0; ofst < obsWidth; ++ofst)
                 {
-                    var test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y - obsHeight, cell_pos.z);
+                    // Check if current tile has restrictions
+                    var test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y - obsHeight + 1, cell_pos.z);
                     var temp = tilemap.GetTile(test_cell_pos);
+
+                    if(temp != null && temp.name == "no_down")
+                    {
+                        return false;
+                    }
+                    
+                    // Look ahead to potential cell
+                    test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y - obsHeight, cell_pos.z);
+                    temp = tilemap.GetTile(test_cell_pos);
 
                     if (temp != null && temp.name == wall_name)
                     {
@@ -178,8 +208,18 @@ public class MazeObstacle : MonoBehaviour
                 // Check along left edge of obstacle
                 for (int ofst = 0; ofst < obsHeight; ++ofst)
                 {
-                    var test_cell_pos = new Vector3Int(cell_pos.x - obsWidth, cell_pos.y - ofst, cell_pos.z);
+                    // Check if current tile has restrictions
+                    var test_cell_pos = new Vector3Int(cell_pos.x - obsWidth + 1, cell_pos.y - ofst, cell_pos.z);
                     var temp = tilemap.GetTile(test_cell_pos);
+
+                    if(temp != null && temp.name == "no_left")
+                    {
+                        return false;
+                    }
+                    
+                    // Look ahead to potential cell
+                    test_cell_pos = new Vector3Int(cell_pos.x - obsWidth, cell_pos.y - ofst, cell_pos.z);
+                    temp = tilemap.GetTile(test_cell_pos);
 
                     if (temp != null && temp.name == wall_name)
                     {

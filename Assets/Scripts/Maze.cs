@@ -5,6 +5,8 @@ using UnityEngine;
 public class Maze : MonoBehaviour
 {
     private MazeObstacle[] obstacles;
+
+    public GameObject winObject, winAnimation;
     
     // Start is called before the first frame update
     void Start()
@@ -72,5 +74,11 @@ public class Maze : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void win()
+    {
+        Debug.Log("YOur winer");
+        // TODO put animation here
     }
 }

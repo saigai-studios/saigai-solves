@@ -17,6 +17,7 @@ public class MazePlayer : MonoBehaviour
     private Vector3 old, next;
     private bool isAnim;
     private bool hasWon = false;
+    private bool firstWin = true;
     private int counter;
     private Vector3Int cell_pos;
 
@@ -34,6 +35,14 @@ public class MazePlayer : MonoBehaviour
         Debug.Log("cell_pos: " + cell_pos);
     }
 
+    // Reset animation variables
+    void ResetAnim()
+    {
+        isAnim = true;
+        counter = 0;
+        old = transform.localPosition;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -43,39 +52,77 @@ public class MazePlayer : MonoBehaviour
             // If game is won, trigger transition
             if (hasWon)
             {
-                Debug.Log("You won!");
-                // TODO add transition code here, delete on win?
+                // Only call win once
+                if(firstWin)
+                {
+                    maze.win();
+                    firstWin = false;
+                }
 
                 return; // Don't move any more
             }
             
-            // Reset animation
-            isAnim = true;
-            counter = 0;
-            old = transform.localPosition;
-            
             if (Input.GetKeyDown("down"))
             {
-                // Check if tile below is occupied
-                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y - playerHeight, cell_pos.z));
+                // Check if current tile has restrictions
+                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
+
+                if(temp != null && temp.name == "no_down")
+                {
+                    return;
+                }
+                
+                // Move player
+                ResetAnim();
+                temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y - playerHeight, cell_pos.z));
 
                 playerMove(temp, 2);
             }
             else if (Input.GetKeyDown("up"))
             {
-                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y + 1, cell_pos.z));
+                // Check if current tile has restrictions
+                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
+
+                if(temp != null && temp.name == "no_up")
+                {
+                    return;
+                }
+                
+                // Move player
+                ResetAnim();
+                temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y + 1, cell_pos.z));
 
                 playerMove(temp, 0);
             }
             else if (Input.GetKeyDown("left"))
             {
-                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x - 1, cell_pos.y, cell_pos.z));
+                // Check if current tile has restrictions
+                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
+
+                if(temp != null && temp.name == "no_left")
+                {
+                    return;
+                }
+                
+                // Move player
+                ResetAnim();
+                temp = tilemap.GetTile(new Vector3Int(cell_pos.x - 1, cell_pos.y, cell_pos.z));
 
                 playerMove(temp, 3);
             }
             else if (Input.GetKeyDown("right"))
             {
-                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x + playerWidth, cell_pos.y, cell_pos.z));
+                // Check if current tile has restrictions
+                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
+
+                if(temp != null && temp.name == "no_right")
+                {
+                    return;
+                }
+                
+                // Move player
+                ResetAnim();
+                temp = tilemap.GetTile(new Vector3Int(cell_pos.x + playerWidth, cell_pos.y, cell_pos.z));
 
                 playerMove(temp, 1);
             }
@@ -114,6 +161,11 @@ public class MazePlayer : MonoBehaviour
             default:
                 Debug.Log("playerMove: Invalid direction");
                 return;
+        }
+
+        if  (tile != null)
+        {
+            Debug.Log(tile.name);
         }
         
         // Check for win state
