@@ -27,6 +27,7 @@ public class ChangeLang : MonoBehaviour {
             return;
         }
 
+
         StartCoroutine(ChangeLocale(id));
     }
 
@@ -34,6 +35,11 @@ public class ChangeLang : MonoBehaviour {
         translating = true;
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_id];
+        if (_id == 0) {
+            
+        } else {
+
+        }
         translating = false;
     }
 }
