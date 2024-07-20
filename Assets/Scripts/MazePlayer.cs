@@ -24,7 +24,7 @@ public class MazePlayer : MonoBehaviour
     private const float ANIM_MAX = 10.0f; // one-tenth of a second?
     private Vector3 locOffset = new Vector3(0.5f, 0.5f, 0.0f); // locOffset since player is moved from center
 
-    private string wall_name = "temp_block";
+    private string wall_name = "Wall_texture_crop";
     private string goal_name = "out_tile";
 
     // Start is called before the first frame update
