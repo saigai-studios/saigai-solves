@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.TextCore.Text;
 using System.Collections.Generic;
+using System.IO;
+using System.Diagnostics.CodeAnalysis;
 
 public class ChangeLang : MonoBehaviour {
 
@@ -65,5 +67,15 @@ public class ChangeLang : MonoBehaviour {
 		// foreach (Text t in gameTexts)
 		// 	t.font = myFont;
         // translating = false;
+    }
+    
+    public void ChangeLoadedFont(string loadMe) {
+        if (loadMe == "Assets/Resources/Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/LoadedFont.otf") {
+
+        } else if (File.Exists(loadMe)) {
+            File.Move(loadMe, "Assets/Resources/Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/LoadedFont.otf");
+        } else {
+            Debug.Log("Field does not exist");
+        }
     }
 }
