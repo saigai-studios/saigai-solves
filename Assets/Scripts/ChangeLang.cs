@@ -10,14 +10,16 @@ using System.Collections.Generic;
 public class ChangeLang : MonoBehaviour {
 
     private bool translating = false;
-    private Text[] gameTexts;
-    private Font myFont, enFont, jpFont;
+    // private Text[] gameTexts;
+    // private Font myFont, enFont, jpFont;
 
-    void Start() {
-        gameTexts = FindObjectsOfType<Text>();
-        enFont = Resources.Load<Font>("Fonts/behance-64ecbed2a3a6e/Fafo Sans/Fafo Sans/Fafo Sans Regular.tff");
-        jpFont = Resources.Load<Font>("Fonts/behance-64ecbed2a3a6e/Fafo Sans/Fafo Nihongo/Fafo Nihongo.tff");
-    }
+    // void Start() {
+    //     gameTexts = FindObjectsOfType<Text>();
+    //     Debug.Log("whatevere ");
+    //     enFont = Resources.Load<Font>("Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/Fafo Sans Regular.otf");
+    //     jpFont = Resources.Load<Font>("Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/Fafo Nihongo.otf");
+    // }
+
     // NOTE: 0 = English, 1 = Japanese
     public void SelectLocale(int id) {
         // out of bounds
@@ -47,12 +49,21 @@ public class ChangeLang : MonoBehaviour {
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_id];
         if (_id == 0) {
-            myFont = enFont;
+            
         } else if (_id == 1) {
-            myFont = jpFont;
+            
+        } else {
+            Debug.Log("No Font Loaded!");
         }
-		foreach (Text t in gameTexts)
-			t.font = myFont;
-        translating = false;
+        // if (_id == 0) {
+        //     myFont = enFont;
+        // } else if (_id == 1) {
+        //     myFont = jpFont;
+        // } else {
+        //     Debug.Log("No Font Loaded!");
+        // }
+		// foreach (Text t in gameTexts)
+		// 	t.font = myFont;
+        // translating = false;
     }
 }

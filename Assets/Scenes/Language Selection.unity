@@ -871,6 +871,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734217655}
   m_CullTransparentMesh: 1
+--- !u!1 &1064233565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1064233567}
+  - component: {fileID: 1064233566}
+  m_Layer: 0
+  m_Name: LangManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1064233566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064233565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a4c9d4d023cbe48a79934e49087551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1064233567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064233565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 101.29226, y: 5.773315, z: 95.36678}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1120081158
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +927,6 @@ GameObject:
   - component: {fileID: 1120081164}
   - component: {fileID: 1120081163}
   - component: {fileID: 1120081162}
-  - component: {fileID: 1120081161}
   - component: {fileID: 1120081160}
   m_Layer: 5
   m_Name: English Button
@@ -952,18 +995,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!114 &1120081161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1120081158}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a4c9d4d023cbe48a79934e49087551, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1120081162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,7 +1039,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1120081161}
+      - m_Target: {fileID: 1064233566}
         m_TargetAssemblyTypeName: ChangeLang, Assembly-CSharp
         m_MethodName: SelectLocale
         m_Mode: 3
@@ -1404,7 +1435,6 @@ GameObject:
   - component: {fileID: 1523249816}
   - component: {fileID: 1523249815}
   - component: {fileID: 1523249814}
-  - component: {fileID: 1523249813}
   - component: {fileID: 1523249812}
   m_Layer: 5
   m_Name: Japanese Button
@@ -1473,18 +1503,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!114 &1523249813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1523249810}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a4c9d4d023cbe48a79934e49087551, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1523249814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1529,7 +1547,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1523249813}
+      - m_Target: {fileID: 1064233566}
         m_TargetAssemblyTypeName: ChangeLang, Assembly-CSharp
         m_MethodName: SelectLocale
         m_Mode: 3
@@ -1763,3 +1781,4 @@ SceneRoots:
   - {fileID: 1203262404}
   - {fileID: 1873490224}
   - {fileID: 2031096828}
+  - {fileID: 1064233567}
