@@ -219,4 +219,40 @@ mod tests {
         mg.increase_score(25);
         assert_eq!(mg.points, 25);
     }
+
+    #[test]
+    fn ut_win_game() {
+        let mut mg = CatchMg::new();
+        assert_eq!(mg.is_game_won(), false);
+        mg.increase_score(100);
+        assert_eq!(mg.is_game_won(), false);
+        mg.increase_score(899);
+        assert_eq!(mg.is_game_won(), false);
+        mg.increase_score(1);
+        assert_eq!(mg.is_game_won(), true);
+
+        let mut mg = CatchMg::new();
+        assert_eq!(mg.is_game_won(), false);
+        mg.increase_score(1001);
+        assert_eq!(mg.is_game_won(), true);
+    }
+
+    #[test]
+    fn ut_win_game_hard() {
+        let mut mg = CatchMg::new();
+        mg.enable_hard_mode();
+        assert_eq!(mg.is_game_won(), false);
+        mg.increase_score(500);
+        assert_eq!(mg.is_game_won(), false);
+        mg.increase_score(498);
+        assert_eq!(mg.is_game_won(), false);
+        mg.increase_score(2);
+        assert_eq!(mg.is_game_won(), true);
+
+        let mut mg = CatchMg::new();
+        mg.enable_hard_mode();
+        assert_eq!(mg.is_game_won(), false);
+        mg.increase_score(1002);
+        assert_eq!(mg.is_game_won(), true);
+    }
 }
