@@ -22285,6 +22285,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Minigame Overlay
       objectReference: {fileID: 0}
+    - target: {fileID: 4191835313916659637, guid: 61a96e8fc6d6c914482e7966d7a1bddc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4191835313916659637, guid: 61a96e8fc6d6c914482e7966d7a1bddc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201645548640363251, guid: 61a96e8fc6d6c914482e7966d7a1bddc, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    - target: {fileID: 9201645548640363251, guid: 61a96e8fc6d6c914482e7966d7a1bddc, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9201645548640363251, guid: 61a96e8fc6d6c914482e7966d7a1bddc, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49398,9 +49418,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 374350343}
     m_Modifications:
+    - target: {fileID: 1459663696256062790, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    - target: {fileID: 2166192879076722283, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    - target: {fileID: 2166192879076722283, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4648093502690586137, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
       propertyPath: m_Name
       value: Tutorial Page
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802566028172826173, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5661256535930694590, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49441,6 +49477,30 @@ PrefabInstance:
     - target: {fileID: 5661256535930694590, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431219994258795676, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    - target: {fileID: 8356939260696318295, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    - target: {fileID: 8575022650822035321, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    - target: {fileID: 8575022650822035321, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8740357146549986798, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    - target: {fileID: 8740357146549986798, guid: f66701c6f8fe6ce4b87846959b233471, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

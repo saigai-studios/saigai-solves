@@ -181,11 +181,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -685,11 +685,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -765,11 +765,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -885,7 +885,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -1436,6 +1436,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 339331038}
     m_Modifications:
+    - target: {fileID: 1594168896276270013, guid: dce4ef892d107f34ea8af51cfe685c19, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594168896276270013, guid: dce4ef892d107f34ea8af51cfe685c19, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2679537807295877106, guid: dce4ef892d107f34ea8af51cfe685c19, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1515,6 +1523,18 @@ PrefabInstance:
     - target: {fileID: 2679537807295877106, guid: dce4ef892d107f34ea8af51cfe685c19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908246056254904116, guid: dce4ef892d107f34ea8af51cfe685c19, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 91f3c57cbcd04804e88aa7a27ddde2db, type: 3}
+    - target: {fileID: 2908246056254904116, guid: dce4ef892d107f34ea8af51cfe685c19, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908246056254904116, guid: dce4ef892d107f34ea8af51cfe685c19, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6072823034393983420, guid: dce4ef892d107f34ea8af51cfe685c19, type: 3}
       propertyPath: m_Name
