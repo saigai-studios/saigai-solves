@@ -30,6 +30,15 @@ public class MazePlayer : MonoBehaviour
     private string wall_name = "Wall_texture_crop";
     private string goal_name = "out_tile";
 
+    enum Direction
+    {
+        Up = 0,
+        Down = 2,
+        Left = 3,
+        Right = 1,
+        None = 4,
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,100 +75,66 @@ public class MazePlayer : MonoBehaviour
 
                 return; // Don't move any more
             }
-            
-            if (Input.GetKeyDown("down"))
-            {
-                // Check if current tile has restrictions
-                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
 
-                if(temp != null && temp.name == "no_down")
-                {
-                    return;
-                }
-                
+            // Check if current tile has restrictions
+            var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
+
+            var dir = Direction.None;
+
+            // pick a direction
+            if ((Input.GetKeyDown("down") || Input.GetKey("down")) && !(temp != null && temp.name == "no_down")) 
+            {
+                dir = Direction.Down;
+            }
+            else if ((Input.GetKeyDown("up") || Input.GetKey("up")) == true && !(temp != null && temp.name == "no_up"))
+            {
+                dir = Direction.Up;
+            }
+            else if ((Input.GetKeyDown("left") || Input.GetKey("left")) == true && !(temp != null && temp.name == "no_left"))
+            {
+                dir = Direction.Left;
+            }
+            else if ((Input.GetKeyDown("right") || Input.GetKey("right")) == true && !(temp != null && temp.name == "no_right"))
+            {
+                dir = Direction.Right;
+            }
+
+            if (dir != Direction.None) 
+            {
                 // Move player
                 ResetAnim();
-                temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y - playerHeight, cell_pos.z));
-
-                playerMove(temp, 2);
-            }
-            else if (Input.GetKeyDown("up"))
-            {
-                // Check if current tile has restrictions
-                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
-
-                if(temp != null && temp.name == "no_up")
-                {
-                    return;
-                }
-                
-                // Move player
-                ResetAnim();
-                temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y + 1, cell_pos.z));
-
-                playerMove(temp, 0);
-            }
-            else if (Input.GetKeyDown("left"))
-            {
-                // Check if current tile has restrictions
-                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
-
-                if(temp != null && temp.name == "no_left")
-                {
-                    return;
-                }
-                
-                // Move player
-                ResetAnim();
-                temp = tilemap.GetTile(new Vector3Int(cell_pos.x - 1, cell_pos.y, cell_pos.z));
-
-                playerMove(temp, 3);
-            }
-            else if (Input.GetKeyDown("right"))
-            {
-                // Check if current tile has restrictions
-                var temp = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y, cell_pos.z));
-
-                if(temp != null && temp.name == "no_right")
-                {
-                    return;
-                }
-                
-                // Move player
-                ResetAnim();
-                temp = tilemap.GetTile(new Vector3Int(cell_pos.x + playerWidth, cell_pos.y, cell_pos.z));
-
-                playerMove(temp, 1);
-            }
-            else
-            {
-                isAnim = false;
-                counter = (int)ANIM_MAX;
+                playerMove(dir);
             }
         }
     }
 
-    void playerMove(TileBase tile, int dir)
+    void playerMove(Direction dir)
     {                
         // Convert direction to coordinates
         int horiz = 0;
         int vert = 0;
 
+        TileBase tile = null;
+
         switch(dir)
         {
-            case 0:
+            case Direction.Up:
+                tile = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y + 1, cell_pos.z));
                 vert = 1;
                 break;
 
-            case 1:
+            case Direction.Right:
+                tile = tilemap.GetTile(new Vector3Int(cell_pos.x + playerWidth, cell_pos.y, cell_pos.z));
                 horiz = 1;
                 break;
 
-            case 2:
+            case Direction.Down:
+                tile = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y - playerHeight, cell_pos.z));
                 vert = -1;
                 break;
             
-            case 3:
+            case Direction.Left:
+                tile = tilemap.GetTile(new Vector3Int(cell_pos.x - 1, cell_pos.y, cell_pos.z));
                 horiz = -1;
                 break;
 
@@ -194,7 +169,7 @@ public class MazePlayer : MonoBehaviour
             var new_cell_pos = new Vector3Int(cell_pos.x + horiz, cell_pos.y + vert, cell_pos.z);
             
             // Check if no obstacles are in the way
-            if(!maze.checkCanMove(new_cell_pos, playerWidth, playerHeight, dir, ""))
+            if(!maze.checkCanMove(new_cell_pos, playerWidth, playerHeight, (int)dir, ""))
             {
                 Debug.Log("Player: obstacle in way");
                 return;

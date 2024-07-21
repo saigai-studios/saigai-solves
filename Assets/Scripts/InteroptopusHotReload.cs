@@ -49,9 +49,10 @@ namespace Interoptopus.Utils
                     is_latest = true;
                 } else {
                     try {
-                        File.Delete(file);
+                        Debug.Log("Found stale file: " + file);
+                        // File.Delete(file);
                         // delete the .meta as well
-                        File.Delete(file + ".meta");
+                        // File.Delete(file + ".meta");
                     } catch (Exception) {
                         Debug.Log("Failed to delete file: " + file);
                     }

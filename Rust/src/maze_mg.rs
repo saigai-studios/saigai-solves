@@ -1,28 +1,33 @@
+use crate::overworld::Vec2;
+
 /// A container for the catch minigame
-static mut MAZE_MG: MazeMg = MazeMg::new();
+static mut _MAZE_MG: MazeMg = MazeMg::_new();
 
 #[derive(Clone, Copy, PartialEq, Debug)]
 enum Tile {
-    Player,
-    Empty,
-    Block,
+    _Player,
+    _Empty,
+    _Block,
+    _Goal,
 }
 
 impl Tile {
-    pub const fn new() -> Self {
-        Self::Empty
+    pub const fn _new() -> Self {
+        Self::_Empty
     }
 }
 
 #[derive(Debug, PartialEq)]
 struct MazeMg {
-    map: [[Tile; 8]; 8],
+    player: Vec2,
+    goal: Vec2,
 }
 
 impl MazeMg {
-    pub const fn new() -> Self {
+    pub const fn _new() -> Self {
         Self {
-            map: [[Tile::new(); 8]; 8],
+            player: Vec2::new(),
+            goal: Vec2::new(),
         }
     }
 }
