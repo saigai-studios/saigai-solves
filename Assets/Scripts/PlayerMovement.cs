@@ -17,12 +17,15 @@ public class PlayerMovement : MonoBehaviour
     Vector3 flip_scl;
 
     Animator anim;
+    AudioSource sfx;
+    public bool sfxOn = false;
     
     // Start is called before the first frame update
     void Start()
     {
         Vec2[] marker_xz = new Vec2[4];
         anim = gameObject.GetComponent<Animator>();
+        sfx = gameObject.GetComponent<AudioSource>();
         
         // Get positions
         for (int i = 0; i < 3; ++i){
@@ -64,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         switch(Interop.get_anim_state())
         {
             case PlayerAnim.IDLE:
+                sfxOn = false;
                 anim.SetBool(idle_bool, false);
                 anim.SetBool(frwd_bool, false);
                 anim.SetBool(back_bool, false);
@@ -71,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case PlayerAnim.LEFT:
+                sfxOn = true;
                 anim.SetBool(idle_bool, true);
                 anim.SetBool(frwd_bool, false);
                 anim.SetBool(back_bool, false);
@@ -78,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case PlayerAnim.RIGHT:
+                sfxOn = true;
                 anim.SetBool(idle_bool, true);
                 anim.SetBool(frwd_bool, false);
                 anim.SetBool(back_bool, false);
@@ -85,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case PlayerAnim.FORWARD:
+                sfxOn = true;
                 anim.SetBool(idle_bool, true);
                 anim.SetBool(frwd_bool, true);
                 anim.SetBool(back_bool, false);
@@ -92,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             case PlayerAnim.BACK:
+                sfxOn = true;
                 anim.SetBool(idle_bool, true);
                 anim.SetBool(frwd_bool, false);
                 anim.SetBool(back_bool, true);
@@ -99,11 +107,25 @@ public class PlayerMovement : MonoBehaviour
                 break;
 
             default:
+                sfxOn = false;
                 anim.SetBool(idle_bool, true);
                 anim.SetBool(frwd_bool, false);
                 anim.SetBool(back_bool, false);
                 transform.localScale = normal_scl;
                 break;
+        }
+
+        // Play walking sfx
+        if (sfxOn)
+        {
+            if (!sfx.isPlaying)
+            {
+                sfx.Play();
+            }
+        }
+        else
+        {
+            sfx.Stop();
         }
     }
 }

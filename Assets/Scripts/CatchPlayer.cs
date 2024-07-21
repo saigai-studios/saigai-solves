@@ -25,6 +25,9 @@ public class CatchPlayer : MonoBehaviour
         // Get collider name
         var name = obj.gameObject.name;
 
+        // Set caught flag for sfx
+        obj.gameObject.GetComponent<CatchPet>().caught = true;
+        
         // TODO verify case sensitivity Dog vs dog etc.
         if (name == "pet")
         {

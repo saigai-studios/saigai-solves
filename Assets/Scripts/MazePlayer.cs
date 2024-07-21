@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class MazePlayer : MonoBehaviour
 {
+    // Sound player
+    private AudioSource sfx;
+    
     // These must be set to detect tiles in grid
     public Grid grid;
     public Tilemap tilemap;
@@ -33,6 +36,8 @@ public class MazePlayer : MonoBehaviour
         old = transform.localPosition;
         cell_pos = grid.LocalToCell(transform.localPosition);
         Debug.Log("cell_pos: " + cell_pos);
+
+        sfx = GetComponent<AudioSource>();
     }
 
     // Reset animation variables
@@ -201,10 +206,9 @@ public class MazePlayer : MonoBehaviour
             // Set next animation position
             next = tilemap.CellToLocal(cell_pos) + locOffset;
         }
-        else
-        {
-            Debug.Log("Player: tile not empty: " + tile.name);
-        }
+        
+        // Play walking sound
+        sfx.Play();
     }
     
     // Update animation at a fixed rate (i.e. not tied to frame rate)
@@ -233,6 +237,7 @@ public class MazePlayer : MonoBehaviour
         else
         {
             transform.localPosition = old;
+            sfx.Stop();
         }
     }
 }

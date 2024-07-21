@@ -8,11 +8,18 @@ public class CatchPet : MonoBehaviour
     public List<Sprite> sprList;
     public GameObject shadow;
 
+    public AudioClip goodSound, badSound;
+    public bool caught = false;
+
     private GameObject shdObj;
+    private CatchMG mgObj;
     
     // Start is called before the first frame update
     void Start()
-    {
+    {        
+        // Get minigame plane
+        mgObj = GameObject.Find("Game Plane").GetComponent<CatchMG>();
+        
         // Pick random sprite
         int randInd = Random.Range(0, sprList.Count);
         Sprite newSpr = sprList[randInd];
@@ -39,6 +46,26 @@ public class CatchPet : MonoBehaviour
     // If shadow still exists, destroy it
     void OnDestroy()
     {
+        // Play respective sfx
+        if (mgObj.musicOn)
+        {
+            if (gameObject.name == "pet")
+            {
+                if (caught)
+                {
+                    AudioSource.PlayClipAtPoint(goodSound, this.gameObject.transform.position);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(badSound, this.gameObject.transform.position);
+                }
+            }
+            else if (caught)
+            {
+                AudioSource.PlayClipAtPoint(badSound, this.gameObject.transform.position);
+            }
+        }
+        
         if (shdObj != null)
         {
             Destroy(shdObj);
