@@ -23,7 +23,7 @@ and the following software must be installed:
 
 Run the following command for your preferred platform:
 ```
-python (or python3) build.py <unity> <target> <iscc (Optional)>
+python build.py <unity> <target> [iscc]
 ```
 where:
 - `<unity>` is the full path to the Unity Editor binary on your local file system  
@@ -36,7 +36,7 @@ Examples:
     - MacOS: `osxuniversal`
     - Linux: `linux64`
     - Windows: `win64`
-- `<iscc>` is the path to Isso Setup's `ISCC.exe` compiler, i.e.
+- `[iscc]` is the path to Isso Setup's `ISCC.exe` compiler, i.e.
     - `C:\Program Files (x86)\Inno Setup 6\ISCC.exe`
 
 ### Windows Example
@@ -65,7 +65,7 @@ Each world focuses on one particular disaster. Before entering a world, players 
 Disaster | Status |
 --- | --- |
 Earthquake | In-progress
-Fire | Planned
+Tsunami | Planned (DLC)
 
 ## Contributing
 

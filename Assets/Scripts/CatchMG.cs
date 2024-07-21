@@ -12,6 +12,12 @@ public class CatchMG : MonoBehaviour
     public Text score;
     private int val;
     public float spawnWidth = 2.0f;
+
+    public AudioClip game_music;
+    public AudioClip win_music;
+
+    private AudioSource music_player;
+    public bool musicOn = false;
     
     void Start()
     {
@@ -19,6 +25,10 @@ public class CatchMG : MonoBehaviour
         // set to HARD MODE if the user already has the earthquake card for this game!
         Interop.init_catch_game(Interop.data_has_earthquake_card(1));
         score.text = val.ToString();
+
+        // Get music player
+        music_player = GetComponent<AudioSource>();
+        music_player.Stop();
     }
 
     void FixedUpdate()
@@ -47,11 +57,26 @@ public class CatchMG : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (tutorial.activeInHierarchy == false && winAnimation.activeInHierarchy == false && musicOn == false)
+        {
+            // Start music
+            music_player.Play();
+            musicOn = true;
+        }
+    }
+
     public void IncScore() {
         val = Interop.good_catch();
         score.text = val.ToString();
         // Check to see if we won the game yet
         if (Interop.is_catch_game_won() == true) {
+            // Stop background music
+            music_player.Stop();
+            musicOn = false;
+
+            // Print debug message
             if (Interop.data_has_earthquake_card(1) == true) {
                 Debug.Log("You win against hard mode!! すごい!");
             } else {

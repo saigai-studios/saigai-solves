@@ -22,7 +22,7 @@ public class MazeObstacle : MonoBehaviour
     private const float ANIM_MAX = 10.0f; // one-tenth of a second?
     private Vector3 offset = new Vector3(0.0f, 0.0f, 0.0f); // Offset since obstacle is moved from center
 
-    private string wall_name = "temp_block";
+    private string wall_name = "Wall_texture_crop";
     
     // Start is called before the first frame update
     void Start()

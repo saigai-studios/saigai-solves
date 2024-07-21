@@ -6,13 +6,29 @@ public class Maze : MonoBehaviour
 {
     private MazeObstacle[] obstacles;
 
-    public GameObject winObject, winAnimation;
+    public GameObject winObject, winAnimation, tutorial;
+
+    private AudioSource music_player;
+    private bool musicOn = false;
     
     // Start is called before the first frame update
     void Start()
     {
         // Get all of the obstacles in the scene automatically
         obstacles = FindObjectsOfType<MazeObstacle>();
+
+        // Get audio player
+        music_player = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        if (tutorial.activeInHierarchy == false && musicOn == false) //winAnimation.activeInHierarchy == false && musicOn == false)
+        {
+            // Start music
+            music_player.Play();
+            musicOn = true;
+        }
     }
 
     // Check if the player can move into a space
@@ -78,6 +94,10 @@ public class Maze : MonoBehaviour
 
     public void win()
     {
+        // Turn off music
+        music_player.Stop();
+        musicOn = false;
+        
         Debug.Log("YOur winer");
         // TODO put animation here
     }

@@ -12,15 +12,9 @@ using System.Diagnostics.CodeAnalysis;
 public class ChangeLang : MonoBehaviour {
 
     private bool translating = false;
+    /* old change font method */
     // private Text[] gameTexts;
     // private Font myFont, enFont, jpFont;
-
-    // void Start() {
-    //     gameTexts = FindObjectsOfType<Text>();
-    //     Debug.Log("whatevere ");
-    //     enFont = Resources.Load<Font>("Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/Fafo Sans Regular.otf");
-    //     jpFont = Resources.Load<Font>("Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/Fafo Nihongo.otf");
-    // }
 
     // NOTE: 0 = English, 1 = Japanese
     public void SelectLocale(int id) {
@@ -50,13 +44,7 @@ public class ChangeLang : MonoBehaviour {
         translating = true;
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_id];
-        if (_id == 0) {
-            
-        } else if (_id == 1) {
-            
-        } else {
-            Debug.Log("No Font Loaded!");
-        }
+        /* old change font method */
         // if (_id == 0) {
         //     myFont = enFont;
         // } else if (_id == 1) {
@@ -69,13 +57,14 @@ public class ChangeLang : MonoBehaviour {
         // translating = false;
     }
     
-    public void ChangeLoadedFont(string loadMe) {
-        if (loadMe == "Assets/Resources/Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/LoadedFont.otf") {
+    /* old change font method */
+    // public void ChangeLoadedFont(string loadMe) {
+    //     if (loadMe == "Assets/Resources/Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/LoadedFont.otf") {
 
-        } else if (File.Exists(loadMe)) {
-            File.Move(loadMe, "Assets/Resources/Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/LoadedFont.otf");
-        } else {
-            Debug.Log("Field does not exist");
-        }
-    }
+    //     } else if (File.Exists(loadMe)) {
+    //         File.Move(loadMe, "Assets/Resources/Fonts/behance-64ecbed2a3a6e/Fafo Sans/Used Fonts/LoadedFont.otf");
+    //     } else {
+    //         Debug.Log("Field does not exist");
+    //     }
+    // }
 }

@@ -23,6 +23,10 @@ public class Piece : MonoBehaviour
     Vector3 mouseOffset3D;
     Vector2 mouseOffset2D;
 
+    // Sound effects player
+    AudioSource sfx;
+    public AudioClip pickUp, placeGrid;
+
     bool isSelected = false;
 
     float distFromCam;
@@ -35,6 +39,9 @@ public class Piece : MonoBehaviour
 
         game = GameObject.FindObjectOfType<BusMg>();
         distFromCam = transform.position.z - cam.transform.position.z; // All objects should be aligned in z plane
+
+        // Get audio player
+        sfx = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -66,6 +73,9 @@ public class Piece : MonoBehaviour
         // Calculate 2D offset - this is used to determine where the piece is on the screen while placing
         newPos = cam.WorldToScreenPoint(transform.position);
         mouseOffset2D = new Vector2(newPos.x - Input.mousePosition.x, newPos.y - Input.mousePosition.y);
+
+        // Play interact sound
+        sfx.PlayOneShot(pickUp, 1.0f);
     }
 
     public void OnPointerUp()
@@ -84,6 +94,11 @@ public class Piece : MonoBehaviour
         // Add the 2D offset to the mouse position
         else if (Interop.place_on_board(pieceId, Input.mousePosition.x + mouseOffset2D.x, Input.mousePosition.y + mouseOffset2D.y) == true) {
             Debug.Log("Placed on board.");
+            
+            // Play snap sound
+            sfx.PlayOneShot(placeGrid, 1.0f);
+            
+            // Snap to grid
             Vec2 home_temp = Interop.get_snap_pos(pieceId);
             homePosition = cam.ScreenToWorldPoint(new Vector3(home_temp.x, home_temp.y, distFromCam));
             // check if we won the game!

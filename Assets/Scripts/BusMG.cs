@@ -5,12 +5,19 @@ using Saigai.Studios;
 
 public class BusMg : MonoBehaviour {
 
+    // Music player
+    private AudioSource music_player;
+    private bool musicOn = false;
+
     // Camera for pixel mapping
     public Camera cam;
 
-    public GameObject winObj, winTransition;
+    public GameObject winObj, winTransition, tutorial;
 
     void Start() {
+        // Get music player
+        music_player = GetComponent<AudioSource>();
+
         // Initialize game grid
         Interop.init_bus_game(0);
 
@@ -39,16 +46,25 @@ public class BusMg : MonoBehaviour {
             corners[i] = cam.WorldToScreenPoint(corners[i]);
         }
 
-        // Debug.Log(corners[0].x);
-        // Debug.Log(corners[0].y);
-        // Debug.Log((corners[3].x - corners[0].x));
-        // Debug.Log((corners[2].y - corners[0].y));
-
         Interop.set_window(corners[0].x, corners[0].y, (corners[3].x - corners[0].x), (corners[2].y - corners[0].y));
+    }
+
+    void Update()
+    {
+        if (tutorial.activeInHierarchy == false && winTransition.activeInHierarchy == false && musicOn == false)
+        {
+            // Start music
+            music_player.Play();
+            musicOn = true;
+        }
     }
 
     public void win() {
         Debug.Log("You successfully completed the puzzle: バス!!!");
+
+        // Stop music
+        music_player.Stop();
+        musicOn = false;
         
         if (winTransition != null)
         {

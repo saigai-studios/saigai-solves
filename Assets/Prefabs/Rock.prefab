@@ -156,3 +156,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c992caab2d0a59949bd3df1a79d7abbd, type: 3}
   - {fileID: 21300000, guid: 28a6293be53805340a81a80ceb3670ef, type: 3}
   shadow: {fileID: 1569081872018561249, guid: 7f79cfaf9d75331499f3aa9dab906913, type: 3}
+  goodSound: {fileID: 8300000, guid: 649c29b334a435142914b4ff1d374b8b, type: 3}
+  badSound: {fileID: 8300000, guid: a7e9f4322cf146f4792962a2d288d0f7, type: 3}
+  caught: 0
