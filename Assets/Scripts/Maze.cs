@@ -99,6 +99,21 @@ public class Maze : MonoBehaviour
         musicOn = false;
         
         Debug.Log("YOur winer");
-        // TODO put animation here
+        if (winAnimation != null)
+        {
+            winAnimation.SetActive(true);
+        }
+        StartCoroutine(WinScreen());
+
+        IEnumerator WinScreen()
+        {
+            yield return new WaitForSeconds(3);
+
+            if (winObject != null)
+            {
+                winObject.SetActive(true);
+            }
+        }
+       
     }
 }
