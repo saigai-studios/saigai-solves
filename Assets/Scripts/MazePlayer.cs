@@ -82,19 +82,21 @@ public class MazePlayer : MonoBehaviour
             var dir = Direction.None;
 
             // pick a direction
-            if ((Input.GetKeyDown("down") || Input.GetKey("down")) && !(temp != null && temp.name == "no_down")) 
+            if ((Input.GetKeyDown("down") || Input.GetKey("down")) && 
+                !(temp != null && (temp.name == "no_down" || temp.name.Contains("bot")))) 
             {
                 dir = Direction.Down;
             }
-            else if ((Input.GetKeyDown("up") || Input.GetKey("up")) == true && !(temp != null && temp.name == "no_up"))
+            else if ((Input.GetKeyDown("up") || Input.GetKey("up")) == true && 
+                     !(temp != null && (temp.name == "no_up" || temp.name.Contains("top"))))
             {
                 dir = Direction.Up;
             }
-            else if ((Input.GetKeyDown("left") || Input.GetKey("left")) == true && !(temp != null && temp.name == "no_left"))
+            else if ((Input.GetKeyDown("left") || Input.GetKey("left")) == true && !(temp != null && temp.name.Contains("left")))
             {
                 dir = Direction.Left;
             }
-            else if ((Input.GetKeyDown("right") || Input.GetKey("right")) == true && !(temp != null && temp.name == "no_right"))
+            else if ((Input.GetKeyDown("right") || Input.GetKey("right")) == true && !(temp != null && temp.name.Contains("right")))
             {
                 dir = Direction.Right;
             }

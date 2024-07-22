@@ -116,7 +116,7 @@ public class MazeObstacle : MonoBehaviour
                     var test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y, cell_pos.z);
                     var temp = tilemap.GetTile(test_cell_pos);
 
-                    if(temp != null && temp.name == "no_up")
+                    if(temp != null && (temp.name == "no_up" || temp.name.Contains("top")))
                     {
                         return false;
                     }
@@ -148,7 +148,7 @@ public class MazeObstacle : MonoBehaviour
                     var test_cell_pos = new Vector3Int(cell_pos.x, cell_pos.y - ofst, cell_pos.z);
                     var temp = tilemap.GetTile(test_cell_pos);
 
-                    if(temp != null && temp.name == "no_right")
+                    if(temp != null && temp.name.Contains("right"))
                     {
                         return false;
                     }
@@ -180,7 +180,7 @@ public class MazeObstacle : MonoBehaviour
                     var test_cell_pos = new Vector3Int(cell_pos.x - ofst, cell_pos.y - obsHeight + 1, cell_pos.z);
                     var temp = tilemap.GetTile(test_cell_pos);
 
-                    if(temp != null && temp.name == "no_down")
+                    if(temp != null && (temp.name == "no_down" || temp.name.Contains("bot")))
                     {
                         return false;
                     }
@@ -212,7 +212,7 @@ public class MazeObstacle : MonoBehaviour
                     var test_cell_pos = new Vector3Int(cell_pos.x - obsWidth + 1, cell_pos.y - ofst, cell_pos.z);
                     var temp = tilemap.GetTile(test_cell_pos);
 
-                    if(temp != null && temp.name == "no_left")
+                    if(temp != null && temp.name.Contains("left"))
                     {
                         return false;
                     }
