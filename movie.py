@@ -7,10 +7,11 @@ import glob
 import subprocess
 
 
-mp4s = glob.glob('./Assets/**/*.mp4', recursive=True)
+mp4s = glob.glob('./Assets/Art/*.mp4', recursive=True)
+# ffmpeg -i input.mp4 -c:v libvpx -b:v 1M -c:a libvorbis output.webm
 # ffmpeg -i input-file.mp4 -c:v libvpx -crf 10 -b:v 1M -c:a libvorbis output-file.webm
 def convert(input_path, output_path):
-    child = subprocess.Popen(['./ffmpeg', '-i', input_path, '-c:v', 'libvpx', '-crf', '10', '-b:v', '1M', '-c:a', 'libvorbis', output_path])
+    child = subprocess.Popen(['./ffmpeg', '-i', input_path, '-c:v', 'libvpx', '-crf', '10', '-b:v', '5M', '-c:a', 'libvorbis', output_path])
     rc = child.wait()
     if rc != 0:
         exit(rc)
