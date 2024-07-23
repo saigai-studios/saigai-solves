@@ -19,6 +19,9 @@ public class MazeObstacle : MonoBehaviour
     private int counter;
     private Vector3Int cell_pos;
 
+    private Vector3 init_pos;
+    private Vector3Int init_cell_pos;
+
     private const float ANIM_MAX = 10.0f; // one-tenth of a second?
     private Vector3 offset = new Vector3(0.0f, 0.0f, 0.0f); // Offset since obstacle is moved from center
 
@@ -72,6 +75,10 @@ public class MazeObstacle : MonoBehaviour
         }
 
         Debug.Log(gameObject.name + " : " + cell_pos);
+
+        // Set init. variables
+        init_pos = transform.localPosition;
+        init_cell_pos = cell_pos;
     }
 
     // Update is called once per frame
@@ -300,5 +307,17 @@ public class MazeObstacle : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Reset()
+    {
+        // Reset animation vars
+        transform.localPosition = init_pos;
+        next = init_pos;
+        old = init_pos;
+        isAnim = false;
+        counter = (int)ANIM_MAX;
+
+        cell_pos = init_cell_pos;
     }
 }
