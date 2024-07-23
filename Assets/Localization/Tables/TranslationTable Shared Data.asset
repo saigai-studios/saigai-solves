@@ -179,6 +179,10 @@ MonoBehaviour:
     m_Key: Cards-SituationsL2-InsideMG
     m_Metadata:
       m_Items: []
+  - m_Id: 10616633614155776
+    m_Key: Gameplay-OutsideMG-Score
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
