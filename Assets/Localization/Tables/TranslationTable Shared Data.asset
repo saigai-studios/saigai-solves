@@ -119,6 +119,66 @@ MonoBehaviour:
     m_Key: DLC
     m_Metadata:
       m_Items: []
+  - m_Id: 10611186542854144
+    m_Key: Tutorials-InsideMG-P1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611335084130304
+    m_Key: Tutorials-InsideMG-P2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611369028632576
+    m_Key: Tutorials-InsideMG-Doorways
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611440390520832
+    m_Key: Tutorials-InsideMG-ExitArrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611510145990656
+    m_Key: Victory-InsideMG-Message
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611572368490496
+    m_Key: Gameplay-InsideMG-Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611606971498496
+    m_Key: WorldMap-BlandNPC-Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611881421586432
+    m_Key: WorldMap-BlandNPC-Dialogue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611967572590592
+    m_Key: Cards-BusMG-Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612326374326272
+    m_Key: Cards-OutsideMG-Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612349002596352
+    m_Key: Cards-InsideMG-Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612715656069120
+    m_Key: Cards-SituationL1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612812682903552
+    m_Key: Cards-SituationL2-BusMG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612904651407360
+    m_Key: Cards-SituationsL2-OutsideMG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612952063819776
+    m_Key: Cards-SituationsL2-InsideMG
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

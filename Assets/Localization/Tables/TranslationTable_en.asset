@@ -31,7 +31,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 315968390684672
-    m_Localized: Reset
+    m_Localized: Back
     m_Metadata:
       m_Items: []
   - m_Id: 389912041336832
@@ -142,6 +142,104 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 7932146167246848
     m_Localized: DLC Coming Soon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611572368490496
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611606971498496
+    m_Localized: Jeremy Bland
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611186542854144
+    m_Localized: "Psyguy is inside his house when an earthquake strikes. Navigate\r
+      the fallen objects to help Psyguy get out of the building."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611335084130304
+    m_Localized: "Use the arrow keys to move Psyguy and push fallen objects out of
+      the way. \rMove between rooms by walking through the orange doorways. Victory
+      will be\r achieved when Psyguy makes it to the doorway marked with a red arrow."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611369028632576
+    m_Localized: Doorways
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611440390520832
+    m_Localized: Exit Arrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611510145990656
+    m_Localized: Psyguy successfully got out of the building and received a disaster
+      preparation card!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611881421586432
+    m_Localized: "Psyguy! You've come at just the right time.\r We need your help
+      around the city. Use the mouse to click on the star markers scattered around\r
+      town in order to move to them. Once you arrive, click on the marker again to
+      enter a new location. "
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10611967572590592
+    m_Localized: "1) Follow the instructions of staff\r\n\r\n2) Hold onto handrails
+      and protect your head. If \r\nan earthquake is detected, the emergency brake\r\nmay
+      be activated\r\n\r\n3) Once the tremors have stopped, follow staff\r\ninstructions
+      and proceed calmly\r\n\r\n4) Do not exit the bus unless you are instructed\r\nto
+      do so"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612326374326272
+    m_Localized: "1) Look out for falling objects\r\n\r\n2) Use personal belongings
+      or your hands to protect\r\nyour head if necessary\r\n\r\n3) Try to find an
+      open space as this will be the safest\r\nplace outside\r\n\r\n4) Avoid vending
+      machines and nearby buildings\r\n\r\n5) Do not try to catch falling objects,
+      and \r\nprotect yourself first"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612349002596352
+    m_Localized: '1) Protect yourself by taking cover
+
+      
+
+      2) Ducking
+      under sturdy tables or similar objects is
+
+      best if evacuating outside
+      is not an option
+
+      
+
+      3) If no cover is available, cover your face
+      and head
+
+      with your arms and crouch in a corner
+
+      
+
+      4)
+      Avoid glass panes and any furniture that could
+
+      easily topple over due
+      to the tremors'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612715656069120
+    m_Localized: 'If an earthquake strikes while:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612812682903552
+    m_Localized: You are on a bus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612904651407360
+    m_Localized: You are outside
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10612952063819776
+    m_Localized: You are inside
     m_Metadata:
       m_Items: []
   references:
