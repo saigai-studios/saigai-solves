@@ -9,7 +9,7 @@ public class DialogueVanish : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (DeactivateForGood.active == false)
+        if (DeactivateForGood.viewed == true)
         {
             dialogue.SetActive(false);
         }

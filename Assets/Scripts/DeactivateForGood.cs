@@ -5,14 +5,12 @@ using UnityEngine;
 public class DeactivateForGood : MonoBehaviour
 {
     public GameObject dialogueBox;
-    public static bool active;
+    public static bool viewed = false;
 
     public void Disappear()
     {
-        if(active == true)
-        {
-            dialogueBox.SetActive(false);
-            active = false;
-        }
+        dialogueBox.SetActive(false);
+        viewed = true;
     }
+
 }
