@@ -27,11 +27,16 @@ public class MazePlayer : MonoBehaviour
     private Vector3 init_pos;
     private Vector3Int init_cell_pos;
 
-    private const float ANIM_MAX = 10.0f; // one-tenth of a second?
+    private const float ANIM_MAX = 15.0f;
     private Vector3 locOffset = new Vector3(0.5f, 0.5f, 0.0f); // locOffset since player is moved from center
 
     private string wall_name = "Wall_texture_crop";
     private string goal_name = "out_tile";
+
+    // Animation vars
+    Animator anim;
+
+    public string anim_bool = "isWalking";
 
     enum Direction
     {
@@ -50,6 +55,7 @@ public class MazePlayer : MonoBehaviour
         Debug.Log("cell_pos: " + cell_pos);
 
         sfx = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
 
         init_pos = transform.localPosition;
         init_cell_pos = cell_pos;
@@ -127,21 +133,25 @@ public class MazePlayer : MonoBehaviour
         switch(dir)
         {
             case Direction.Up:
+                transform.localRotation = Quaternion.Euler(0.0f,0.0f,180.0f);
                 tile = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y + 1, cell_pos.z));
                 vert = 1;
                 break;
 
             case Direction.Right:
+                transform.localRotation = Quaternion.Euler(0.0f,0.0f,90.0f);
                 tile = tilemap.GetTile(new Vector3Int(cell_pos.x + playerWidth, cell_pos.y, cell_pos.z));
                 horiz = 1;
                 break;
 
             case Direction.Down:
+                transform.localRotation = Quaternion.Euler(0.0f,0.0f,0.0f);
                 tile = tilemap.GetTile(new Vector3Int(cell_pos.x, cell_pos.y - playerHeight, cell_pos.z));
                 vert = -1;
                 break;
             
             case Direction.Left:
+                transform.localRotation = Quaternion.Euler(0.0f,0.0f,-90.0f);
                 tile = tilemap.GetTile(new Vector3Int(cell_pos.x - 1, cell_pos.y, cell_pos.z));
                 horiz = -1;
                 break;
@@ -200,6 +210,9 @@ public class MazePlayer : MonoBehaviour
         // Move if animating
         if (isAnim)
         {
+            // Enable walking animation
+            anim.SetBool(anim_bool, true);
+            
             // Increment animation counter
             counter += 1;
             
@@ -221,6 +234,9 @@ public class MazePlayer : MonoBehaviour
         {
             transform.localPosition = old;
             sfx.Stop();
+
+            // Disable walking animation
+            anim.SetBool(anim_bool, false);
         }
     }
 
