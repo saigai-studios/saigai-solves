@@ -5,6 +5,7 @@ using UnityEngine;
 public class Maze : MonoBehaviour
 {
     private MazeObstacle[] obstacles;
+    private MazePlayer player;
 
     public GameObject winObject, winAnimation, tutorial;
 
@@ -16,9 +17,20 @@ public class Maze : MonoBehaviour
     {
         // Get all of the obstacles in the scene automatically
         obstacles = FindObjectsOfType<MazeObstacle>();
+        player = FindObjectsOfType<MazePlayer>()[0];
 
         // Get audio player
         music_player = GetComponent<AudioSource>();
+    }
+
+    public void Reset()
+    {
+        player.Reset();
+
+        foreach (MazeObstacle obs in obstacles)
+        {
+            obs.Reset();
+        }
     }
 
     void Update()

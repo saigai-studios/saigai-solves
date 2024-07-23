@@ -14,9 +14,15 @@ public class BusMg : MonoBehaviour {
 
     public GameObject winObj, winTransition, tutorial;
 
+    // Piece objects for reset
+    public Piece [] pieces;
+
     void Start() {
         // Get music player
         music_player = GetComponent<AudioSource>();
+
+        // Get board pieces
+        pieces = FindObjectsOfType<Piece>();
 
         // Initialize game grid
         Interop.init_bus_game(0);
@@ -80,6 +86,15 @@ public class BusMg : MonoBehaviour {
         if (winObj != null)
         {
             winObj.SetActive(true);
+        }
+    }
+
+    public void Reset()
+    {
+        // Reset all pieces in the scene
+        foreach (Piece p in pieces)
+        {
+            p.Reset();
         }
     }
 }

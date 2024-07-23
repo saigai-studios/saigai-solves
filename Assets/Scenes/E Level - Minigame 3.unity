@@ -14684,6 +14684,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &624545335 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1416068455152524099, guid: ff5ba929e9b1d444881fb35cb8d634cf, type: 3}
+  m_PrefabInstance: {fileID: 1761585228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624545330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80bd14e40dac5834a9dba0907aafd1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &626713458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42178,7 +42189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1869092171329449109, guid: ff5ba929e9b1d444881fb35cb8d634cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1869092171329449109, guid: ff5ba929e9b1d444881fb35cb8d634cf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48905,7 +48916,6 @@ GameObject:
   - component: {fileID: 2037018035}
   - component: {fileID: 2037018034}
   - component: {fileID: 2037018033}
-  - component: {fileID: 2037018032}
   m_Layer: 5
   m_Name: Reset Button
   m_TagString: Untagged
@@ -48933,19 +48943,6 @@ RectTransform:
   m_AnchoredPosition: {x: -3.93, y: 6.66}
   m_SizeDelta: {x: 77.341, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2037018032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037018030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5123b97cf05265c4192d3b0c0b567374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelToLoad: 4
 --- !u!114 &2037018033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48990,9 +48987,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037018032}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: LoadTheLevel
+      - m_Target: {fileID: 624545335}
+        m_TargetAssemblyTypeName: Maze, Assembly-CSharp
+        m_MethodName: Reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
