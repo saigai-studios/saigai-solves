@@ -17,7 +17,7 @@ public class Piece : MonoBehaviour
     private uint pieceId;
 
     // Position when not selected or placed in grid
-    public Vector3 homePosition;
+    public Vector3 homePosition, initPosition;
 
     // Offsets from mouse position while dragging
     Vector3 mouseOffset3D;
@@ -36,6 +36,7 @@ public class Piece : MonoBehaviour
     {
         // Set the home position to wherever the piece is at when game starts
         homePosition = transform.position;
+        initPosition = homePosition;
 
         game = GameObject.FindObjectOfType<BusMg>();
         distFromCam = transform.position.z - cam.transform.position.z; // All objects should be aligned in z plane
@@ -126,5 +127,13 @@ public class Piece : MonoBehaviour
         return pieceId;
     }
 
-    //TODO remove piece from grid
+    public void Reset()
+    {
+        // Return to inital position
+        transform.position = initPosition;
+        homePosition = initPosition;
+
+        // Remove from board (if placed)
+        Interop.place_off_board(pieceId, 0.0f, 0.0f);
+    }
 }

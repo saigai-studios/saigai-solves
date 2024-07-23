@@ -5745,6 +5745,7 @@ MonoBehaviour:
   - row: 1
     col: 2
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &226303727
@@ -9838,6 +9839,7 @@ MonoBehaviour:
   - row: 1
     col: 2
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &397721413
@@ -12369,6 +12371,7 @@ MonoBehaviour:
   winObj: {fileID: 2484272697527848635}
   winTransition: {fileID: 520894880672082734}
   tutorial: {fileID: 8786654649057707903}
+  pieces: []
 --- !u!82 &482964197
 AudioSource:
   m_ObjectHideFlags: 0
@@ -32387,6 +32390,7 @@ MonoBehaviour:
   - row: 1
     col: 1
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &1267012324
@@ -34168,6 +34172,7 @@ MonoBehaviour:
   - row: 2
     col: 1
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &1336977611
@@ -36829,6 +36834,7 @@ MonoBehaviour:
   - row: 0
     col: 3
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &1433878852
@@ -42460,6 +42466,7 @@ MonoBehaviour:
   - row: 1
     col: 3
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &1691913495
@@ -49305,6 +49312,7 @@ MonoBehaviour:
   - row: 2
     col: 3
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &1957145415
@@ -51060,7 +51068,6 @@ GameObject:
   - component: {fileID: 2029907602}
   - component: {fileID: 2029907601}
   - component: {fileID: 2029907600}
-  - component: {fileID: 2029907599}
   m_Layer: 5
   m_Name: Reset Button
   m_TagString: Untagged
@@ -51088,19 +51095,6 @@ RectTransform:
   m_AnchoredPosition: {x: -3.91, y: 6.7}
   m_SizeDelta: {x: 77.341, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2029907599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029907597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5123b97cf05265c4192d3b0c0b567374, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelToLoad: 4
 --- !u!114 &2029907600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51145,9 +51139,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2029907599}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: LoadTheLevel
+      - m_Target: {fileID: 482964196}
+        m_TargetAssemblyTypeName: BusMg, Assembly-CSharp
+        m_MethodName: Reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -51360,6 +51354,7 @@ MonoBehaviour:
   - row: 1
     col: 1
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &2035267567
@@ -52439,6 +52434,7 @@ MonoBehaviour:
   - row: 1
     col: 2
   homePosition: {x: 0, y: 0, z: 0}
+  initPosition: {x: 0, y: 0, z: 0}
   pickUp: {fileID: 8300000, guid: 07a8264c624e6e1409223e0942c80736, type: 3}
   placeGrid: {fileID: 8300000, guid: 000f7a84c4bc3344184fa89677460a5e, type: 3}
 --- !u!114 &2072132711
