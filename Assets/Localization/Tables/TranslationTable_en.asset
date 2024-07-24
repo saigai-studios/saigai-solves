@@ -202,28 +202,27 @@ MonoBehaviour:
   - m_Id: 10612349002596352
     m_Localized: '1) Protect yourself by taking cover
 
-      
 
-      2) Ducking
-      under sturdy tables or similar objects is
 
-      best if evacuating outside
-      is not an option
+      2) Ducking under sturdy
+      tables or similar objects is
 
-      
+      best if evacuating outside is not an option
 
-      3) If no cover is available, cover your face
-      and head
 
-      with your arms and crouch in a corner
 
-      
+      3)
+      If no cover is available, cover your face and head
 
-      4)
-      Avoid glass panes and any furniture that could
+      with your arms and
+      crouch in a corner
 
-      easily topple over due
-      to the tremors'
+
+
+      4) Avoid glass panes and any furniture that could
+
+      easily
+      topple over due to the tremors'
     m_Metadata:
       m_Items: []
   - m_Id: 10612715656069120
@@ -244,6 +243,34 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 10616633614155776
     m_Localized: SCORE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10807391038226432
+    m_Localized: Thet Ei
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10807360558219264
+    m_Localized: Yi Min
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10807318246080512
+    m_Localized: Gianna Giliberto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10807195382333440
+    m_Localized: Thomas Le
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10807162918420480
+    m_Localized: Chase Ruskin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10807132924952576
+    m_Localized: Kelly Beaudrot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10806805395947520
+    m_Localized: Joseph Benigno
     m_Metadata:
       m_Items: []
   references:
