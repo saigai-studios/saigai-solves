@@ -270,6 +270,54 @@ MonoBehaviour:
     m_Localized: Joseph Benigno
     m_Metadata:
       m_Items: []
+  - m_Id: 10863517519855616
+    m_Localized: 2D Art
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10863533881835520
+    m_Localized: Level Design
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10863821984382976
+    m_Localized: Programming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10863859305299968
+    m_Localized: Researchers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10863898496876544
+    m_Localized: Translation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10863968449478656
+    m_Localized: 3D Environment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10864069918081024
+    m_Localized: Additional Art
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10864153481199616
+    m_Localized: Fonts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10864204395855872
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10864251904737280
+    m_Localized: Special Thanks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10864318401232896
+    m_Localized: 'Saigai Studios Presents:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10870519927160832
+    m_Localized: Psyguy
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
