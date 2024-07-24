@@ -138,7 +138,7 @@ impl BusMg {
     }
 
     pub fn place_on_board(&mut self, piece: PieceId, mouse_x: f32, mouse_y: f32) -> bool {
-        match self.raw_mouse_pos_transform(mouse_x, mouse_y, 0.0) {
+        match self.raw_mouse_pos_transform(mouse_x, mouse_y, 75.0) {
             Some(root) => {
                 // check if the cells are available
                 let selected = self.pieces.get_mut(piece as usize).unwrap();
