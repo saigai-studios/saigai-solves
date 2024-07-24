@@ -7072,6 +7072,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 374350343}
     m_Modifications:
+    - target: {fileID: -8393109870756571725, guid: b3ebc237f94c66d48afbb84483148bef, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d0f354c8a954961469bef66057d597dd, type: 3}
     - target: {fileID: 2106276104651772826, guid: b3ebc237f94c66d48afbb84483148bef, type: 3}
       propertyPath: m_Name
       value: Win Transition
