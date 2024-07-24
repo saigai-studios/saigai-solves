@@ -436,9 +436,9 @@ mod tests {
     #[test]
     fn ut_place_on_board_bad() {
         let mut game = make_basic_game(10.0, 20.0);
-        assert_eq!(game.place_on_board(0, 5.0, 30.0), false);
-        assert_eq!(game.place_on_board(0, 30.0, 15.0), false);
-        assert_eq!(game.place_on_board(0, 95.0, 40.0), false);
+        assert_eq!(game.place_on_board(0, -105.0, 30.0), false);
+        assert_eq!(game.place_on_board(0, 30.0, -105.0), false);
+        assert_eq!(game.place_on_board(0, 155.0, 40.0), false);
         assert_eq!(game.place_on_board(0, 40.0, 105.0), false);
     }
 
@@ -452,6 +452,15 @@ mod tests {
 
         let mut game = make_basic_game(10.0, 20.0);
         assert_eq!(game.place_on_board(0, 84.9, 40.0), true);
+
+        let mut game = make_basic_game(10.0, 20.0);
+        assert_eq!(game.place_on_board(0, -20.4, 5.0), true);
+
+        let mut game = make_basic_game(10.0, 20.0);
+        assert_eq!(game.place_on_board(0, -60.6, -30.6), true);
+
+        let mut game = make_basic_game(10.0, 20.0);
+        assert_eq!(game.place_on_board(0, 82.7, -15.0), true);
 
         let mut game = make_basic_game(10.0, 20.0);
         assert_eq!(game.place_on_board(0, 40.0, 94.9), true);
