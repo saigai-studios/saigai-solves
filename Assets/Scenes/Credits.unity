@@ -241,7 +241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20.489817, y: -727.322}
+  m_AnchoredPosition: {x: 21.04282, y: -720}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &65458215
@@ -403,7 +403,7 @@ Transform:
   m_GameObject: {fileID: 222490420}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.3, y: -116.40001, z: 79.07741}
+  m_LocalPosition: {x: 17.3, y: -176.3, z: 79.07741}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1573,7 +1573,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Unity Asset Store
+  m_Text: Gnome's Artworks
 --- !u!222 &525988490
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3023,8 +3023,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17.841616, y: 4.6594505}
-  m_SizeDelta: {x: 224.982, y: 98.44}
+  m_AnchoredPosition: {x: 17.841616, y: -25.8}
+  m_SizeDelta: {x: 224.982, y: 282.6906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &959481584
 MonoBehaviour:
@@ -3059,7 +3059,28 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Freesound.org
+  m_Text: 'TECHNOTRAIN
+
+    shimtone
+
+    Private Manbou
+
+    Nagatsuki Laurel
+
+    NaruIDEA
+
+    Addpico
+
+    Kyusu
+
+    edamame88
+
+    Casuality
+    Sound
+
+    Takashi Koya
+
+    Heitaro Ashibe'
 --- !u!222 &959481585
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4490,7 +4511,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: DaFont.com
+  m_Text: Fafo Ferrao
 --- !u!222 &1708870379
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4949,7 +4970,7 @@ Transform:
   m_GameObject: {fileID: 2132686050}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.3, y: -172.50003, z: 79.07741}
+  m_LocalPosition: {x: 17.3, y: -232.4, z: 79.07741}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
